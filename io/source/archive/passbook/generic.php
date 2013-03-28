@@ -40,6 +40,11 @@
      * @var Properties
      */
     public $properties;
+
+    public $certificateAppleIntermediate;
+    public $certificate;
+    public $privateKey;
+    public $privateKeyPassphrase;
     //--------------------------------------------------------------------------
 
 
@@ -72,39 +77,6 @@
 
 
     // ACCESSORS/MUTATORS
-    public function sign($certificateAppleIntermediate_, $certificate_, $privateKey_, $privateKeyPassphrase_)
-    {
-      if($this->isOpen())
-        throw new Io_Exception('io/archive/passbook/generic', 'Pass must be closed before it can be signed.');
-
-      $signature=Io::tmpFile();
-
-      @openssl_pkcs7_sign(
-        (string)$this->m_manifest,
-        (string)$signature,
-        "file://$certificate_",
-        array("file://$privateKey_", $privateKeyPassphrase_),
-        array(),
-        PKCS7_BINARY|PKCS7_NOATTR|PKCS7_DETACHED,
-        $certificateAppleIntermediate_
-      );
-
-      if(1>$signature->getSize()->bytes())
-        throw new Io_Exception('io/archive/passbook/generic', 'Failed to sign passs.');
-
-      $content=$signature->getContent();
-      $start=strpos($content, 'filename="smime.p7s"')+strlen('filename="smime.p7s"');
-      $content=trim(substr($content, $start, strrpos($content, '------')-$start));
-      $signature->setContent($content);
-
-      $this->open();
-
-      parent::add($signature, self::FILE_SIGNATURE);
-      parent::close();
-
-      $signature->delete();
-    }
-
     public function getStyle()
     {
       return self::STYLE;
@@ -311,8 +283,40 @@
 
     public function close()
     {
-      $this->add($this->createPass(), self::FILE_PASS);
-      $this->add($this->createManifest(), self::FILE_MANIFEST);
+      $pass=Io::tmpFile();
+
+      $properties=$this->properties->toArray();
+      $properties[$this->getStyle()]=$this->getFields();
+
+      $pass->setContent(json_encode($properties));
+      $this->add($pass, self::FILE_PASS);
+
+      $manifest=Io::tmpFile();
+      $manifest->setContent(json_encode($this->m_files));
+
+      parent::add($manifest, self::FILE_MANIFEST);
+
+      $signature=Io::tmpFile();
+
+      @openssl_pkcs7_sign(
+        (string)$manifest,
+        (string)$signature,
+        "file://{$this->certificate}",
+        array("file://{$this->privateKey}", $this->privateKeyPassphrase),
+        array(),
+        PKCS7_BINARY|PKCS7_NOATTR|PKCS7_DETACHED,
+        $this->certificateAppleIntermediate
+      );
+
+      if(1>$signature->getSize()->bytes())
+        throw new Io_Exception('io/archive/passbook/generic', 'Failed to sign passs.');
+
+      $content=$signature->getContent();
+      $start=strpos($content, 'filename="smime.p7s"')+strlen('filename="smime.p7s"');
+      $content=trim(substr($content, $start, strrpos($content, '------')-$start));
+      $signature->setContent($content);
+
+      parent::add($signature, self::FILE_SIGNATURE);
 
       parent::close();
     }
@@ -323,64 +327,9 @@
     }
     //--------------------------------------------------------------------------
 
-
     // IMPLEMENTATION
     private $m_fields=array();
     private $m_files=array();
-    /**
-     * @var Io_File
-     */
-    private $m_pass;
-    /**
-     * @var Io_File
-     */
-    private $m_manifest;
-    /**
-     * @var Io_Image
-     */
-    private $m_logo;
-    /**
-     * @var Io_Image
-     */
-    private $m_icon;
-    //-----
-
-
-    protected function createPass()
-    {
-      if(null===$this->m_pass)
-        $this->m_pass=Io::tmpFile();
-
-      $properties=$this->properties->toArray();
-      $properties[$this->getStyle()]=$this->getFields();
-
-      $this->m_pass->setContent(json_encode($properties));
-
-      return $this->m_pass;
-    }
-
-    protected function createManifest()
-    {
-      if(null===$this->m_manifest)
-        $this->m_manifest=Io::tmpFile();
-
-      $this->m_manifest->setContent(json_encode($this->m_files, JSON_FORCE_OBJECT));
-
-      return $this->m_manifest;
-    }
-
-
-    // DESTRUCTION
-    public function __destruct()
-    {
-      if($this->isOpen())
-        @$this->close();
-
-      if(null!==$this->m_manifest && $this->m_manifest->exists())
-        $this->m_manifest->delete();
-      if(null!==$this->m_pass && $this->m_pass->exists())
-        $this->m_pass->delete();
-    }
     //--------------------------------------------------------------------------
   }
 ?>
