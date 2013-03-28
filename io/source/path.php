@@ -212,27 +212,38 @@
 
     public function isRoot()
     {
+      // FIXME (CSH) Implement for windows ...
+      if(Io::systemIsWindows())
+        return false;
 
+      return '/'===$this->m_path;
     }
 
     public function isParentOf(Io_Path $path_)
     {
+      return 0===mb_strpos($path_->m_path, $this->m_path) && strlen($this->m_path)<strlen($path_->m_path);
+    }
 
+    public function isParentOfFile(Io_File $file_)
+    {
+      $filePath=(string)$file_;
+
+      return 0===mb_strpos($filePath, $this->m_path) && strlen($this->m_path)<strlen($filePath);
     }
 
     public function isChildOf(Io_Path $path_)
     {
-
+      return 0===mb_strpos($this->m_path, $path_->m_path) && strlen($this->m_path)>strlen($path_->m_path);
     }
 
     public function isSiblingOf(Io_Path $path_)
     {
-
+      return $this->getParent()->m_path===$path_->getParent()->m_path;
     }
 
     public function containsFile(Io_File $file_)
     {
-
+      return $this->m_path===$file_->getDirectory()->m_path;
     }
 
     public function hasChildren()
@@ -248,6 +259,12 @@
 
 
     // OVERRIDES/IMPLEMENTS
+    /**
+     * (non-PHPdoc)
+     * @see IteratorAggregate::getIterator()
+     *
+     * @return Io_Path_Iterator
+     */
     public function getIterator()
     {
       return new Io_Path_Iterator($this->m_path);

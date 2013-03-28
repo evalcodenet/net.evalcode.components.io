@@ -16,6 +16,7 @@
     const APPLICATION_XML='application/xml';
     const APPLICATION_ZIP='application/zip';
     const APPLICATION_OCTET_STREAM='application/octet-stream';
+    const APPLICATION_VND_APPLE_PKPASS='application/vnd.apple.pkpass';
     const IMAGE_GIF='image/gif';
     const IMAGE_PNG='image/png';
     const IMAGE_JPG='image/jpg';
@@ -38,6 +39,7 @@
     const EXTENSION_JPG='jpg';
     const EXTENSION_JPEG='jpeg';
     const EXTENSION_JSON='json';
+    const EXTENSION_PKPASS='pkpass';
     const EXTENSION_PNG='png';
     const EXTENSION_SVG='svg';
     const EXTENSION_TXT='txt';
@@ -289,6 +291,7 @@
       self::EXTENSION_XML=>'APPLICATION_XML',
       self::EXTENSION_ZIP=>'APPLICATION_ZIP',
       self::EXTENSION_GIF=>'IMAGE_GIF',
+      self::EXTENSION_PKPASS=>'APPLICATION_VND_APPLE_PKPASS',
       self::EXTENSION_PNG=>'IMAGE_PNG',
       self::EXTENSION_JPG=>'IMAGE_JPG',
       self::EXTENSION_JPEG=>'IMAGE_JPG',
@@ -302,6 +305,7 @@
       self::APPLICATION_OCTET_STREAM=>'APPLICATION_OCTET_STREAM',
       self::APPLICATION_XML=>'APPLICATION_XML',
       self::APPLICATION_ZIP=>'APPLICATION_ZIP',
+      self::APPLICATION_VND_APPLE_PKPASS=>'APPLICATION_VND_APPLE_PKPASS',
       self::IMAGE_GIF=>'IMAGE_GIF',
       self::IMAGE_PNG=>'IMAGE_PNG',
       self::IMAGE_JPG=>'IMAGE_JPG',
@@ -322,6 +326,7 @@
       self::APPLICATION_OCTET_STREAM=>self::EXTENSION_BIN,
       self::APPLICATION_XML=>self::EXTENSION_XML,
       self::APPLICATION_ZIP=>self::EXTENSION_ZIP,
+      self::APPLICATION_VND_APPLE_PKPASS=>self::EXTENSION_PKPASS,
       self::IMAGE_GIF=>self::EXTENSION_GIF,
       self::IMAGE_PNG=>self::EXTENSION_PNG,
       self::IMAGE_JPG=>self::EXTENSION_JPG,
@@ -333,7 +338,8 @@
     );
 
     private static $m_mapArchiveMimeTypes=array(
-      self::APPLICATION_ZIP=>'APPLICATION_ZIP'
+      self::APPLICATION_ZIP=>'APPLICATION_ZIP',
+      self::APPLICATION_VND_APPLE_PKPASS=>'APPLICATION_VND_APPLE_PKPASS'
     );
 
     private $m_type;

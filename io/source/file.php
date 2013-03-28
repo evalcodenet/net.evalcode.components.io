@@ -43,7 +43,7 @@
     // CONSTRUCTION
     public function __construct($path_, $accessModeMask_=self::READ)
     {
-      $this->m_path=$path_;
+      $this->m_pathAsString=$path_;
       $this->m_accessMask=$accessModeMask_;
     }
     //--------------------------------------------------------------------------
@@ -69,7 +69,7 @@
     public function getName()
     {
       if(null===$this->m_name)
-        $this->m_name=@basename($this->m_path);
+        $this->m_name=@basename($this->m_pathAsString);
 
       return $this->m_name;
     }
@@ -80,7 +80,7 @@
     public function getExtension()
     {
       if(null===$this->m_extension)
-        return strtolower(substr($this->m_path, strrpos($this->m_path, '.')+1));
+        return mb_strtolower(mb_substr($this->m_pathAsString, mb_strrpos($this->m_pathAsString, '.')+1));
 
       return $this->m_extension;
     }
@@ -90,7 +90,10 @@
      */
     public function getPath()
     {
-      return new Io_Path($this->m_path);
+      if(null===$this->m_path)
+        $this->m_path=new Io_Path($this->m_pathAsString);
+
+      return $this->m_path;
     }
 
     /**
@@ -98,7 +101,7 @@
      */
     public function getPathAsString()
     {
-      return $this->m_path;
+      return $this->m_pathAsString;
     }
 
     /**
@@ -106,7 +109,10 @@
      */
     public function getDirectory()
     {
-      return new Io_Path($this->getDirectoryAsString());
+      if(null===$this->m_directory)
+        $this->m_directory=new Io_Path($this->getDirectoryAsString());
+
+      return $this->m_directory;
     }
 
     /**
@@ -114,10 +120,10 @@
      */
     public function getDirectoryAsString()
     {
-      if(null===$this->m_directory)
-        $this->m_directory=@dirname($this->m_path);
+      if(null===$this->m_directoryAsString)
+        $this->m_directoryAsString=@dirname($this->m_pathAsString);
 
-      return $this->m_directory;
+      return $this->m_directoryAsString;
     }
 
     /**
@@ -128,9 +134,9 @@
     public function getSize()
     {
       // TODO
-      @clearstatcache(null, $this->m_path);
-      if(false===($filesize=@filesize($this->m_path)))
-        return new Io_FileSize(0);
+      @clearstatcache(null, $this->m_pathAsString);
+      if(false===($filesize=@filesize($this->m_pathAsString)))
+        return new Io_Filesize(0);
 
       return new Io_Filesize($filesize);
     }
@@ -143,7 +149,7 @@
       if(null===$this->m_mimeType)
       {
         if($this->exists())
-          return $this->m_mimeType=Io_MimeType::forFilePath($this->m_path);
+          return $this->m_mimeType=Io_MimeType::forFilePath($this->m_pathAsString);
 
         return $this->m_mimeType=Io_MimeType::forFileExtension($this->getExtension());
       }
@@ -175,9 +181,9 @@
      */
     public function asImage()
     {
-      $image=new Io_Image($this->m_path, $this->m_accessMask);
+      $image=new Io_Image($this->m_pathAsString, $this->m_accessMask);
       $image->m_name=$this->m_name;
-      $image->m_directory=$this->m_directory;
+      $image->m_directoryAsString=$this->m_directoryAsString;
       $image->m_extension=$this->m_extension;
       $image->m_mimeType=$this->m_mimeType;
 
@@ -185,11 +191,14 @@
     }
 
     /**
+     * Returns a file for an absolute path or for a path that is relative to
+     * the one of this file.
+     *
      * @param string $path_
      *
      * @return Io_File
      */
-    public function getRelative($path_)
+    public function getRelated($path_)
     {
       if(String::startsWith($path_, Io::DIRECTORY_SEPARATOR))
         return new self($path_);
@@ -198,11 +207,42 @@
     }
 
     /**
+     * Returns path of given file relative to path of this file.
+     *
+     * @param Io_File $file_
+     *
+     * @return Io_Path
+     */
+    public function getRelativePath(Io_File $file_)
+    {
+      if($this->getDirectory()->isParentOfFile($file_))
+        return Io::path(String::replace($file_->m_pathAsString, $this->getDirectoryAsString().'/', ''));
+
+      $level=0;
+      $segments=explode('/', $this->m_pathAsString);
+      $filepath=$file_->m_pathAsString;
+      while(array_pop($segments))
+      {
+        if(0===mb_strpos($filepath, implode('/', $segments)))
+        {
+          $path=implode('/', $segments);
+          $subPath=String::replace($filepath, $path, '');
+
+          return str_repeat('/..', $level).$subPath;
+        }
+
+        $level++;
+      }
+
+      return $file_->getPath();
+    }
+
+    /**
      * @return string
      */
     public function getContent()
     {
-      return @file_get_contents($this->m_path);
+      return @file_get_contents($this->m_pathAsString);
     }
 
     /**
@@ -214,7 +254,7 @@
     {
       if(false===$this->isWritable())
       {
-        if($this->m_accessMask&self::CREATE && false===@is_file($this->m_path))
+        if($this->m_accessMask&self::CREATE && false===@is_file($this->m_pathAsString))
         {
           $directory=$this->getDirectory();
           if(false===$directory->exists())
@@ -231,7 +271,7 @@
       else if($this->m_accessMask&self::LOCK)
         $mode=LOCK_EX;
 
-      if(false===($written=@file_put_contents($this->m_path, $string_, $mode)))
+      if(false===($written=@file_put_contents($this->m_pathAsString, $string_, $mode)))
         throw new Io_Exception('io/file', sprintf('Unable to write to file [%1$s].', $this));
 
       if($this->m_accessMask&self::APPEND)
@@ -251,29 +291,29 @@
 
     public function getHashMD5()
     {
-      return @md5_file($this->m_path);
+      return @md5_file($this->m_pathAsString);
     }
 
     public function getHashSHA1()
     {
-      return @sha1_file($this->m_path);
+      return @sha1_file($this->m_pathAsString);
     }
 
     public function isReadable()
     {
-      return @is_readable($this->m_path);
+      return @is_readable($this->m_pathAsString);
     }
 
     public function isWritable()
     {
-      if(false===@is_writable($this->m_path))
+      if(false===@is_writable($this->m_pathAsString))
         return false;
 
       if(0<($this->m_accessMask&(self::APPEND|self::TRUNCATE|self::CREATE)))
         return true;
 
       if(0<($this->m_accessMask&(self::WRITE)))
-        return @is_file($this->m_path);
+        return @is_file($this->m_pathAsString);
 
       return false;
     }
@@ -283,7 +323,7 @@
      */
     public function exists()
     {
-      return @is_file($this->m_path);
+      return @is_file($this->m_pathAsString);
     }
 
     /**
@@ -291,14 +331,14 @@
      */
     public function create()
     {
-      if(false===@touch($this->m_path))
+      if(false===@touch($this->m_pathAsString))
       {
         $directory=$this->getDirectory();
         if(false===$directory->exists())
           $directory->create();
       }
 
-      if(false===@touch($this->m_path))
+      if(false===@touch($this->m_pathAsString))
         throw new Io_Exception('io/file', sprintf('Unable to create file in given location [%1$s].', $this));
 
       return $this;
@@ -306,7 +346,7 @@
 
     public function delete()
     {
-      if(false===@unlink($this->m_path))
+      if(false===@unlink($this->m_pathAsString))
         throw new Io_Exception('io/file', sprintf('Unable to delete file [%1$s].', $this));
 
       return $this;
@@ -328,7 +368,7 @@
           $targetDirectory_->create($umaskTargetDirectory_);
       }
 
-      if(false===@copy($this->m_path, $destination_->m_path))
+      if(false===@copy($this->m_pathAsString, $destination_->m_pathAsString))
         throw new Io_Exception('io/file', sprintf('Unable to copy file to given destination [source: %1$s, destination: %2$s].', $this, $destination_));
 
       return $destination_;
@@ -353,10 +393,10 @@
           $targetDirectory->create($umaskTargetDirectory_);
       }
 
-      if(false===@rename($this->m_path, $destination_->m_path))
+      if(false===@rename($this->m_pathAsString, $destination_->m_pathAsString))
       {
-        if(@is_file($destination_->m_path))
-          @unlink($this->m_path);
+        if(@is_file($destination_->m_pathAsString))
+          @unlink($this->m_pathAsString);
         else
           throw new Io_Exception('io/file', sprintf('Unable to move file to given destination [source: %1$s, destination: %2$s].', $this, $destination_));
       }
@@ -393,13 +433,13 @@
      */
     public function open()
     {
-      if(false===($this->m_pointer=@fopen($this->m_path, $this->accessFlagsForMask($this->m_accessMask))))
+      if(false===($this->m_pointer=@fopen($this->m_pathAsString, $this->accessFlagsForMask($this->m_accessMask))))
         throw new Io_Exception('io/file', sprintf('Unable to open file [%1$s].', $this));
 
       if(null===$this->m_length)
       {
         if($this->m_accessMask^self::TRUNCATE)
-          $this->m_length=@filesize($this->m_path);
+          $this->m_length=@filesize($this->m_pathAsString);
         else
           $this->m_length=0;
       }
@@ -622,7 +662,7 @@
      */
     public function __clone()
     {
-      return self($this->m_path);
+      return self($this->m_pathAsString);
     }
 
     /**
@@ -631,7 +671,7 @@
      */
     public function hashCode()
     {
-      return String::hash($this->m_path);
+      return String::hash($this->m_pathAsString);
     }
 
     /**
@@ -641,7 +681,7 @@
     public function equals($object_)
     {
       if($object_ instanceof self)
-        return String::equal($this->m_path, $object_->m_path);
+        return String::equal($this->m_pathAsString, $object_->m_pathAsString);
 
       return false;
     }
@@ -652,28 +692,36 @@
      */
     public function __toString()
     {
-      return (string)$this->m_path;
+      return (string)$this->m_pathAsString;
     }
     //--------------------------------------------------------------------------
 
 
     // IMPLEMENTATION
-    protected $m_path;
+    protected $m_open=false;
+    protected $m_pathAsString;
+    protected $m_accessMask;
+    protected $m_position;
+    protected $m_length;
 
-    private $m_open=false;
     private $m_name;
-    private $m_directory;
     private $m_extension;
-    private $m_accessFlags;
-    private $m_accessMask;
+    /**
+     * @var Io_Path
+     */
+    private $m_path;
+    /**
+     * @var Io_Path
+     */
+    private $m_directory;
+    private $m_directoryAsString;
     private $m_pointer;
+    private $m_accessFlags;
+    private $m_writable;
     /**
      * @var Io_MimeType
      */
     private $m_mimeType;
-    private $m_writable;
-    private $m_position;
-    private $m_length;
     //-----
 
 

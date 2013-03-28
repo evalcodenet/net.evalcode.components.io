@@ -346,6 +346,26 @@
       return @unlink($path_);
     }
 
+    /**
+     * @param string $path_
+     *
+     * @return Io_Archive
+     */
+    public static function openArchive($path_)
+    {
+      return Io_Archive::openZip($path_);
+    }
+
+    /**
+     * @param string $path_
+     *
+     * @return Io_Archive
+     */
+    public static function createArchive($path_)
+    {
+      return Io_Archive::createZip($path_);
+    }
+
     public static function systemName()
     {
       return PHP_OS;
