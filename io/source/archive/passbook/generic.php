@@ -9,7 +9,7 @@
    *
    * @author evalcode.net
    */
-  abstract class Io_Archive_Passbook_Generic extends Io_Archive_Zip
+  class Io_Archive_Passbook_Generic extends Io_Archive_Zip
   {
     // PREDEFINED PROPERTIES
     const STYLE='generic';
@@ -50,15 +50,12 @@
 
       $this->properties=new Properties();
 
-      $this->properties->formatVersion=self::FORMAT_VERSION;
-      $this->properties->style=$this->getStyle();
-
-      $this->properties->serialNumber=static::generateSerialNumber();
-
       $this->properties->description=$description_;
+      $this->properties->formatVersion=self::FORMAT_VERSION;
       $this->properties->organizationName=$organizationName_;
-      $this->properties->teamIdentifier=$teamIdentifier_;
       $this->properties->passTypeIdentifier=$passTypeIdentifier_;
+      $this->properties->teamIdentifier=$teamIdentifier_;
+      $this->properties->serialNumber=static::generateSerialNumber();
     }
     //--------------------------------------------------------------------------
 
@@ -95,6 +92,11 @@
       if(1>$signature->getSize()->bytes())
         throw new Io_Exception('io/archive/passbook/generic', 'Failed to sign passs.');
 
+      $content=$signature->getContent();
+      $start=strpos($content, 'filename="smime.p7s"')+strlen('filename="smime.p7s"');
+      $content=trim(substr($content, $start, strrpos($content, '------')-$start));
+      $signature->setContent($content);
+
       $this->open();
 
       parent::add($signature, self::FILE_SIGNATURE);
@@ -115,7 +117,7 @@
 
     public function addField($type_, $name_, $value_, $title_)
     {
-      $this->m_fields[$type_][$name_]=array(
+      $this->m_fields[$type_][]=array(
         'key'=>$name_,
         'value'=>$value_,
         'label'=>$title_
@@ -149,6 +151,13 @@
 
     public function setIcon(Io_Image $icon_)
     {
+      if(!$icon_->exists())
+      {
+        throw new Io_Exception('io/archive/passbook/generic', sprintf(
+          'Given icon does not exist [icon: %s].', Io_MimeType::IMAGE_PNG(), $icon_)
+        );
+      }
+
       if(!Io_MimeType::IMAGE_PNG()->equals($icon_->getMimeType()))
       {
         throw new Io_Exception('io/archive/passbook/generic', sprintf(
@@ -161,6 +170,13 @@
 
     public function setLogo(Io_Image $logo_)
     {
+      if(!$logo_->exists())
+      {
+        throw new Io_Exception('io/archive/passbook/generic', sprintf(
+          'Given logo does not exist [icon: %s].', Io_MimeType::IMAGE_PNG(), $logo_)
+        );
+      }
+
       if(!Io_MimeType::IMAGE_PNG()->equals($logo_->getMimeType()))
       {
         throw new Io_Exception('io/archive/passbook/generic', sprintf(
@@ -176,18 +192,22 @@
       $this->properties->logoText=$text_;
     }
 
-    public function setBarcode($text_, $alternativeText_,
+    public function setBarcode($text_, $alternativeText_=null,
       Io_Charset $charset_=null, $type_=self::TYPE_BARCODE_2DMATRIX_QR)
     {
       if(null===$charset_)
         $charset_=Io_Charset::ISO_8859_1();
 
-      $this->properties->barcode=array(
+      $barcode=array(
         'format'=>$type_,
         'message'=>$text_,
-        'altText'=>$alternativeText_,
-        'messageEncoding'=>$charset_->name()
+        'messageEncoding'=>strtolower($charset_->name())
       );
+
+      if(null!==$alternativeText_)
+        $barcode['altText']=$alternativeText_;
+
+      $this->properties->barcode=$barcode;
     }
 
     public function setLabelColor(Color $color_)
@@ -207,6 +227,13 @@
 
     public function setBackgroundImage(Io_Image $image_)
     {
+      if(!$image_->exists())
+      {
+        throw new Io_Exception('io/archive/passbook/generic', sprintf(
+          'Given background image does not exist [icon: %s].', Io_MimeType::IMAGE_PNG(), $image_)
+        );
+      }
+
       if(!Io_MimeType::IMAGE_PNG()->equals($image_->getMimeType()))
       {
         throw new Io_Exception('io/archive/passbook/generic', sprintf(
@@ -289,6 +316,11 @@
 
       parent::close();
     }
+
+    public function getMimeType()
+    {
+      return Io_MimeType::APPLICATION_VND_APPLE_PKPASS();
+    }
     //--------------------------------------------------------------------------
 
 
@@ -322,7 +354,7 @@
       $properties=$this->properties->toArray();
       $properties[$this->getStyle()]=$this->getFields();
 
-      $this->m_pass->setContent(json_encode($properties, JSON_FORCE_OBJECT));
+      $this->m_pass->setContent(json_encode($properties));
 
       return $this->m_pass;
     }
