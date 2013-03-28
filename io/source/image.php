@@ -42,7 +42,7 @@
       $engineImpl=self::defaultProcessingEngine();
 
       $instance=new self((string)$path_);
-      $instance->m_engine=$engineImpl::forPath($instance->m_path);
+      $instance->m_engine=$engineImpl::forPath($instance->m_pathAsString);
 
       return $instance;
     }
@@ -58,7 +58,7 @@
       $engineImpl=self::defaultProcessingEngine();
 
       $instance=new self((string)$path_);
-      $instance->m_engine=$engineImpl::createImage($instance->m_path, $dimensions_);
+      $instance->m_engine=$engineImpl::createImage($instance->m_pathAsString, $dimensions_);
 
       return $instance;
     }
@@ -116,7 +116,7 @@
 
     public function save()
     {
-      $this->m_engine->save($this->m_path);
+      $this->m_engine->save($this->m_pathAsString);
     }
     //--------------------------------------------------------------------------
 
@@ -147,7 +147,7 @@
      */
     public function __clone()
     {
-      $instance=new self($this->m_path);
+      $instance=new self($this->m_pathAsString);
       $instance->m_engine=clone $this->m_engine;
 
       return $instance;
@@ -159,7 +159,7 @@
      */
     public function hashCode()
     {
-      return String::hash($this->m_path);
+      return String::hash($this->m_pathAsString);
     }
 
     /**
@@ -169,7 +169,7 @@
     public function equals($object_)
     {
       if($object_ instanceof self)
-        return String::equal($this->m_path, $object_->m_path);
+        return String::equal($this->m_pathAsString, $object_->m_pathAsString);
 
       return false;
     }
@@ -180,7 +180,7 @@
      */
     public function __toString()
     {
-      return (string)$this->m_path;
+      return (string)$this->m_pathAsString;
     }
     //--------------------------------------------------------------------------
 

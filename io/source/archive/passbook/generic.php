@@ -31,6 +31,7 @@
     const FILE_SIGNATURE='signature';
     const FILE_ICON='icon.png';
     const FILE_LOGO='logo.png';
+    const FILE_BACKGROUND='background.png';
     //--------------------------------------------------------------------------
 
 
@@ -39,17 +40,13 @@
      * @var Properties
      */
     public $properties;
-
-    public $certificatePassType;
-    public $certificatePassTypePassphrase;
-    public $certificateAppleIntermediate;
     //--------------------------------------------------------------------------
 
 
     // CONSTRUCTION
     public function __construct($path_, $passTypeIdentifier_, $description_, $organizationName_, $teamIdentifier_)
     {
-      parent::__construct($path_, Io_File::CREATE);
+      parent::__construct($path_, Io_File::CREATE|Io_File::TRUNCATE);
 
       $this->properties=new Properties();
 
@@ -70,7 +67,7 @@
     public static function generateSerialNumber()
     {
       $serial=md5(uniqid(null, true));
-      $chunks=str_split($serial, 4);
+      $chunks=str_split($serial, 5);
 
       return implode('-', array_slice($chunks, 0, 5));
     }
@@ -78,48 +75,37 @@
 
 
     // ACCESSORS/MUTATORS
-    public function close()
+    public function sign($certificateAppleIntermediate_, $certificate_, $privateKey_, $privateKeyPassphrase_)
     {
+      if($this->isOpen())
+        throw new Io_Exception('io/archive/passbook/generic', 'Pass must be closed before it can be signed.');
+
+      $signature=Io::tmpFile();
+
+      @openssl_pkcs7_sign(
+        (string)$this->m_manifest,
+        (string)$signature,
+        "file://$certificate_",
+        array("file://$privateKey_", $privateKeyPassphrase_),
+        array(),
+        PKCS7_BINARY|PKCS7_NOATTR|PKCS7_DETACHED,
+        $certificateAppleIntermediate_
+      );
+
+      if(1>$signature->getSize()->bytes())
+        throw new Io_Exception('io/archive/passbook/generic', 'Failed to sign passs.');
+
+      $this->open();
+
+      parent::add($signature, self::FILE_SIGNATURE);
       parent::close();
 
-      $properties=$this->properties->toArray();
-      $properties[$this->getStyle()]=$this->getFields();
-
-      var_dump(json_encode($properties));
+      $signature->delete();
     }
 
     public function getStyle()
     {
       return self::STYLE;
-    }
-
-    public function setIcon(Io_Image $icon_)
-    {
-      $this->m_icon=$icon_;
-    }
-
-    public function setLogo(Io_Image $logo_)
-    {
-      $this->m_logo=$logo_;
-    }
-
-    public function setLogoText($text_)
-    {
-      $this->properties->logoText=$text_;
-    }
-
-    public function setBarcode($text_, $alternativeText_,
-      Io_Charset $charset_=null, $type_=self::TYPE_BARCODE_2DMATRIX_QR)
-    {
-      if(null===$charset_)
-        $charset_=Io_Charset::ISO_8859_1();
-
-      $this->properties->barcode=array(
-        'format'=>$type_,
-        'message'=>$text_,
-        'altText'=>$alternativeText_,
-        'messageEncoding'=>$charset_->name()
-      );
     }
 
     public function getFields()
@@ -161,6 +147,76 @@
       $this->addField(self::TYPE_FIELD_BACK, $name_, $value_, $title_);
     }
 
+    public function setIcon(Io_Image $icon_)
+    {
+      if(!Io_MimeType::IMAGE_PNG()->equals($icon_->getMimeType()))
+      {
+        throw new Io_Exception('io/archive/passbook/generic', sprintf(
+          'Icon must be of type %s [icon: %s].', Io_MimeType::IMAGE_PNG(), $icon_)
+        );
+      }
+
+      $this->add($icon_, self::FILE_ICON);
+    }
+
+    public function setLogo(Io_Image $logo_)
+    {
+      if(!Io_MimeType::IMAGE_PNG()->equals($logo_->getMimeType()))
+      {
+        throw new Io_Exception('io/archive/passbook/generic', sprintf(
+          'Logo must be of type %s [logo: %s].', Io_MimeType::IMAGE_PNG(), $logo_)
+        );
+      }
+
+      $this->add($logo_, self::FILE_LOGO);
+    }
+
+    public function setLogoText($text_)
+    {
+      $this->properties->logoText=$text_;
+    }
+
+    public function setBarcode($text_, $alternativeText_,
+      Io_Charset $charset_=null, $type_=self::TYPE_BARCODE_2DMATRIX_QR)
+    {
+      if(null===$charset_)
+        $charset_=Io_Charset::ISO_8859_1();
+
+      $this->properties->barcode=array(
+        'format'=>$type_,
+        'message'=>$text_,
+        'altText'=>$alternativeText_,
+        'messageEncoding'=>$charset_->name()
+      );
+    }
+
+    public function setLabelColor(Color $color_)
+    {
+      $this->properties->labelColor=(string)$color_;
+    }
+
+    public function setForegroundColor(Color $color_)
+    {
+      $this->properties->foregroundColor=(string)$color_;
+    }
+
+    public function setBackgroundColor(Color $color_)
+    {
+      $this->properties->backgroundColor=(string)$color_;
+    }
+
+    public function setBackgroundImage(Io_Image $image_)
+    {
+      if(!Io_MimeType::IMAGE_PNG()->equals($image_->getMimeType()))
+      {
+        throw new Io_Exception('io/archive/passbook/generic', sprintf(
+          'Background image must be of type %s [logo: %s].', Io_MimeType::IMAGE_PNG(), $image_)
+        );
+      }
+
+      $this->add($image_, self::FILE_BACKGROUND);
+    }
+
     public function addAssociatedAppKey($appKey_)
     {
       $associatedStoreIdentifiers=array();
@@ -193,21 +249,6 @@
       $this->properties->relevantDate=$date_->format('c');
     }
 
-    public function setColorLabel(Color $color_)
-    {
-      $this->properties->labelColor=(string)$color_;
-    }
-
-    public function setColorForeground(Color $color_)
-    {
-      $this->properties->foregroundColor=(string)$color_;
-    }
-
-    public function setColorBackground(Color $color_)
-    {
-      $this->properties->backgroundColor=(string)$color_;
-    }
-
     public function setWebserviceUrl($url_)
     {
       $this->properties->webServiceURL=$url_;
@@ -230,8 +271,38 @@
     //--------------------------------------------------------------------------
 
 
+    // OVERRIDES/IMPLEMENTS
+    public function add(Io_File $file_, $withName_=null)
+    {
+      parent::add($file_, $withName_);
+
+      if(null===$withName_)
+        $withName_=$file_->getName();
+
+      $this->m_files[$withName_]=$file_->getHashSHA1();
+    }
+
+    public function close()
+    {
+      $this->add($this->createPass(), self::FILE_PASS);
+      $this->add($this->createManifest(), self::FILE_MANIFEST);
+
+      parent::close();
+    }
+    //--------------------------------------------------------------------------
+
+
     // IMPLEMENTATION
     private $m_fields=array();
+    private $m_files=array();
+    /**
+     * @var Io_File
+     */
+    private $m_pass;
+    /**
+     * @var Io_File
+     */
+    private $m_manifest;
     /**
      * @var Io_Image
      */
@@ -240,6 +311,44 @@
      * @var Io_Image
      */
     private $m_icon;
+    //-----
+
+
+    protected function createPass()
+    {
+      if(null===$this->m_pass)
+        $this->m_pass=Io::tmpFile();
+
+      $properties=$this->properties->toArray();
+      $properties[$this->getStyle()]=$this->getFields();
+
+      $this->m_pass->setContent(json_encode($properties, JSON_FORCE_OBJECT));
+
+      return $this->m_pass;
+    }
+
+    protected function createManifest()
+    {
+      if(null===$this->m_manifest)
+        $this->m_manifest=Io::tmpFile();
+
+      $this->m_manifest->setContent(json_encode($this->m_files, JSON_FORCE_OBJECT));
+
+      return $this->m_manifest;
+    }
+
+
+    // DESTRUCTION
+    public function __destruct()
+    {
+      if($this->isOpen())
+        @$this->close();
+
+      if(null!==$this->m_manifest && $this->m_manifest->exists())
+        $this->m_manifest->delete();
+      if(null!==$this->m_pass && $this->m_pass->exists())
+        $this->m_pass->delete();
+    }
     //--------------------------------------------------------------------------
   }
 ?>

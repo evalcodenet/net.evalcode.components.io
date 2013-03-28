@@ -25,7 +25,7 @@
 
       if($exists)
       {
-        if($this->m_accessMask&self::CREATE)
+        if(false===$this->m_created && $this->m_accessMask&self::CREATE)
         {
           if($this->m_accessMask&self::TRUNCATE)
             $status=$this->archive()->open($this->m_pathAsString, ZipArchive::OVERWRITE);
@@ -36,6 +36,8 @@
         {
           $status=$this->archive()->open($this->m_pathAsString);
         }
+
+        $this->m_created=true;
       }
       else
       {
@@ -133,10 +135,26 @@
 
       return $this;
     }
+
+    /**
+     * (non-PHPdoc)
+     * @see Io_File::delete()
+     *
+     * @return Io_Archive_Zip
+     */
+    public function delete()
+    {
+      parent::delete();
+
+      $this->m_created=false;
+
+      return $this;
+    }
     //--------------------------------------------------------------------------
 
 
     // IMPLEMENTATION
+    private $m_created=false;
     /**
      * @var ZipArchive
      */
