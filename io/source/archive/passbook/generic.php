@@ -314,7 +314,7 @@
       $content=$signature->getContent();
       $start=strpos($content, 'filename="smime.p7s"')+strlen('filename="smime.p7s"');
       $content=trim(substr($content, $start, strrpos($content, '------')-$start));
-      $signature->setContent($content);
+      $signature->setContent(base64_decode($content));
 
       parent::add($signature, self::FILE_SIGNATURE);
 
