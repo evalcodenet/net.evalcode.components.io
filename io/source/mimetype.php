@@ -7,6 +7,24 @@
    * @package net.evalcode.components
    * @subpackage io
    *
+   * @method Io_MimeType APPLICATION_JSON
+   * @method Io_MimeType APPLICATION_XML
+   * @method Io_MimeType APPLICATION_ZIP
+   * @method Io_MimeType APPLICATION_OCTET_STREAM
+   * @method Io_MimeType APPLICATION_VND_APPLE_PKPASS
+   * @method Io_MimeType IMAGE_GIF
+   * @method Io_MimeType IMAGE_PNG
+   * @method Io_MimeType IMAGE_JPG
+   * @method Io_MimeType IMAGE_SVG_XML
+   * @method Io_MimeType MULTIPART_ALTERNATIVE
+   * @method Io_MimeType MULTIPART_DIGEST
+   * @method Io_MimeType MULTIPART_ENCRYPTED
+   * @method Io_MimeType MULTIPART_MIXED
+   * @method Io_MimeType MULTIPART_RELATED
+   * @method Io_MimeType TEXT_HTML
+   * @method Io_MimeType TEXT_JSON
+   * @method Io_MimeType TEXT_PLAIN
+   *
    * @author evalcode.net
    */
   class Io_MimeType extends Enumeration
