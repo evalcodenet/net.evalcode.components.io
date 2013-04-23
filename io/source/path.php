@@ -25,6 +25,23 @@
      *
      * @return Io_Path
      */
+    public static function get($pathName0_/*, $pathName1_, $pathName2_..*/)
+    {
+      if(1>count($args=func_get_args()))
+        return null;
+
+      $prepend='';
+      if(Io::DIRECTORY_SEPARATOR===$args[0])
+        $prepend=array_shift($args);
+
+      return new self($prepend.implode(Io::DIRECTORY_SEPARATOR, $args));
+    }
+
+    /**
+     * @param string $path_
+     *
+     * @return Io_Path
+     */
     public static function resolve($path_)
     {
       if(false===($path_=@realpath($path_)))
@@ -58,6 +75,46 @@
     public function getParent()
     {
       return new self(dirname($this->m_path));
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isAbsolutePath()
+    {
+      if(null===$this->m_isAbsolutePath)
+      {
+        if(null===$this->m_path || Io::DIRECTORY_SEPARATOR!==substr($this->m_path, 0, 1) || false!==strpos($this->m_path, '..'))
+          $this->m_isAbsolutePath=false;
+        else
+          $this->m_isAbsolutePath=true;
+      }
+
+      return $this->m_isAbsolutePath;
+    }
+
+    /**
+     * @return Io_Path
+     *
+     * @throws Io_Exception If fails to resolve path.
+     */
+    public function toAbsolutePath()
+    {
+      if($this->isAbsolutePath())
+        return $this;
+
+      if(false===($path=@realpath($this->m_path)))
+        throw new Io_Exception('io/path', sprintf('Unable to resolve path [%s].', $this->m_path));
+
+      return new self($path);
+    }
+
+    /**
+     * @return Net_Uri
+     */
+    public function toUri()
+    {
+      return new Net_Uri($this->m_path);
     }
 
     /**
@@ -312,6 +369,7 @@
 
 
     // IMPLEMENTATION
+    private $m_isAbsolutePath=false;
     private $m_name;
     private $m_path;
     //--------------------------------------------------------------------------

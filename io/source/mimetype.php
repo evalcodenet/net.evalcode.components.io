@@ -48,6 +48,8 @@
     const TEXT_HTML='text/html';
     const TEXT_JSON='text/json';
     const TEXT_PLAIN='text/plain';
+    const TEXT_PHP_SOURCE='text/php';
+
 
     // FILE EXTENSIONS
     const EXTENSION_BIN='bin';

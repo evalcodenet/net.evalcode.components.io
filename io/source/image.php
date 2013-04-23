@@ -37,7 +37,7 @@
      *
      * @return Io_Image
      */
-    public static function forPath($path_)
+    public static function forPath($path_, $accessModeMask_=self::READ)
     {
       $engineImpl=self::defaultProcessingEngine();
 

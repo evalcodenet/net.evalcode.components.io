@@ -23,6 +23,20 @@
 
     // STATIC ACCESSORS
     /**
+     * @return Io_Console
+     */
+    public static function console()
+    {
+      if(null===self::$m_console)
+      {
+        self::$m_console=new Io_Console();
+        self::$m_console->attach(new Io_Pipe_Stdin(), new Io_Pipe_Stdout(), new Io_Pipe_Stderr());
+      }
+
+      return self::$m_console;
+    }
+
+    /**
     * @param string $filepath_
     *
     * @return Io_File
@@ -209,7 +223,7 @@
         {
           return sys_get_temp_dir().
             DIRECTORY_SEPARATOR.
-            Runtime::getInstanceKey().
+            Runtime::getInstanceNamespace().
             DIRECTORY_SEPARATOR.
             date('YW', time()).
             DIRECTORY_SEPARATOR.
@@ -220,7 +234,7 @@
 
         return sys_get_temp_dir().
           DIRECTORY_SEPARATOR.
-          Runtime::getInstanceKey().
+          Runtime::getInstanceNamespace().
           DIRECTORY_SEPARATOR.
           date('YW', time()).
           DIRECTORY_SEPARATOR.
@@ -235,7 +249,7 @@
       {
         return sys_get_temp_dir().
           DIRECTORY_SEPARATOR.
-          Runtime::getInstanceKey().
+          Runtime::getInstanceNamespace().
           DIRECTORY_SEPARATOR.
           date('YW', time()).
           DIRECTORY_SEPARATOR.
@@ -244,7 +258,7 @@
 
       return sys_get_temp_dir().
         DIRECTORY_SEPARATOR.
-        Runtime::getInstanceKey().
+        Runtime::getInstanceNamespace().
         DIRECTORY_SEPARATOR.
         date('YW', time()).
         DIRECTORY_SEPARATOR.
