@@ -82,9 +82,17 @@
       $this->appendLine($this->m_license);
     }
 
+    public function isAttached()
+    {
+      return $this->m_isAttached;
+    }
+
     public function attach(Io_Channel_Readable $stdin_, Io_Channel_Writable $stdout_,
       Io_Channel_Writable $stderr_=null)
     {
+      if($this->m_isAttached)
+        throw new Exception_IllegalState('io/console', 'Console is already attached.');
+
       $this->in=$stdin_;
       $this->out=$stdout_;
 
@@ -130,6 +138,8 @@
           $this->m_arguments[$option['extended']]=$option['default'];
         }
       }
+
+      $this->m_isAttached=true;
     }
 
     public function addOption($character_, $holdsValue_=false, $defaultValue_=null, $description_=null, $nameExtended_=null)
@@ -158,6 +168,11 @@
       $this->m_license=$license_;
     }
 
+    public function getArguments()
+    {
+      return $this->m_arguments;
+    }
+
     public function hasArgument($name_)
     {
       if(isset($this->m_arguments[$name_]))
@@ -174,9 +189,9 @@
       return $defaultValue_;
     }
 
-    public function getArguments()
+    public function setArgument($name_, $value_)
     {
-      return $this->m_arguments;
+      $this->m_arguments[$name_]=$value_;
     }
 
     public function getWorkingDirectory()
@@ -260,6 +275,7 @@
     // IMPLEMENTATION
     private $m_arguments=array();
     private $m_options=array();
+    private $m_isAttached=false;
     private $m_isOpen=false;
     /**
      * @var Io_Buffer

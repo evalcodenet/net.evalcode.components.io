@@ -316,6 +316,11 @@
 
 
     // OVERRIDES/IMPLEMENTS
+    public function __get($name_)
+    {
+      return static::get($this->m_path, $name_);
+    }
+
     /**
      * (non-PHPdoc)
      * @see IteratorAggregate::getIterator()
