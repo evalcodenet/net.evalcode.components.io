@@ -1,6 +1,9 @@
 <?php
 
 
+namespace Components;
+
+
   /**
    * Io_Path_Iterator
    *
@@ -9,12 +12,12 @@
    *
    * @author evalcode.net
    */
-  class Io_Path_Iterator extends RecursiveDirectoryIterator
+  class Io_Path_Iterator extends \RecursiveDirectoryIterator
   {
     // CONSTRUCTION
     public function __construct($path_)
     {
-      parent::__construct($path_, RecursiveDirectoryIterator::SKIP_DOTS|RecursiveDirectoryIterator::CURRENT_AS_PATHNAME);
+      parent::__construct($path_, \RecursiveDirectoryIterator::SKIP_DOTS|\RecursiveDirectoryIterator::CURRENT_AS_PATHNAME);
     }
     //--------------------------------------------------------------------------
 

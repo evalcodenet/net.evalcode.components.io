@@ -1,6 +1,9 @@
 <?php
 
 
+namespace Components;
+
+
   /**
    * Io_Archive_Zip
    *
@@ -28,7 +31,7 @@
         if($this->m_accessMask&self::CREATE)
         {
           if($this->m_accessMask&self::TRUNCATE)
-            $status=$this->archive()->open($this->m_pathAsString, ZipArchive::OVERWRITE);
+            $status=$this->archive()->open($this->m_pathAsString, \ZipArchive::OVERWRITE);
           else
             throw new Io_Exception('io/archive/zip', 'Can not create already existing archive.');
         }
@@ -40,7 +43,7 @@
       else
       {
         if($this->m_accessMask&self::CREATE)
-          $status=$this->archive()->open($this->m_pathAsString, ZipArchive::CREATE);
+          $status=$this->archive()->open($this->m_pathAsString, \ZipArchive::CREATE);
         else
           throw new Io_Exception('io/archive/zip', 'Can not open not existing archive.');
       }
@@ -151,19 +154,19 @@
 
     // IMPLEMENTATION
     /**
-     * @var ZipArchive
+     * @var \ZipArchive
      */
     private $m_archive;
     //-----
 
 
     /**
-     * @return ZipArchive
+     * @return \ZipArchive
      */
     private function archive()
     {
       if(null===$this->m_archive)
-        $this->m_archive=new ZipArchive($this->m_pathAsString);
+        $this->m_archive=new \ZipArchive($this->m_pathAsString);
 
       return $this->m_archive;
     }

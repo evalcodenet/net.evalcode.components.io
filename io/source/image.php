@@ -1,6 +1,9 @@
 <?php
 
 
+namespace Components;
+
+
   /**
    * Io_Image
    *
@@ -187,7 +190,7 @@
 
     // IMPLEMENTATION
     private static $m_engineImpl=array(
-      'gd'=>'Io_Image_Engine_Gd'
+      'gd'=>'\\Components\\Io_Image_Engine_Gd'
     );
 
     /**

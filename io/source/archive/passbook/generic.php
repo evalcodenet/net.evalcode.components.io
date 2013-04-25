@@ -1,6 +1,9 @@
 <?php
 
 
+namespace Components;
+
+
   /**
    * Io_Archive_Passbook_Generic
    *
@@ -238,7 +241,7 @@
       $this->properties->locations=$locations;
     }
 
-    public function setDateTimeStart(DateTime $date_)
+    public function setDateTimeStart(\DateTime $date_)
     {
       $this->properties->relevantDate=$date_->format('c');
     }

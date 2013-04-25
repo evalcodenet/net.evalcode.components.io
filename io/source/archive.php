@@ -1,6 +1,9 @@
 <?php
 
 
+namespace Components;
+
+
   /**
    * Io_Archive
    *
@@ -9,7 +12,7 @@
    *
    * @author evalcode.net
    */
-  abstract class Io_Archive extends Io_File implements IteratorAggregate
+  abstract class Io_Archive extends Io_File implements \IteratorAggregate
   {
     // STATIC ACCESSORS
     /**

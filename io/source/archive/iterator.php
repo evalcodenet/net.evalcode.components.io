@@ -1,6 +1,9 @@
 <?php
 
 
+namespace Components;
+
+
   /**
    * Io_Archive_Iterator
    *
@@ -9,7 +12,7 @@
    *
    * @author evalcode.net
    */
-  class Io_Archive_Iterator extends RecursiveIterator
+  class Io_Archive_Iterator extends \RecursiveIterator
   {
     // CONSTRUCTION
     public function __construct(Io_Archive $archive_)

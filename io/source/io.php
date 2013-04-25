@@ -1,6 +1,9 @@
 <?php
 
 
+namespace Components;
+
+
   /**
    * Io
    *
@@ -308,11 +311,11 @@
       if(false===@is_dir($pathTarget_))
         throw new Io_Exception('io', 'Failed to copy directory. Unable to create target directory.');
 
-      $iterator=new RecursiveIteratorIterator(
-        new RecursiveDirectoryIterator(
-          $pathSource_, RecursiveDirectoryIterator::SKIP_DOTS|RecursiveDirectoryIterator::KEY_AS_PATHNAME
+      $iterator=new \RecursiveIteratorIterator(
+        new \RecursiveDirectoryIterator(
+          $pathSource_, \RecursiveDirectoryIterator::SKIP_DOTS|\RecursiveDirectoryIterator::KEY_AS_PATHNAME
         ),
-        RecursiveIteratorIterator::CHILD_FIRST
+        \RecursiveIteratorIterator::CHILD_FIRST
       );
 
       foreach($iterator as $entryPath=>$entryInfo)
@@ -330,12 +333,12 @@
 
     public static function clearPath($path_)
     {
-      $iterator=new RecursiveIteratorIterator(
-        new RecursiveDirectoryIterator(
-          $path_, RecursiveDirectoryIterator::SKIP_DOTS|RecursiveDirectoryIterator::KEY_AS_PATHNAME
+      $iterator=new \RecursiveIteratorIterator(
+        new \RecursiveDirectoryIterator(
+          $path_, \RecursiveDirectoryIterator::SKIP_DOTS|\RecursiveDirectoryIterator::KEY_AS_PATHNAME
         ),
-        RecursiveIteratorIterator::CHILD_FIRST,
-        RecursiveIteratorIterator::CATCH_GET_CHILD
+        \RecursiveIteratorIterator::CHILD_FIRST,
+        \RecursiveIteratorIterator::CATCH_GET_CHILD
       );
 
       foreach($iterator as $entryPath=>$entryInfo)

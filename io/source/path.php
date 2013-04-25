@@ -1,6 +1,9 @@
 <?php
 
 
+namespace Components;
+
+
   /**
    * Io_Path
    *
@@ -9,7 +12,7 @@
    *
    * @author evalcode.net
    */
-  class Io_Path implements Object, Cloneable, IteratorAggregate
+  class Io_Path implements Object, Cloneable, \IteratorAggregate
   {
     // CONSTRUCTION
     public function __construct($path_)
@@ -323,7 +326,7 @@
 
     /**
      * (non-PHPdoc)
-     * @see IteratorAggregate::getIterator()
+     * @see \IteratorAggregate::getIterator()
      *
      * @return Io_Path_Iterator
      */
