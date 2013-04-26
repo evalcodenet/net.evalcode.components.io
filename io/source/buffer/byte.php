@@ -268,7 +268,7 @@ namespace Components;
     }
 
     /**
-     * @see Object::hashCode()
+     * @see Components.Object::hashCode()
      */
     public function hashCode()
     {
@@ -280,7 +280,7 @@ namespace Components;
     }
 
     /**
-     * @see Object::equals()
+     * @see Components.Object::equals()
      */
     public function equals($object_)
     {
@@ -291,7 +291,7 @@ namespace Components;
     }
 
     /**
-     * @see Object::__toString()
+     * @see Components.Object::__toString()
      */
     public function __toString()
     {
