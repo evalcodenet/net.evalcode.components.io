@@ -65,7 +65,7 @@ namespace Components;
     //--------------------------------------------------------------------------
 
 
-    // IMPLEMENTS
+    // OVERRIDES/IMPLEMENTS
     /**
      * @see Io_Buffer::capacity()
      */

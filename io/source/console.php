@@ -204,7 +204,7 @@ namespace Components;
     //--------------------------------------------------------------------------
 
 
-    // IMPLEMENTS
+    // OVERRIDES/IMPLEMENTS
     /**
      * @see Io_Channel_Readable::read()
      */
