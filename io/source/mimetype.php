@@ -95,9 +95,9 @@ namespace Components;
     // STATIC ACCESSORS
     /**
      * @param string $name_
-     * @param Io_Charset $charset_
+     * @param \Components\Io_Charset $charset_
      *
-     * @return Io_MimeType
+     * @return \Components\Io_MimeType
      */
     public static function forName($name_, Io_Charset $charset_=null)
     {
@@ -107,10 +107,10 @@ namespace Components;
     }
 
     /**
-     * @param Io_File $file_
-     * @param Io_Charset $charset_
+     * @param \Components\Io_File $file_
+     * @param \Components\Io_Charset $charset_
      *
-     * @return Io_MimeType
+     * @return \Components\Io_MimeType
      */
     public static function forFile(Io_File $file_, Io_Charset $charset_=null)
     {
@@ -119,9 +119,9 @@ namespace Components;
 
     /**
      * @param string $fileExtension_
-     * @param Io_Charset $charset_
+     * @param \Components\Io_Charset $charset_
      *
-     * @return Io_MimeType
+     * @return \Components\Io_MimeType
      */
     public static function forFileName($filename_, Io_Charset $charset_=null)
     {
@@ -130,9 +130,9 @@ namespace Components;
 
     /**
      * @param string $fileExtension_
-     * @param Io_Charset $charset_
+     * @param \Components\Io_Charset $charset_
      *
-     * @return Io_MimeType
+     * @return \Components\Io_MimeType
      */
     public static function forFileExtension($fileExtension_, Io_Charset $charset_=null)
     {
@@ -148,7 +148,7 @@ namespace Components;
     /**
      * @param string $file_
      *
-     * @return Io_MimeType
+     * @return \Components\Io_MimeType
      */
     public static function forFilePath($file_, Io_Charset $charset_=null)
     {
@@ -208,6 +208,9 @@ namespace Components;
       return false;
     }
 
+    /**
+     * @see Components.Enumeration::values()
+     */
     public static function values()
     {
       return array_values(self::$m_mapMimeTypes);
@@ -282,18 +285,28 @@ namespace Components;
     }
 
     /**
-     * @return Io_Charset
+     * @return \Components\Io_Charset
      */
     public function charset()
     {
       return $this->m_charset;
     }
 
+    /**
+     * @param string $size_
+     *
+     * @return string
+     */
     public function icon($size_=self::ICON_SIZE_16)
     {
       return sprintf('/io/resource/image/icon/mime/%1$s/%2$s.png', $size_, $this->m_name);
     }
 
+    /**
+     * @param string $size_
+     *
+     * @return string
+     */
     public function iconClass($size_=self::ICON_SIZE_16)
     {
       return sprintf('io_mime_icon io_mime_icon_%1$s io_mime_icon_%2$s io_mime_icon_%3$s',
@@ -368,7 +381,7 @@ namespace Components;
     private $m_type;
     private $m_category;
     /**
-     * @var Io_Charset
+     * @var \Components\Io_Charset
      */
     private $m_charset;
     //--------------------------------------------------------------------------

@@ -12,14 +12,14 @@ namespace Components;
    *
    * @author evalcode.net
    *
-   * @method Io_Charset BINARY
-   * @method Io_Charset UTF_16
-   * @method Io_Charset UTF_16_BE
-   * @method Io_Charset UTF_16_LE
-   * @method Io_Charset UTF_8
-   * @method Io_Charset ISO_8859_1
-   * @method Io_Charset ISO_8859_15
-   * @method Io_Charset US_ASCII
+   * @method \Components\Io_Charset BINARY
+   * @method \Components\Io_Charset UTF_16
+   * @method \Components\Io_Charset UTF_16_BE
+   * @method \Components\Io_Charset UTF_16_LE
+   * @method \Components\Io_Charset UTF_8
+   * @method \Components\Io_Charset ISO_8859_1
+   * @method \Components\Io_Charset ISO_8859_15
+   * @method \Components\Io_Charset US_ASCII
    */
   class Io_Charset extends Enumeration
   {
@@ -41,7 +41,7 @@ namespace Components;
     /**
      * @param string $charset_
      *
-     * @return Io_Charset
+     * @return \Components\Io_Charset
      */
     public static function forName($name_)
     {
@@ -59,7 +59,7 @@ namespace Components;
     /**
      * @param string $filename_
      *
-     * @return Io_Charset
+     * @return \Components\Io_Charset
      */
     public static function forFilePath($filepath_)
     {
@@ -77,9 +77,9 @@ namespace Components;
     }
 
     /**
-     * @param Io_File $file_
+     * @param \Components\Io_File $file_
      *
-     * @return Io_Charset
+     * @return \Components\Io_Charset
      */
     public static function forFile(Io_File $file_)
     {
@@ -87,7 +87,7 @@ namespace Components;
     }
 
     /**
-     * @return Io_Charset
+     * @return \Components\Io_Charset
      */
     public static function defaultCharset()
     {
@@ -98,7 +98,7 @@ namespace Components;
     }
 
     /**
-     * @see Enumeration
+     * @see Components.Enumeration::values()
      */
     public static function values()
     {
@@ -118,7 +118,7 @@ namespace Components;
 
     // IMPLEMENTATION
     /**
-     * @var Io_Charset
+     * @var \Components\Io_Charset
      */
     private static $m_defaultCharset;
 
