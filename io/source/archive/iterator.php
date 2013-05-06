@@ -22,7 +22,7 @@ namespace Components;
     //--------------------------------------------------------------------------
 
 
-    // OVERRIDES/IMPLEMENTS
+    // OVERRIDES
     public function hasChildren()
     {
 
@@ -62,7 +62,7 @@ namespace Components;
 
     // IMLEMENTATION
     /**
-     * @var Io_Archive
+     * @var \Components\Io_Archive
      */
     private $m_archive;
     //--------------------------------------------------------------------------

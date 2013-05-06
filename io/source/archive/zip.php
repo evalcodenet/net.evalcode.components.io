@@ -14,12 +14,12 @@ namespace Components;
    */
   class Io_Archive_Zip extends Io_Archive
   {
-    // OVERRIDES/IMPLEMENTS
+    // OVERRIDES
     /**
      * (non-PHPdoc)
-     * @see Io_File::open()
+     * @see Components.Io_File::open()
      *
-     * @return Io_Archive_Zip
+     * @return \Components\Io_Archive_Zip
      */
     public function open()
     {
@@ -63,9 +63,9 @@ namespace Components;
 
     /**
      * (non-PHPdoc)
-     * @see Io_File::close()
+     * @see Components.Io_File::close()
      *
-     * @return Io_Archive_Zip
+     * @return \Components\Io_Archive_Zip
      */
     public function close()
     {
@@ -77,9 +77,9 @@ namespace Components;
 
     /**
      * (non-PHPdoc)
-     * @see Io_Archive::add()
+     * @see Components.Io_Archive::add()
      *
-     * @return Io_Archive_Zip
+     * @return \Components\Io_Archive_Zip
      */
     public function add(Io_File $file_, $withName_=null)
     {
@@ -93,9 +93,9 @@ namespace Components;
 
     /**
      * (non-PHPdoc)
-     * @see Io_Archive::addDirectory()
+     * @see Components.Io_Archive::addDirectory()
      *
-     * @return Io_Archive_Zip
+     * @return \Components\Io_Archive_Zip
      */
     public function addDirectory(Io_Path $directory_)
     {
@@ -105,7 +105,7 @@ namespace Components;
       if(false===$directory_->isDirectory())
         throw new Io_Exception('io/archive/zip', 'Given path must point to a readable directory.');
 
-      /* @var $path Io_Path */
+      /* @var $path \Components\Io_Path */
       foreach($directory_ as $path)
       {
         if($path->isDirectory())
@@ -123,9 +123,9 @@ namespace Components;
 
     /**
      * (non-PHPdoc)
-     * @see Io_Archive::extract()
+     * @see Components.Io_Archive::extract()
      *
-     * @return Io_Archive_Zip
+     * @return \Components\Io_Archive_Zip
      */
     public function extract(Io_Path $directory_)
     {
@@ -139,9 +139,9 @@ namespace Components;
 
     /**
      * (non-PHPdoc)
-     * @see Io_File::delete()
+     * @see Components.Io_File::delete()
      *
-     * @return Io_Archive_Zip
+     * @return \Components\Io_Archive_Zip
      */
     public function delete()
     {

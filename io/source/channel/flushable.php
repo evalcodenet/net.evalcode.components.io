@@ -8,7 +8,7 @@ namespace Components;
    * Io_Channel_Flushable
    *
    * @package net.evalcode.components
-   * @subpackage io
+   * @subpackage io.channel
    *
    * @author evalcode.net
    */
@@ -16,11 +16,9 @@ namespace Components;
   {
     // ACCESSORS
     /**
-     * Returns 'true' on success.
+     * @return \Components\Io_Channel_Flushable
      *
-     * @return boolean
-     *
-     * @throws Io_Exception
+     * @throws \Components\Io_Exception
      */
     function flush();
     //--------------------------------------------------------------------------

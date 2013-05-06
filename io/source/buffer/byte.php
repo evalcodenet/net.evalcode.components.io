@@ -8,7 +8,7 @@ namespace Components;
    * Io_Buffer_Byte
    *
    * @package net.evalcode.components
-   * @subpackage io
+   * @subpackage io.buffer
    *
    * @author evalcode.net
    */
@@ -16,7 +16,7 @@ namespace Components;
   {
     // CONSTRUCTION
     /**
-     * @see Io_Buffer::__construct()
+     * @see Components.Io_Buffer::__construct()
      */
     public function __construct($capacity_)
     {
@@ -31,7 +31,7 @@ namespace Components;
      *
      * @param integer $limit_
      *
-     * @return Io_Buffer_Byte
+     * @return \Components\Io_Buffer_Byte
      */
     public static function allocate($capacity_=4096)
     {
@@ -53,7 +53,7 @@ namespace Components;
      *
      * @param array $buffer_
      *
-     * @return Io_Buffer_Byte
+     * @return \Components\Io_Buffer_Byte
      */
     public static function wrap(&$buffer_)
     {
@@ -65,9 +65,9 @@ namespace Components;
     //--------------------------------------------------------------------------
 
 
-    // OVERRIDES/IMPLEMENTS
+    // OVERRIDES
     /**
-     * @see Io_Buffer::capacity()
+     * @see Components.Io_Buffer::capacity()
      */
     public function capacity()
     {
@@ -75,7 +75,7 @@ namespace Components;
     }
 
     /**
-     * @see Io_Buffer::read()
+     * @see Components.Io_Buffer::read()
      */
     public function read(Io_Buffer $target_)
     {
@@ -86,7 +86,7 @@ namespace Components;
     }
 
     /**
-     * @see Io_Buffer::next()
+     * @see Components.Io_Buffer::next()
      */
     public function next()
     {
@@ -94,7 +94,7 @@ namespace Components;
     }
 
     /**
-     * @see Io_Buffer::get()
+     * @see Components.Io_Buffer::get()
      */
     public function get($position_=null)
     {
@@ -105,9 +105,9 @@ namespace Components;
     }
 
     /**
-     * @see Io_Buffer::append()
+     * @see Components.Io_Buffer::append()
      *
-     * @return Io_Buffer_Byte
+     * @return \Components\Io_Buffer_Byte
      */
     public function append($value_)
     {
@@ -118,9 +118,9 @@ namespace Components;
     }
 
     /**
-     * @see Io_Buffer::appendBuffer()
+     * @see Components.Io_Buffer::appendBuffer()
      *
-     * @return Io_Buffer_Byte
+     * @return \Components\Io_Buffer_Byte
      */
     public function appendBuffer(Io_Buffer $source_)
     {
@@ -132,9 +132,9 @@ namespace Components;
     }
 
     /**
-     * @see Io_Buffer::flip()
+     * @see Components.Io_Buffer::flip()
      *
-     * @return Io_Buffer_Byte
+     * @return \Components\Io_Buffer_Byte
      */
     public function flip()
     {
@@ -145,7 +145,7 @@ namespace Components;
     }
 
     /**
-     * @see Io_Buffer::position()
+     * @see Components.Io_Buffer::position()
      */
     public function position($position_=null)
     {
@@ -159,7 +159,7 @@ namespace Components;
     }
 
     /**
-     * @see Io_Buffer::limit()
+     * @see Components.Io_Buffer::limit()
      */
     public function limit($limit_=null)
     {
@@ -170,7 +170,7 @@ namespace Components;
     }
 
     /**
-     * @see Io_Buffer::hasRemaining()
+     * @see Components.Io_Buffer::hasRemaining()
      */
     public function hasRemaining()
     {
@@ -178,7 +178,7 @@ namespace Components;
     }
 
     /**
-     * @see Io_Buffer::remaining()
+     * @see Components.Io_Buffer::remaining()
      */
     public function remaining()
     {
@@ -186,9 +186,9 @@ namespace Components;
     }
 
     /**
-     * @see Io_Buffer::rewind()
+     * @see Components.Io_Buffer::rewind()
      *
-     * @return Io_Buffer_Byte
+     * @return \Components\Io_Buffer_Byte
      */
     public function rewind()
     {
@@ -198,9 +198,9 @@ namespace Components;
     }
 
     /**
-     * @see Io_Buffer::clear()
+     * @see Components.Io_Buffer::clear()
      *
-     * @return Io_Buffer_Byte
+     * @return \Components\Io_Buffer_Byte
      */
     public function clear()
     {
@@ -212,9 +212,9 @@ namespace Components;
     }
 
     /**
-     * @see Io_Buffer::mark()
+     * @see Components.Io_Buffer::mark()
      *
-     * @return Io_Buffer_Byte
+     * @return \Components\Io_Buffer_Byte
      */
     public function mark()
     {
@@ -224,9 +224,9 @@ namespace Components;
     }
 
     /**
-     * @see Io_Buffer::reset()
+     * @see Components.Io_Buffer::reset()
      *
-     * @return Io_Buffer_Byte
+     * @return \Components\Io_Buffer_Byte
      */
     public function reset()
     {
@@ -236,7 +236,7 @@ namespace Components;
     }
 
     /**
-     * @see Io_Buffer::isArray()
+     * @see Components.Io_Buffer::isArray()
      */
     public function isArray()
     {
@@ -244,7 +244,7 @@ namespace Components;
     }
 
     /**
-     * @see Io_Buffer::arrayValue()
+     * @see Components.Io_Buffer::arrayValue()
      */
     public function arrayValue()
     {
@@ -252,13 +252,13 @@ namespace Components;
     }
 
     /**
-     * @see Io_Buffer::__clone()
+     * @see Components.Cloneable::__clone()
      *
-     * @return Io_Buffer_Byte
+     * @return \Components\Io_Buffer_Byte
      */
     public function __clone()
     {
-      $buffer=new static($this->m_capacity);
+      $buffer=new self($this->m_capacity);
       $buffer->m_buffer=&$this->m_buffer;
       $buffer->m_position=$this->m_position;
       $buffer->m_limit=$this->m_limit;

@@ -8,7 +8,7 @@ namespace Components;
    * Io_Buffer_String
    *
    * @package net.evalcode.components
-   * @subpackage io
+   * @subpackage io.buffer
    *
    * @author evalcode.net
    */
@@ -16,9 +16,9 @@ namespace Components;
   {
     // STATIC ACCESSORS
     /**
-     * @param int $capacity_
+     * @param integer $capacity_
      *
-     * @return Io_Buffer_String
+     * @return \Components\Io_Buffer_String
      */
     public static function allocate($capacity_=4096)
     {
@@ -28,7 +28,7 @@ namespace Components;
     /**
      * @param string $buffer_
      *
-     * @return Io_Buffer_String
+     * @return \Components\Io_Buffer_String
      */
     public static function wrap(&$buffer_)
     {
@@ -50,7 +50,7 @@ namespace Components;
 
     // OVERRIDES
     /**
-     * @see Io_Buffer::next()
+     * @see Components.Io_Buffer::next()
      *
      * @return string
      */
@@ -60,7 +60,7 @@ namespace Components;
     }
 
     /**
-     * @see Io_Buffer::get()
+     * @see Components.Io_Buffer::get()
      *
      * @return string
      */
@@ -73,9 +73,9 @@ namespace Components;
     }
 
     /**
-     * @see Io_Buffer::append()
+     * @see Components.Io_Buffer::append()
      *
-     * @return Io_Buffer_String
+     * @return \Components\Io_Buffer_String
      */
     public function append($value_)
     {
@@ -86,24 +86,24 @@ namespace Components;
     }
 
     /**
-     * @see Io_Buffer::appendBuffer()
+     * @see Components.Io_Buffer::appendBuffer()
      *
      * @param Io_Buffer_String $source_
      *
-     * @return Io_Buffer_String
+     * @return \Components\Io_Buffer_String
      */
     public function appendBuffer(Io_Buffer $source_)
     {
-      if(!$source_ instanceof static)
+      if(!$source_ instanceof self)
         throw new Exception_IllegalArgument('io/buffer/string', 'Expected instance of '.__CLASS__.'.');
 
       return parent::appendBuffer($source_);
     }
 
     /**
-     * @see Io_Buffer::flip()
+     * @see Components.Io_Buffer::flip()
      *
-     * @return Io_Buffer_String
+     * @return \Components\Io_Buffer_String
      */
     public function flip()
     {
@@ -111,9 +111,9 @@ namespace Components;
     }
 
     /**
-     * @see Io_Buffer::rewind()
+     * @see Components.Io_Buffer::rewind()
      *
-     * @return Io_Buffer_String
+     * @return \Components\Io_Buffer_String
      */
     public function rewind()
     {
@@ -121,9 +121,9 @@ namespace Components;
     }
 
     /**
-     * @see Io_Buffer::clear()
+     * @see Components.Io_Buffer::clear()
      *
-     * @return Io_Buffer_String
+     * @return \Components\Io_Buffer_String
      */
     public function clear()
     {
@@ -135,9 +135,9 @@ namespace Components;
     }
 
     /**
-     * @see Io_Buffer::mark()
+     * @see Components.Io_Buffer::mark()
      *
-     * @return Io_Buffer_String
+     * @return \Components\Io_Buffer_String
      */
     public function mark()
     {
@@ -145,9 +145,9 @@ namespace Components;
     }
 
     /**
-     * @see Io_Buffer::reset()
+     * @see Components.Io_Buffer::reset()
      *
-     * @return Io_Buffer_String
+     * @return \Components\Io_Buffer_String
      */
     public function reset()
     {
@@ -155,7 +155,7 @@ namespace Components;
     }
 
     /**
-     * @see Io_Buffer::isArray()
+     * @see Components.Io_Buffer::isArray()
      */
     public function isArray()
     {
@@ -163,7 +163,7 @@ namespace Components;
     }
 
     /**
-     * @see Io_Buffer::arrayValue()
+     * @see Components.Io_Buffer::arrayValue()
      */
     public function arrayValue()
     {
@@ -171,13 +171,13 @@ namespace Components;
     }
 
     /**
-     * @see Io_Buffer::__clone()
+     * @see Components.Cloneable::__clone()
      *
-     * @return Io_Buffer_String
+     * @return \Components\Io_Buffer_String
      */
     public function __clone()
     {
-      $buffer=new static($this->m_capacity);
+      $buffer=new self($this->m_capacity);
       $buffer->m_limit=$this->m_limit;
       $buffer->m_mark=$this->m_mark;
       $buffer->m_position=$this->m_position;
@@ -191,7 +191,7 @@ namespace Components;
      */
     public function hashCode()
     {
-      return String::hash($this->m_stringBuffer);
+      return string_hash($this->m_stringBuffer);
     }
 
     /**
@@ -199,7 +199,7 @@ namespace Components;
      */
     public function equals($object_)
     {
-      if($object_ instanceof static)
+      if($object_ instanceof self)
         return String::equal($this->m_stringBuffer, $object_->m_stringBuffer);
 
       return false;

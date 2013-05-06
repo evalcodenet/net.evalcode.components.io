@@ -46,7 +46,7 @@ namespace Components;
     // CONSTRUCTION
     public function __construct($path_, $accessModeMask_=self::READ)
     {
-      $this->m_pathAsString=$path_;
+      $this->m_pathAsString=(string)$path_;
       $this->m_accessMask=$accessModeMask_;
     }
     //--------------------------------------------------------------------------
@@ -56,7 +56,7 @@ namespace Components;
     /**
      * @param string $path_
      *
-     * @return Io_File
+     * @return \Components\Io_File
      */
     public static function forPath($path_, $accessModeMask_=self::READ)
     {
@@ -65,14 +65,14 @@ namespace Components;
     //--------------------------------------------------------------------------
 
 
-    // ACCESSORS/MUTATORS
+    // ACCESSORS
     /**
      * @return string
      */
     public function getName()
     {
       if(null===$this->m_name)
-        $this->m_name=@basename($this->m_pathAsString);
+        $this->m_name=basename($this->m_pathAsString);
 
       return $this->m_name;
     }
@@ -89,7 +89,7 @@ namespace Components;
     }
 
     /**
-     * @return Io_Path
+     * @return \Components\Io_Path
      */
     public function getPath()
     {
@@ -108,7 +108,7 @@ namespace Components;
     }
 
     /**
-     * @return Io_Path
+     * @return \Components\Io_Path
      */
     public function getDirectory()
     {
@@ -124,28 +124,28 @@ namespace Components;
     public function getDirectoryAsString()
     {
       if(null===$this->m_directoryAsString)
-        $this->m_directoryAsString=@dirname($this->m_pathAsString);
+        $this->m_directoryAsString=dirname($this->m_pathAsString);
 
       return $this->m_directoryAsString;
     }
 
     /**
-     * @throws Io_Exception
+     * @throws \Components\Io_Exception
      *
-     * @return Io_Filesize
+     * @return \Components\Io_Filesize
      */
     public function getSize()
     {
       // TODO
-      @clearstatcache(null, $this->m_pathAsString);
-      if(false===($filesize=@filesize($this->m_pathAsString)))
+      clearstatcache(null, $this->m_pathAsString);
+      if(false===($filesize=filesize($this->m_pathAsString)))
         return new Io_Filesize(0);
 
       return new Io_Filesize($filesize);
     }
 
     /**
-     * @return Io_MimeType
+     * @return \Components\Io_MimeType
      */
     public function getMimeType()
     {
@@ -161,7 +161,7 @@ namespace Components;
     }
 
     /**
-     * @return Io_Charset
+     * @return \Components\Io_Charset
      */
     public function getCharset()
     {
@@ -180,7 +180,7 @@ namespace Components;
     }
 
     /**
-     * @return Io_Image
+     * @return \Components\Io_Image
      */
     public function asImage()
     {
@@ -199,22 +199,22 @@ namespace Components;
      *
      * @param string $path_
      *
-     * @return Io_File
+     * @return \Components\Io_File
      */
     public function getRelated($path_)
     {
-      if(String::startsWith($path_, Io::DIRECTORY_SEPARATOR))
+      if(String::startsWith($path_, '/'))
         return new self($path_);
 
-      return new self($this->getDirectoryAsString().Io::DIRECTORY_SEPARATOR.$path_);
+      return new self($this->getDirectoryAsString()."/$path_");
     }
 
     /**
      * Returns path of given file relative to path of this file.
      *
-     * @param Io_File $file_
+     * @param \Components\Io_File $file_
      *
-     * @return Io_Path
+     * @return \Components\Io_Path
      */
     public function getRelativePath(Io_File $file_)
     {
@@ -245,19 +245,19 @@ namespace Components;
      */
     public function getContent()
     {
-      return @file_get_contents($this->m_pathAsString);
+      return file_get_contents($this->m_pathAsString);
     }
 
     /**
      * @param string $string_
      *
-     * @return Io_File
+     * @return \Components\Io_File
      */
     public function setContent($string_)
     {
       if(false===$this->isWritable())
       {
-        if($this->m_accessMask&self::CREATE && false===@is_file($this->m_pathAsString))
+        if($this->m_accessMask&self::CREATE && false===is_file($this->m_pathAsString))
         {
           $directory=$this->getDirectory();
           if(false===$directory->exists())
@@ -265,7 +265,7 @@ namespace Components;
         }
         else
         {
-          throw new Io_Exception('io/file', sprintf('File is not writable [%1$s].', $this));
+          throw new Io_Exception('io/file', sprintf('File is not writable [%s].', $this));
         }
       }
 
@@ -274,8 +274,8 @@ namespace Components;
       else if($this->m_accessMask&self::LOCK)
         $mode=LOCK_EX;
 
-      if(false===($written=@file_put_contents($this->m_pathAsString, $string_, $mode)))
-        throw new Io_Exception('io/file', sprintf('Unable to write to file [%1$s].', $this));
+      if(false===($written=file_put_contents($this->m_pathAsString, $string_, $mode)))
+        throw new Io_Exception('io/file', sprintf('Unable to write to file [%s].', $this));
 
       if($this->m_accessMask&self::APPEND)
         $this->m_length+=$written;
@@ -294,29 +294,29 @@ namespace Components;
 
     public function getHashMD5()
     {
-      return @md5_file($this->m_pathAsString);
+      return md5_file($this->m_pathAsString);
     }
 
     public function getHashSHA1()
     {
-      return @sha1_file($this->m_pathAsString);
+      return sha1_file($this->m_pathAsString);
     }
 
     public function isReadable()
     {
-      return @is_readable($this->m_pathAsString);
+      return is_readable($this->m_pathAsString);
     }
 
     public function isWritable()
     {
-      if(false===@is_writable($this->m_pathAsString))
+      if(false===is_writable($this->m_pathAsString))
         return false;
 
       if(0<($this->m_accessMask&(self::APPEND|self::TRUNCATE|self::CREATE)))
         return true;
 
       if(0<($this->m_accessMask&(self::WRITE)))
-        return @is_file($this->m_pathAsString);
+        return is_file($this->m_pathAsString);
 
       return false;
     }
@@ -326,41 +326,41 @@ namespace Components;
      */
     public function exists()
     {
-      return @is_file($this->m_pathAsString);
+      return is_file($this->m_pathAsString);
     }
 
     /**
-     * @return Io_File
+     * @return \Components\Io_File
      */
     public function create()
     {
-      if(false===@touch($this->m_pathAsString))
+      if(false===touch($this->m_pathAsString))
       {
         $directory=$this->getDirectory();
         if(false===$directory->exists())
           $directory->create();
       }
 
-      if(false===@touch($this->m_pathAsString))
-        throw new Io_Exception('io/file', sprintf('Unable to create file in given location [%1$s].', $this));
+      if(false===touch($this->m_pathAsString))
+        throw new Io_Exception('io/file', sprintf('Unable to create file in given location [%s].', $this));
 
       return $this;
     }
 
     public function delete()
     {
-      if(false===@unlink($this->m_pathAsString))
-        throw new Io_Exception('io/file', sprintf('Unable to delete file [%1$s].', $this));
+      if(false===unlink($this->m_pathAsString))
+        throw new Io_Exception('io/file', sprintf('Unable to delete file [%s].', $this));
 
       return $this;
     }
 
     /**
-     * @param Io_File $destination_
+     * @param \Components\Io_File $destination_
      *
-     * @return Io_File
+     * @return \Components\Io_File
      *
-     * @throws Io_Exception
+     * @throws \Components\Io_Exception
      */
     public function copy(Io_File $destination_, $autoCreateTargetDirectory_=false, $umaskTargetDirectory_=0775)
     {
@@ -371,8 +371,8 @@ namespace Components;
           $targetDirectory_->create($umaskTargetDirectory_);
       }
 
-      if(false===@copy($this->m_pathAsString, $destination_->m_pathAsString))
-        throw new Io_Exception('io/file', sprintf('Unable to copy file to given destination [source: %1$s, destination: %2$s].', $this, $destination_));
+      if(false===copy($this->m_pathAsString, $destination_->m_pathAsString))
+        throw new Io_Exception('io/file', sprintf('Unable to copy file to given destination [source: %s, destination: %s].', $this, $destination_));
 
       return $destination_;
     }
@@ -383,9 +383,9 @@ namespace Components;
     }
 
     /**
-     * @param Io_File $target_
+     * @param \Components\Io_File $target_
      *
-     * @return Io_File
+     * @return \Components\Io_File
      */
     public function move(Io_File $destination_, $autoCreateTargetDirectory_=false, $umaskTargetDirectory_=0775)
     {
@@ -396,23 +396,23 @@ namespace Components;
           $targetDirectory->create($umaskTargetDirectory_);
       }
 
-      if(false===@rename($this->m_pathAsString, $destination_->m_pathAsString))
+      if(false===rename($this->m_pathAsString, $destination_->m_pathAsString))
       {
-        if(@is_file($destination_->m_pathAsString))
-          @unlink($this->m_pathAsString);
+        if(is_file($destination_->m_pathAsString))
+          unlink($this->m_pathAsString);
         else
-          throw new Io_Exception('io/file', sprintf('Unable to move file to given destination [source: %1$s, destination: %2$s].', $this, $destination_));
+          throw new Io_Exception('io/file', sprintf('Unable to move file to given destination [source: %s, destination: %s].', $this, $destination_));
       }
 
       return $destination_;
     }
 
     /**
-     * @param Io_Path $target_
+     * @param \Components\Io_Path $target_
      * @param boolean $autoCreateTargetDirectory_
-     * @param int $umaskTargetDirectory_
+     * @param integer $umaskTargetDirectory_
      *
-     * @return Io_File
+     * @return \Components\Io_File
      */
     public function moveInto(Io_Path $destination_, $autoCreateTargetDirectory_=false, $umaskTargetDirectory_=0775)
     {
@@ -428,27 +428,27 @@ namespace Components;
     }
 
     /**
-     * @param int $mask_
+     * @param integer $mask_
      *
-     * @return Io_File
+     * @return \Components\Io_File
      *
-     * @throws Io_Exception
+     * @throws \Components\Io_Exception
      */
     public function open()
     {
-      if(false===($this->m_pointer=@fopen($this->m_pathAsString, $this->accessFlagsForMask($this->m_accessMask))))
-        throw new Io_Exception('io/file', sprintf('Unable to open file [%1$s].', $this));
+      if(false===($this->m_pointer=fopen($this->m_pathAsString, $this->accessFlagsForMask($this->m_accessMask))))
+        throw new Io_Exception('io/file', sprintf('Unable to open file [%s].', $this));
 
       if(null===$this->m_length)
       {
         if($this->m_accessMask^self::TRUNCATE)
-          $this->m_length=@filesize($this->m_pathAsString);
+          $this->m_length=filesize($this->m_pathAsString);
         else
           $this->m_length=0;
       }
 
       if($this->m_accessMask&self::APPEND)
-        $this->m_position=@fseek($this->m_pointer, 0, SEEK_END);
+        $this->m_position=fseek($this->m_pointer, 0, SEEK_END);
       else if(null===$this->m_position)
         $this->m_position=0;
 
@@ -459,13 +459,13 @@ namespace Components;
     }
 
     /**
-     * @return Io_File
+     * @return \Components\Io_File
      *
-     * @throws Io_Exception
+     * @throws \Components\Io_Exception
      */
     public function close()
     {
-      @fclose($this->m_pointer);
+      fclose($this->m_pointer);
 
       $this->m_open=false;
 
@@ -473,21 +473,21 @@ namespace Components;
     }
 
     /**
-     * @param int $bytes_
+     * @param integer $bytes_
      *
      * @return string
      *
-     * @throws Io_Exception
+     * @throws \Components\Io_Exception
      */
     public function read($bytes_=4096)
     {
       if(0>$bytes_)
-        @fseek($this->m_pointer, $this->m_position-($bytes_=-$bytes_));
+        fseek($this->m_pointer, $this->m_position-($bytes_=-$bytes_));
 
-      if(false===($read=@fread($this->m_pointer, $bytes_)))
-        throw new Io_Exception('io/file', sprintf('Unable to read from file [%1$s].', $this));
+      if(false===($read=fread($this->m_pointer, $bytes_)))
+        throw new Io_Exception('io/file', sprintf('Unable to read from file [%s].', $this));
 
-      $this->m_position=@ftell($this->m_pointer);
+      $this->m_position=ftell($this->m_pointer);
 
       return $read;
     }
@@ -495,20 +495,20 @@ namespace Components;
     /**
      * @param string $string_
      *
-     * @return int
+     * @return integer
      *
-     * @throws Io_Exception
+     * @throws \Components\Io_Exception
      */
     public function write($string_)
     {
       if(false===$this->m_writable)
-        throw new Io_Exception('io/file', sprintf('File is not writable [%1$s].', $this));
+        throw new Io_Exception('io/file', sprintf('File is not writable [%s].', $this));
 
       if(1>($length=strlen($string_)))
         return 0;
 
-      if(0===($written=@fwrite($this->m_pointer, $string_, $length)))
-        throw new Io_Exception('io/file', sprintf('Unable to write to file [%1$s].', $this));
+      if(0===($written=fwrite($this->m_pointer, $string_, $length)))
+        throw new Io_Exception('io/file', sprintf('Unable to write to file [%s].', $this));
 
       if($this->m_length<($this->m_position+=$written))
         $this->m_length=$this->m_position;
@@ -524,14 +524,14 @@ namespace Components;
     public function append($string_)
     {
       if(false===$this->m_writable)
-        throw new Io_Exception('io/file', sprintf('File is not writable [%1$s].', $this));
+        throw new Io_Exception('io/file', sprintf('File is not writable [%s].', $this));
 
       if(1>($length=strlen($string_)))
         return 0;
 
-      @fseek($this->m_pointer, $this->m_length, SEEK_SET);
-      if(0===($written=@fwrite($this->m_pointer, $string_, $length)))
-        throw new Io_Exception('io/file', sprintf('Unable to write to file [%1$s].', $this));
+      fseek($this->m_pointer, $this->m_length, SEEK_SET);
+      if(0===($written=fwrite($this->m_pointer, $string_, $length)))
+        throw new Io_Exception('io/file', sprintf('Unable to write to file [%s].', $this));
 
       $this->m_length+=$written;
       $this->m_position=$this->m_length;
@@ -545,16 +545,16 @@ namespace Components;
     }
 
     /**
-     * @param int $length_
+     * @param integer $length_
      *
-     * @return Io_File
+     * @return \Components\Io_File
      *
-     * @throws Io_Exception
+     * @throws \Components\Io_Exception
      */
     public function truncate($length_=0)
     {
-      if(false===@ftruncate($this->m_pointer, $length_))
-        throw new Io_Exception('io/file', sprintf('Failed to truncate file [%1$s].', $this));
+      if(false===ftruncate($this->m_pointer, $length_))
+        throw new Io_Exception('io/file', sprintf('Failed to truncate file [%s].', $this));
 
       $this->m_length=$length_;
       if($this->m_position>$length_)
@@ -564,31 +564,31 @@ namespace Components;
     }
 
     /**
-     * @param int $position_
+     * @param integer $position_
      *
-     * @return Io_File
+     * @return \Components\Io_File
      *
-     * @throws Io_Exception
+     * @throws \Components\Io_Exception
      */
     public function seekTo($position_)
     {
-      if(-1===@fseek($this->m_pointer, $position_, SEEK_SET))
-        throw new Io_Exception('io/file', sprintf('Unable to seek in file [%1$s].', $this));
+      if(-1===fseek($this->m_pointer, $position_, SEEK_SET))
+        throw new Io_Exception('io/file', sprintf('Unable to seek in file [%s].', $this));
 
-      $this->m_position=@ftell($this->m_pointer);
+      $this->m_position=ftell($this->m_pointer);
 
       return $this;
     }
 
     /**
-     * @return Io_File
+     * @return \Components\Io_File
      *
-     * @throws Io_Exception
+     * @throws \Components\Io_Exception
      */
     public function seekToBegin()
     {
-      if(false===@rewind($this->m_pointer))
-        throw new Io_Exception('io/file', sprintf('Unable to seek in file [%1$s].', $this));
+      if(false===rewind($this->m_pointer))
+        throw new Io_Exception('io/file', sprintf('Unable to seek in file [%s].', $this));
 
       $this->m_position=0;
 
@@ -596,41 +596,41 @@ namespace Components;
     }
 
     /**
-     * @return Io_File
+     * @return \Components\Io_File
      *
-     * @throws Io_Exception
+     * @throws \Components\Io_Exception
      */
     public function seekToEnd()
     {
-      if(-1===@fseek($this->m_pointer, 0, SEEK_END))
-        throw new Io_Exception('io/file', sprintf('Unable to seek in file [%1$s].', $this));
+      if(-1===fseek($this->m_pointer, 0, SEEK_END))
+        throw new Io_Exception('io/file', sprintf('Unable to seek in file [%s].', $this));
 
-      $this->m_position=@ftell($this->m_pointer);
+      $this->m_position=ftell($this->m_pointer);
 
       return $this;
     }
 
     /**
-     * @param int $bytes_
+     * @param integer $bytes_
      *
-     * @return Io_File
+     * @return \Components\Io_File
      *
-     * @throws Io_Exception
+     * @throws \Components\Io_Exception
      */
     public function skip($bytes_=1)
     {
-      if(-1===@fseek($this->m_pointer, $bytes_, SEEK_CUR))
-        throw new Io_Exception('io/file', sprintf('Unable to seek in file [%1$s].', $this));
+      if(-1===fseek($this->m_pointer, $bytes_, SEEK_CUR))
+        throw new Io_Exception('io/file', sprintf('Unable to seek in file [%s].', $this));
 
-      $this->m_position=@ftell($this->m_pointer);
+      $this->m_position=ftell($this->m_pointer);
 
       return $this;
     }
 
     /**
-     * @return int
+     * @return integer
      *
-     * @throws Io_Exception
+     * @throws \Components\Io_Exception
      */
     public function position()
     {
@@ -645,11 +645,11 @@ namespace Components;
 
     public function isEnd()
     {
-      return @feof($this->m_pointer);
+      return feof($this->m_pointer);
     }
 
     /**
-     * @return int
+     * @return integer
      */
     public function length()
     {
@@ -658,10 +658,10 @@ namespace Components;
     //--------------------------------------------------------------------------
 
 
-    // OVERRIDES/IMPLEMENTS
+    // OVERRIDES
     /**
      * (non-PHPdoc)
-     * @see Cloneable::__clone()
+     * @see Components.Cloneable::__clone()
      */
     public function __clone()
     {
@@ -674,7 +674,7 @@ namespace Components;
      */
     public function hashCode()
     {
-      return String::hash($this->m_pathAsString);
+      return string_hash($this->m_pathAsString);
     }
 
     /**
@@ -695,7 +695,7 @@ namespace Components;
      */
     public function __toString()
     {
-      return (string)$this->m_pathAsString;
+      return $this->m_pathAsString;
     }
     //--------------------------------------------------------------------------
 
@@ -710,11 +710,11 @@ namespace Components;
     private $m_name;
     private $m_extension;
     /**
-     * @var Io_Path
+     * @var \Components\Io_Path
      */
     private $m_path;
     /**
-     * @var Io_Path
+     * @var \Components\Io_Path
      */
     private $m_directory;
     private $m_directoryAsString;
@@ -722,7 +722,7 @@ namespace Components;
     private $m_accessFlags;
     private $m_writable;
     /**
-     * @var Io_MimeType
+     * @var \Components\Io_MimeType
      */
     private $m_mimeType;
     //-----

@@ -38,7 +38,7 @@ namespace Components;
     /**
      * @param string $path_
      *
-     * @return Io_Image
+     * @return \Components\Io_Image
      */
     public static function forPath($path_, $accessModeMask_=self::READ)
     {
@@ -52,9 +52,9 @@ namespace Components;
 
     /**
      * @param string $path_
-     * @param Point $dimensions_
+     * @param \Components\Point $dimensions_
      *
-     * @return Io_Image
+     * @return \Components\Io_Image
      */
     public static function createNew($path_, Point $dimensions_)
     {
@@ -68,9 +68,9 @@ namespace Components;
 
     /**
      * @param string $path_
-     * @param Point $dimensions_
+     * @param \Components\Point $dimensions_
      *
-     * @return Io_Image
+     * @return \Components\Io_Image
      */
     public static function createForBase64($path_, $base64_)
     {
@@ -84,9 +84,9 @@ namespace Components;
     //--------------------------------------------------------------------------
 
 
-    // ACCESSORS/MUTATORS
+    // ACCESSORS
     /**
-     * @return Point
+     * @return \Components\Point
      */
     public function getDimensions()
     {
@@ -94,9 +94,9 @@ namespace Components;
     }
 
     /**
-     * @param Point $toSize_
+     * @param \Components\Point $toSize_
      *
-     * @return Io_Image
+     * @return \Components\Io_Image
      */
     public function crop(Point $toSize_)
     {
@@ -106,9 +106,9 @@ namespace Components;
     }
 
     /**
-     * @param Point $toSize_
+     * @param \Components\Point $toSize_
      *
-     * @return Io_Image
+     * @return \Components\Io_Image
      */
     public function scale(Point $toSize_)
     {
@@ -124,11 +124,11 @@ namespace Components;
     //--------------------------------------------------------------------------
 
 
-    // OVERRIDES/IMPLEMENTS
+    // OVERRIDES
     // TODO Override __clone(), copy(), move() etc. correctly
     /**
      * (non-PHPdoc)
-     * @see Io_File::isImage()
+     * @see Components.Io_File::isImage()
      */
     public function isImage()
     {
@@ -137,7 +137,7 @@ namespace Components;
 
     /**
      * (non-PHPdoc)
-     * @see Io_File::asImage()
+     * @see Components.Io_File::asImage()
      */
     public function asImage()
     {
@@ -146,7 +146,7 @@ namespace Components;
 
     /**
      * (non-PHPdoc)
-     * @see Cloneable::__clone()
+     * @see Components.Cloneable::__clone()
      */
     public function __clone()
     {
@@ -194,7 +194,7 @@ namespace Components;
     );
 
     /**
-     * @var Io_Image_Engine
+     * @var \Components\Io_Image_Engine
      */
     private $m_engine;
     //--------------------------------------------------------------------------

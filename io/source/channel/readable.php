@@ -8,7 +8,7 @@ namespace Components;
    * Io_Channel_Readable
    *
    * @package net.evalcode.components
-   * @subpackage io
+   * @subpackage io.channel
    *
    * @author evalcode.net
    */
@@ -22,12 +22,12 @@ namespace Components;
      *
      * Returns amount of read bytes/characters.
      *
-     * @param Io_Buffer $buffer_ Target buffer.
-     * @param int $interrupt_ ASCII code for expected interrupt character.
+     * @param \Components\Io_Buffer $buffer_ Target buffer.
+     * @param integer $interrupt_ ASCII code for expected interrupt character.
      *
-     * @return int
+     * @return integer
      *
-     * @throws Io_Exception
+     * @throws \Components\Io_Exception
      */
     function read(Io_Buffer $buffer_, $interrupt_=null);
     //--------------------------------------------------------------------------

@@ -8,7 +8,7 @@ namespace Components;
    * Io_Pipe_Stderr
    *
    * @package net.evalcode.components
-   * @subpackage io
+   * @subpackage io.pipe
    *
    * @author evalcode.net
    */

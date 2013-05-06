@@ -33,7 +33,7 @@ namespace Components;
     /**
      * Reads this buffer into passed target buffer.
      *
-     * @param Io_Buffer $target_
+     * @param \Components\Io_Buffer $target_
      *
      * @return integer
      */
@@ -66,7 +66,7 @@ namespace Components;
      *
      * @param mixed $value_
      *
-     * @return Io_Buffer
+     * @return \Components\Io_Buffer
      */
     function append($value_);
 
@@ -76,9 +76,9 @@ namespace Components;
      * Internal position will be incremented by amount of values appended
      * in this operation.
      *
-     * @param Io_Buffer $source_
+     * @param \Components\Io_Buffer $source_
      *
-     * @return Io_Buffer
+     * @return \Components\Io_Buffer
      */
     function appendBuffer(Io_Buffer $source_);
 
@@ -86,7 +86,7 @@ namespace Components;
      * Sets this buffer's limit to its current position and resets the position
      * to zero.
      *
-     * @return Io_Buffer
+     * @return \Components\Io_Buffer
      */
     function flip();
 
@@ -97,7 +97,7 @@ namespace Components;
      *
      * @return integer
      *
-     * @throws Exception_IllegalState
+     * @throws \Components\Exception_IllegalState
      */
     function position($position_=null);
 
@@ -108,7 +108,7 @@ namespace Components;
      *
      * @return integer
      *
-     * @throws Exception_IllegalState
+     * @throws \Components\Exception_IllegalState
      */
     function limit($limit_=null);
 
@@ -133,7 +133,7 @@ namespace Components;
     /**
      * Resets this buffers internal position to zero.
      *
-     * @return Io_Buffer
+     * @return \Components\Io_Buffer
      */
     function rewind();
 
@@ -141,14 +141,14 @@ namespace Components;
      * Removes this buffers contents, resets its internal position to zero
      * and its limit to its capacity.
      *
-     * @return Io_Buffer
+     * @return \Components\Io_Buffer
      */
     function clear();
 
     /**
      * Sets a mark at current position.
      *
-     * @return Io_Buffer
+     * @return \Components\Io_Buffer
      */
     function mark();
 
@@ -156,7 +156,7 @@ namespace Components;
      * Resets this buffers internal position to the last mark ot to
      * zero if no mark is set.
      *
-     * @return Io_Buffer
+     * @return \Components\Io_Buffer
      */
     function reset();
 
@@ -190,7 +190,7 @@ namespace Components;
      * limit and marks, therefore can be searched independently.
      * </p>
      *
-     * @see Cloneable::__clone()
+     * @see Components.Cloneable::__clone()
      */
     function __clone();
     //--------------------------------------------------------------------------

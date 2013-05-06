@@ -40,7 +40,7 @@ namespace Components;
 
     // PROPERTIES
     /**
-     * @var Properties
+     * @var \Components\Properties
      */
     public $properties;
     //--------------------------------------------------------------------------
@@ -64,6 +64,9 @@ namespace Components;
 
 
     // STATIC ACCESSORS
+    /**
+     * @return string
+     */
     public static function generateSerialNumber()
     {
       $serial=md5(uniqid(null, true));
@@ -74,7 +77,7 @@ namespace Components;
     //--------------------------------------------------------------------------
 
 
-    // ACCESSORS/MUTATORS
+    // ACCESSORS
     public function getStyle()
     {
       return self::STYLE;
@@ -313,7 +316,11 @@ namespace Components;
     //--------------------------------------------------------------------------
 
 
-    // OVERRIDES/IMPLEMENTS
+    // OVERRIDES
+    /**
+     * (non-PHPdoc)
+     * @see Components.Io_Archive_Zip::add()
+     */
     public function add(Io_File $file_, $withName_=null)
     {
       parent::add($file_, $withName_);
@@ -324,6 +331,10 @@ namespace Components;
       $this->m_files[$withName_]=$file_->getHashSHA1();
     }
 
+    /**
+     * (non-PHPdoc)
+     * @see Components.Io_Archive_Zip::close()
+     */
     public function close()
     {
       $properties=$this->properties->toArray();
@@ -346,6 +357,10 @@ namespace Components;
       return $this;
     }
 
+    /**
+     * (non-PHPdoc)
+     * @see Components.Io_File::getMimeType()
+     */
     public function getMimeType()
     {
       return Io_MimeType::APPLICATION_VND_APPLE_PKPASS();

@@ -12,7 +12,7 @@ namespace Components;
    *
    * @author evalcode.net
    */
-  class Io_Path implements Object, Cloneable, \IteratorAggregate
+  class Io_Path implements Object, Cloneable, \IteratorAggregate // TODO (CSH) Iterable
   {
     // CONSTRUCTION
     public function __construct($path_)
@@ -55,7 +55,7 @@ namespace Components;
     //--------------------------------------------------------------------------
 
 
-    // ACCESSORS/MUTATORS
+    // ACCESSORS
     public function getName()
     {
       if(null===$this->m_name)
@@ -217,7 +217,7 @@ namespace Components;
 
     /**
      * @param boolean $recursive_
-     * @param int $umask_
+     * @param integer $umask_
      *
      * @return Io_Path
      *
@@ -318,7 +318,7 @@ namespace Components;
     //--------------------------------------------------------------------------
 
 
-    // OVERRIDES/IMPLEMENTS
+    // OVERRIDES
     public function __get($name_)
     {
       return static::get($this->m_path, $name_);
@@ -337,7 +337,7 @@ namespace Components;
 
     /**
      * (non-PHPdoc)
-     * @see Cloneable::__clone()
+     * @see Components.Cloneable::__clone()
      */
     public function __clone()
     {

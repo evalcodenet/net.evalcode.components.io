@@ -12,7 +12,7 @@ namespace Components;
    *
    * @author evalcode.net
    */
-  class Io_Filesize implements Object, Cloneable, Comparable
+  class Io_Filesize extends Integer
   {
     // PREDEFINED PROPERTIES
     const BYTES='Bytes';
@@ -30,18 +30,10 @@ namespace Components;
     //--------------------------------------------------------------------------
 
 
-    // CONSTRUCTION
-    public function __construct($bytes_)
-    {
-      $this->m_bytes=$bytes_;
-    }
-    //--------------------------------------------------------------------------
-
-
     // STATIC ACCESSORS
     /**
-     * @param int $bytes_
-     * @param int $round_
+     * @param integer $bytes_
+     * @param integer $round_
      *
      * @return float
      */
@@ -51,8 +43,8 @@ namespace Components;
     }
 
     /**
-     * @param int $bytes_
-     * @param int $round_
+     * @param integer $bytes_
+     * @param integer $round_
      *
      * @return float
      */
@@ -62,8 +54,8 @@ namespace Components;
     }
 
     /**
-     * @param int $bytes_
-     * @param int $round_
+     * @param integer $bytes_
+     * @param integer $round_
      *
      * @return float
      */
@@ -73,8 +65,8 @@ namespace Components;
     }
 
     /**
-     * @param int $bytes_
-     * @param int $round_
+     * @param integer $bytes_
+     * @param integer $round_
      *
      * @return float
      */
@@ -84,8 +76,8 @@ namespace Components;
     }
 
     /**
-     * @param int $bytes_
-     * @param int $round_
+     * @param integer $bytes_
+     * @param integer $round_
      *
      * @return string
      */
@@ -104,8 +96,8 @@ namespace Components;
     }
 
     /**
-     * @param int $bytes_
-     * @param int $round_
+     * @param integer $bytes_
+     * @param integer $round_
      *
      * @return string
      */
@@ -115,8 +107,8 @@ namespace Components;
     }
 
     /**
-     * @param int $bytes_
-     * @param int $round_
+     * @param integer $bytes_
+     * @param integer $round_
      *
      * @return string
      */
@@ -126,8 +118,8 @@ namespace Components;
     }
 
     /**
-     * @param int $bytes_
-     * @param int $round_
+     * @param integer $bytes_
+     * @param integer $round_
      *
      * @return string
      */
@@ -137,8 +129,8 @@ namespace Components;
     }
 
     /**
-     * @param int $bytes_
-     * @param int $round_
+     * @param integer $bytes_
+     * @param integer $round_
      *
      * @return string
      */
@@ -148,8 +140,8 @@ namespace Components;
     }
 
     /**
-     * @param int $bytes_
-     * @param int $round_
+     * @param integer $bytes_
+     * @param integer $round_
      *
      * @return string
      */
@@ -160,125 +152,133 @@ namespace Components;
     //--------------------------------------------------------------------------
 
 
-    // ACCESSORS/MUTATORS
+    // ACCESSORS
     /**
      * @return number
      */
     public function bytes()
     {
-      return $this->m_bytes;
+      return $this->m_value;
     }
 
     /**
-     * @param int $round_
+     * @param integer $round_
      *
      * @return number
      */
     public function kiloBytes($round_=self::ROUND_DEFAULT)
     {
-      return self::convertToKB($this->m_bytes, $round_);
+      return self::convertToKB($this->m_value, $round_);
     }
 
     /**
-     * @param int $round_
+     * @param integer $round_
      *
      * @return number
      */
     public function megaBytes($round_=self::ROUND_DEFAULT)
     {
-      return self::convertToMB($this->m_bytes, $round_);
+      return self::convertToMB($this->m_value, $round_);
     }
 
     /**
-     * @param int $round_
+     * @param integer $round_
      *
      * @return number
      */
     public function gigaBytes($round_=self::ROUND_DEFAULT)
     {
-      return self::convertToGB($this->m_bytes, $round_);
+      return self::convertToGB($this->m_value, $round_);
     }
 
     /**
-     * @param int $round_
+     * @param integer $round_
      *
      * @return number
      */
     public function teraBytes($round_=self::ROUND_DEFAULT)
     {
-      return self::convertToTB($this->m_bytes, $round_);
+      return self::convertToTB($this->m_value, $round_);
     }
 
 
     /**
-     * @param int $round_
+     * @param integer $round_
      *
      * @return string
      */
     public function formatted($round_=self::ROUND_DEFAULT)
     {
-      return self::format($this->m_bytes, $round_);
+      return self::format($this->m_value, $round_);
     }
 
     /**
-     * @param int $round_
+     * @param integer $round_
      *
      * @return string
      */
     public function formattedKB($round_=self::ROUND_DEFAULT)
     {
-      return self::formatAsKiloBytes($this->m_bytes, $round_);
+      return self::formatAsKiloBytes($this->m_value, $round_);
     }
 
     /**
-     * @param int $round_
+     * @param integer $round_
      *
      * @return string
      */
     public function formattedMB($round_=self::ROUND_DEFAULT)
     {
-      return self::formatAsMegaBytes($this->m_bytes, $round_);
+      return self::formatAsMegaBytes($this->m_value, $round_);
     }
 
     /**
-     * @param int $round_
+     * @param integer $round_
      *
      * @return string
      */
     public function formattedGB($round_=self::ROUND_DEFAULT)
     {
-      return self::formatAsGigaBytes($this->m_bytes, $round_);
+      return self::formatAsGigaBytes($this->m_value, $round_);
     }
 
     /**
-     * @param int $round_
+     * @param integer $round_
      *
      * @return string
      */
     public function formattedTB($round_=self::ROUND_DEFAULT)
     {
-      return self::formatAsTeraBytes($this->m_bytes, $round_);
+      return self::formatAsTeraBytes($this->m_value, $round_);
     }
     //--------------------------------------------------------------------------
 
 
-    // OVERRIDES/IMPLEMENTS
+    // OVERRIDES
     public function __clone()
     {
-      return new self($this->m_bytes);
+      return new self($this->m_value);
     }
 
     public function compareTo($object_)
     {
-      if($object_ instanceof self)
+      if(is_numeric($object_))
       {
-        if($this->m_bytes===$object_->m_bytes)
+        if($this->m_value==$object_)
           return 0;
 
-        return $this->m_bytes<$object_->m_bytes?-1:1;
+        return $this->m_value<$object_->m_value?-1:1;
       }
 
-      throw new Runtime_Exception('io/filesize', 'Can not compare to object of given type.');
+      if($object_ instanceof Integer)
+      {
+        if($this->m_value===$object_->m_value)
+          return 0;
+
+        return $this->m_value<$object_->m_value?-1:1;
+      }
+
+      throw new Io_Exception('io/filesize', 'Can not compare to object of given type.');
     }
 
     /**
@@ -287,8 +287,7 @@ namespace Components;
      */
     public function hashCode()
     {
-      // TODO Implement Number::hash()
-      return String::hash((string)$this->m_bytes);
+      return integer_hash($this->m_value);
     }
 
     /**
@@ -298,7 +297,7 @@ namespace Components;
     public function equals($object_)
     {
       if($object_ instanceof self)
-        return $this->m_bytes===$object_->m_bytes;
+        return $this->m_value===$object_->m_value;
 
       return false;
     }
@@ -309,16 +308,8 @@ namespace Components;
      */
     public function __toString()
     {
-      return self::format($this->m_bytes);
+      return self::format($this->m_value);
     }
-    //--------------------------------------------------------------------------
-
-
-    // IMPLEMENTATION
-    /**
-     * @var int
-     */
-    private $m_bytes;
     //--------------------------------------------------------------------------
   }
 ?>

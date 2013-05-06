@@ -32,12 +32,20 @@ namespace Components;
     //--------------------------------------------------------------------------
 
 
-    // OVERRIDES/IMPLEMENTS
+    // OVERRIDES
+    /**
+     * (non-PHPdoc)
+     * @see Components.Io_Archive_Passbook_Generic::getStyle()
+     */
     public function getStyle()
     {
       return self::STYLE;
     }
 
+    /**
+     * (non-PHPdoc)
+     * @see Components.Io_Archive_Passbook_Generic::getFields()
+     */
     public function getFields()
     {
       $fields=parent::getFields();

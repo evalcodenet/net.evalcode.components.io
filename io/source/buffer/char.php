@@ -8,7 +8,7 @@ namespace Components;
    * Io_Buffer_Char
    *
    * @package net.evalcode.components
-   * @subpackage io
+   * @subpackage io.buffer
    *
    * @author evalcode.net
    */

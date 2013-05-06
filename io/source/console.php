@@ -16,15 +16,15 @@ namespace Components;
   {
     // PROPERTIES
     /**
-     * @var Io_Channel_Readable
+     * @var \Components\Io_Channel_Readable
      */
     public $in;
     /**
-     * @var Io_Channel_Writable
+     * @var \Components\Io_Channel_Writable
      */
     public $out;
     /**
-     * @var Io_Channel_Writable
+     * @var \Components\Io_Channel_Writable
      */
     public $err;
     //--------------------------------------------------------------------------
@@ -43,14 +43,28 @@ namespace Components;
 
 
     // ACCESSORS
+    /**
+     * @param string $string_
+     *
+     * @return \Components\Io_Console
+     */
     public function append($string_)
     {
       $this->m_buffer->append($string_);
+
+      return $this;
     }
 
+    /**
+     * @param string $string_
+     *
+     * @return \Components\Io_Console
+     */
     public function appendLine($string_='')
     {
       $this->append($string_.Io::LINE_SEPARATOR_DEFAULT);
+
+      return $this;
     }
 
     public function appendOptions()
@@ -73,16 +87,22 @@ namespace Components;
       }
 
       $this->appendLine();
+
+      return $this;
     }
 
     public function appendInfo()
     {
       $this->appendLine($this->m_info);
+
+      return $this;
     }
 
     public function appendLicense()
     {
       $this->appendLine($this->m_license);
+
+      return $this;
     }
 
     public function isAttached()
@@ -90,11 +110,20 @@ namespace Components;
       return $this->m_isAttached;
     }
 
+    /**
+     * @param \Components\Io_Channel_Readable $stdin_
+     * @param \Components\Io_Channel_Writable $stdout_
+     * @param \Components\Io_Channel_Writable $stderr_
+     *
+     * @return \Components\Io_Console
+     *
+     * @throws \Components\Io_Exception
+     */
     public function attach(Io_Channel_Readable $stdin_, Io_Channel_Writable $stdout_,
       Io_Channel_Writable $stderr_=null)
     {
       if($this->m_isAttached)
-        throw new Exception_IllegalState('io/console', 'Console is already attached.');
+        throw new Io_Exception('io/console', 'Console is already attached.');
 
       $this->in=$stdin_;
       $this->out=$stdout_;
@@ -143,6 +172,8 @@ namespace Components;
       }
 
       $this->m_isAttached=true;
+
+      return $this;
     }
 
     public function addOption($character_, $holdsValue_=false, $defaultValue_=null, $description_=null, $nameExtended_=null)
@@ -154,21 +185,29 @@ namespace Components;
         'description'=>$description_,
         'extended'=>$nameExtended_,
       ));
+
+      return $this;
     }
 
     public function addEmptyOption()
     {
       array_push($this->m_options, array());
+
+      return $this;
     }
 
     public function setInfo($info_)
     {
       $this->m_info=$info_;
+
+      return $this;
     }
 
     public function setLicense($license_)
     {
       $this->m_license=$license_;
+
+      return $this;
     }
 
     public function getArguments()
@@ -195,6 +234,8 @@ namespace Components;
     public function setArgument($name_, $value_)
     {
       $this->m_arguments[$name_]=$value_;
+
+      return $this;
     }
 
     public function getWorkingDirectory()
@@ -204,9 +245,10 @@ namespace Components;
     //--------------------------------------------------------------------------
 
 
-    // OVERRIDES/IMPLEMENTS
+    // OVERRIDES
     /**
-     * @see Io_Channel_Readable::read()
+     * (non-PHPdoc)
+     * @see Components.Io_Channel_Readable::read()
      */
     public function read(Io_Buffer $buffer_, $interrupt_=null)
     {
@@ -214,7 +256,8 @@ namespace Components;
     }
 
     /**
-     * @see Io_Channel_Writable::write()
+     * (non-PHPdoc)
+     * @see Components.Io_Channel_Writable::write()
      */
     public function write(Io_Buffer $buffer_)
     {
@@ -222,17 +265,23 @@ namespace Components;
     }
 
     /**
-     * @see Io_Channel_Flushable::flush()
+     * (non-PHPdoc)
+     * @see Components.Io_Channel_Flushable::flush()
+     *
+     * @return \Components\Io_Console
      */
     public function flush()
     {
       $this->m_buffer->flip();
       $this->out->write($this->m_buffer);
       $this->m_buffer->clear();
+
+      return $this;
     }
 
     /**
-     * @see Io_Channel::isOpen()
+     * (non-PHPdoc)
+     * @see Components.Io_Channel::isOpen()
      */
     public function isOpen()
     {
@@ -240,7 +289,10 @@ namespace Components;
     }
 
     /**
-     * @see Io_Channel::open()
+     * (non-PHPdoc)
+     * @see Components.Io_Channel::open()
+     *
+     * @return \Components\Io_Console
      */
     public function open()
     {
@@ -253,11 +305,14 @@ namespace Components;
 
       $this->m_isOpen=true;
 
-      return true;
+      return $this;
     }
 
     /**
-     * @see Io_Channel_Closeable::close()
+     * (non-PHPdoc)
+     * @see Components.Io_Channel_Closeable::close()
+     *
+     * @return \Components\Io_Console
      */
     public function close()
     {
@@ -270,7 +325,7 @@ namespace Components;
 
       $this->m_isOpen=false;
 
-      return true;
+      return $this;
     }
     //--------------------------------------------------------------------------
 
@@ -281,7 +336,7 @@ namespace Components;
     private $m_isAttached=false;
     private $m_isOpen=false;
     /**
-     * @var Io_Buffer
+     * @var \Components\Io_Buffer
      */
     private $m_buffer;
     private $m_info;

@@ -12,7 +12,7 @@ namespace Components;
    *
    * @author evalcode.net
    */
-  class Io_Path_Iterator extends \RecursiveDirectoryIterator
+  class Io_Path_Iterator extends \RecursiveDirectoryIterator // TODO (CSH) Iterator
   {
     // CONSTRUCTION
     public function __construct($path_)
@@ -22,7 +22,13 @@ namespace Components;
     //--------------------------------------------------------------------------
 
 
-    // OVERRIDES/IMPLEMENTS
+    // OVERRIDES
+    /**
+     * (non-PHPdoc)
+     * @see RecursiveDirectoryIterator::current()
+     *
+     * @return \Components\Io_Path_Iterator
+     */
     public function current()
     {
       return new Io_Path(parent::current());

@@ -8,15 +8,15 @@ namespace Components;
    * Io_Channel_Null
    *
    * @package net.evalcode.components
-   * @subpackage io
+   * @subpackage io.channel
    *
    * @author evalcode.net
    */
   class Io_Channel_Null implements Object, Io_Channel_Readable, Io_Channel_Writable
   {
-    // OVERRIDES/IMPLEMENTS
+    // OVERRIDES
     /**
-     * @see Io_Channel_Readable::read()
+     * @see Components.Io_Channel_Readable::read()
      */
     public function read(Io_Buffer $buffer_, $interrupt_=null)
     {
@@ -24,7 +24,7 @@ namespace Components;
     }
 
     /**
-     * @see Io_Channel_Writable::write()
+     * @see Components.Io_Channel_Writable::write()
      */
     public function write(Io_Buffer $buffer_)
     {
@@ -32,7 +32,7 @@ namespace Components;
     }
 
     /**
-     * @see Io_Channel::isOpen()
+     * @see Components.Io_Channel::isOpen()
      */
     public function isOpen()
     {
@@ -40,7 +40,7 @@ namespace Components;
     }
 
     /**
-     * @see Io_Channel::open()
+     * @see Components.Io_Channel::open()
      */
     public function open()
     {
@@ -48,7 +48,7 @@ namespace Components;
     }
 
     /**
-     * @see Io_Channel_Closeable::close()
+     * @see Components.Io_Channel_Closeable::close()
      */
     public function close()
     {
@@ -60,7 +60,7 @@ namespace Components;
      */
     public function hashCode()
     {
-      return spl_object_hash($this);
+      return object_hash($this);
     }
 
     /**

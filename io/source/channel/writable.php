@@ -8,7 +8,7 @@ namespace Components;
    * Io_Channel_Writable
    *
    * @package net.evalcode.components
-   * @subpackage io
+   * @subpackage io.channel
    *
    * @author evalcode.net
    */
@@ -19,11 +19,11 @@ namespace Components;
      * Writes contents of given buffer.
      * Returns amount of written bytes/characters.
      *
-     * @param Io_Buffer $buffer_
+     * @param \Components\Io_Buffer $buffer_
      *
-     * @return int
+     * @return integer
      *
-     * @throws Io_Exception
+     * @throws \Components\Io_Exception
      */
     function write(Io_Buffer $buffer_);
     //--------------------------------------------------------------------------
