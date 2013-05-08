@@ -30,8 +30,31 @@ namespace Components;
      */
     public static function console()
     {
-      $console=new Io_Console();
-      return $console->attach(new Io_Pipe_Stdin(), new Io_Pipe_Stdout(), new Io_Pipe_Stderr());
+      return new Io_Console();
+    }
+
+    /**
+     * @return \Components\Io_Pipe_Stdin
+     */
+    public static function stdin()
+    {
+      return new Io_Pipe_Stdin();
+    }
+
+    /**
+     * @return \Components\Io_Pipe_Stdout
+     */
+    public static function stdout()
+    {
+      return new Io_Pipe_Stdout();
+    }
+
+    /**
+     * @return \Components\Io_Pipe_Stderr
+     */
+    public static function stderr()
+    {
+      return new Io_Pipe_Stderr();
     }
 
     /**
