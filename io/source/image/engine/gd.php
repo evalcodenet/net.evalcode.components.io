@@ -24,9 +24,9 @@ namespace Components;
 
     // STATIC ACCESSORS
     /**
-     * @param \Components\Point $dimensions_
+     * @param Components\Point $dimensions_
      *
-     * @return \Components\Io_Image_Engine_Gd
+     * @return Components\Io_Image_Engine_Gd
      */
     public static function forBase64($base64_)
     {
@@ -37,9 +37,9 @@ namespace Components;
     }
 
     /**
-     * @param \Components\Point $dimensions_
+     * @param Components\Point $dimensions_
      *
-     * @return \Components\Io_Image_Engine_Gd
+     * @return Components\Io_Image_Engine_Gd
      */
     public static function forPath($path_)
     {
@@ -53,9 +53,9 @@ namespace Components;
     }
 
     /**
-     * @param \Components\Point $dimensions_
+     * @param Components\Point $dimensions_
      *
-     * @return \Components\Io_Image_Engine_Gd
+     * @return Components\Io_Image_Engine_Gd
      */
     public static function createImage(Point $dimensions_)
     {
@@ -72,7 +72,7 @@ namespace Components;
      * (non-PHPdoc)
      * @see Components.Io_Image_Engine::dimensions()
      *
-     * @return \Components\Io_Image_Engine_Gd
+     * @return Components\Io_Image_Engine_Gd
      */
     public function dimensions()
     {
@@ -86,7 +86,7 @@ namespace Components;
      * (non-PHPdoc)
      * @see Components.Io_Image_Engine::crop()
      *
-     * @return \Components\Io_Image_Engine_Gd
+     * @return Components\Io_Image_Engine_Gd
      */
     public function crop(Point $point_)
     {
@@ -99,7 +99,7 @@ namespace Components;
      * (non-PHPdoc)
      * @see Components.Io_Image_Engine::scale()
      *
-     * @return \Components\Io_Image_Engine_Gd
+     * @return Components\Io_Image_Engine_Gd
      */
     public function scale(Point $dimensions_)
     {
@@ -121,7 +121,7 @@ namespace Components;
      * (non-PHPdoc)
      * @see Components.Io_Image_Engine::save()
      *
-     * @return \Components\Io_Image_Engine_Gd
+     * @return Components\Io_Image_Engine_Gd
      */
     public function save($path_, $type_=Io_MimeType::IMAGE_PNG)
     {
@@ -134,7 +134,7 @@ namespace Components;
 
     // IMPLEMENTATION
     /**
-     * @var \Components\Point
+     * @var Components\Point
      */
     private $m_dimensions;
     /**

@@ -16,9 +16,9 @@ namespace Components;
   {
     // ACCESSORS
     /**
-     * @return \Components\Io_Channel_Closeable
+     * @return Components\Io_Channel_Closeable
      *
-     * @throws \Components\Io_Exception
+     * @throws Components\Io_Exception
      */
     function close();
     //--------------------------------------------------------------------------

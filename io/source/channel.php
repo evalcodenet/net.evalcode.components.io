@@ -25,7 +25,7 @@ namespace Components;
      *
      * @return boolean
      *
-     * @throws \Components\Io_Exception
+     * @throws Components\Io_Exception
      */
     function open();
     //--------------------------------------------------------------------------

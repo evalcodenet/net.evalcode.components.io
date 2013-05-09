@@ -31,7 +31,7 @@ namespace Components;
      *
      * @param integer $limit_
      *
-     * @return \Components\Io_Buffer_Byte
+     * @return Components\Io_Buffer_Byte
      */
     public static function allocate($capacity_=4096)
     {
@@ -53,7 +53,7 @@ namespace Components;
      *
      * @param array $buffer_
      *
-     * @return \Components\Io_Buffer_Byte
+     * @return Components\Io_Buffer_Byte
      */
     public static function wrap(&$buffer_)
     {
@@ -107,7 +107,7 @@ namespace Components;
     /**
      * @see Components.Io_Buffer::append()
      *
-     * @return \Components\Io_Buffer_Byte
+     * @return Components\Io_Buffer_Byte
      */
     public function append($value_)
     {
@@ -120,7 +120,7 @@ namespace Components;
     /**
      * @see Components.Io_Buffer::appendBuffer()
      *
-     * @return \Components\Io_Buffer_Byte
+     * @return Components\Io_Buffer_Byte
      */
     public function appendBuffer(Io_Buffer $source_)
     {
@@ -134,7 +134,7 @@ namespace Components;
     /**
      * @see Components.Io_Buffer::flip()
      *
-     * @return \Components\Io_Buffer_Byte
+     * @return Components\Io_Buffer_Byte
      */
     public function flip()
     {
@@ -188,7 +188,7 @@ namespace Components;
     /**
      * @see Components.Io_Buffer::rewind()
      *
-     * @return \Components\Io_Buffer_Byte
+     * @return Components\Io_Buffer_Byte
      */
     public function rewind()
     {
@@ -200,7 +200,7 @@ namespace Components;
     /**
      * @see Components.Io_Buffer::clear()
      *
-     * @return \Components\Io_Buffer_Byte
+     * @return Components\Io_Buffer_Byte
      */
     public function clear()
     {
@@ -214,7 +214,7 @@ namespace Components;
     /**
      * @see Components.Io_Buffer::mark()
      *
-     * @return \Components\Io_Buffer_Byte
+     * @return Components\Io_Buffer_Byte
      */
     public function mark()
     {
@@ -226,7 +226,7 @@ namespace Components;
     /**
      * @see Components.Io_Buffer::reset()
      *
-     * @return \Components\Io_Buffer_Byte
+     * @return Components\Io_Buffer_Byte
      */
     public function reset()
     {
@@ -254,7 +254,7 @@ namespace Components;
     /**
      * @see Components.Cloneable::__clone()
      *
-     * @return \Components\Io_Buffer_Byte
+     * @return Components\Io_Buffer_Byte
      */
     public function __clone()
     {

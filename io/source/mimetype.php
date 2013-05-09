@@ -95,9 +95,9 @@ namespace Components;
     // STATIC ACCESSORS
     /**
      * @param string $name_
-     * @param \Components\Io_Charset $charset_
+     * @param Components\Io_Charset $charset_
      *
-     * @return \Components\Io_MimeType
+     * @return Components\Io_MimeType
      */
     public static function forName($name_, Io_Charset $charset_=null)
     {
@@ -107,10 +107,10 @@ namespace Components;
     }
 
     /**
-     * @param \Components\Io_File $file_
-     * @param \Components\Io_Charset $charset_
+     * @param Components\Io_File $file_
+     * @param Components\Io_Charset $charset_
      *
-     * @return \Components\Io_MimeType
+     * @return Components\Io_MimeType
      */
     public static function forFile(Io_File $file_, Io_Charset $charset_=null)
     {
@@ -119,9 +119,9 @@ namespace Components;
 
     /**
      * @param string $fileExtension_
-     * @param \Components\Io_Charset $charset_
+     * @param Components\Io_Charset $charset_
      *
-     * @return \Components\Io_MimeType
+     * @return Components\Io_MimeType
      */
     public static function forFileName($filename_, Io_Charset $charset_=null)
     {
@@ -130,9 +130,9 @@ namespace Components;
 
     /**
      * @param string $fileExtension_
-     * @param \Components\Io_Charset $charset_
+     * @param Components\Io_Charset $charset_
      *
-     * @return \Components\Io_MimeType
+     * @return Components\Io_MimeType
      */
     public static function forFileExtension($fileExtension_, Io_Charset $charset_=null)
     {
@@ -148,7 +148,7 @@ namespace Components;
     /**
      * @param string $file_
      *
-     * @return \Components\Io_MimeType
+     * @return Components\Io_MimeType
      */
     public static function forFilePath($file_, Io_Charset $charset_=null)
     {
@@ -285,7 +285,7 @@ namespace Components;
     }
 
     /**
-     * @return \Components\Io_Charset
+     * @return Components\Io_Charset
      */
     public function charset()
     {
@@ -381,7 +381,7 @@ namespace Components;
     private $m_type;
     private $m_category;
     /**
-     * @var \Components\Io_Charset
+     * @var Components\Io_Charset
      */
     private $m_charset;
     //--------------------------------------------------------------------------

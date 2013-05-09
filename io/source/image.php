@@ -38,7 +38,7 @@ namespace Components;
     /**
      * @param string $path_
      *
-     * @return \Components\Io_Image
+     * @return Components\Io_Image
      */
     public static function forPath($path_, $accessModeMask_=self::READ)
     {
@@ -52,9 +52,9 @@ namespace Components;
 
     /**
      * @param string $path_
-     * @param \Components\Point $dimensions_
+     * @param Components\Point $dimensions_
      *
-     * @return \Components\Io_Image
+     * @return Components\Io_Image
      */
     public static function createNew($path_, Point $dimensions_)
     {
@@ -68,9 +68,9 @@ namespace Components;
 
     /**
      * @param string $path_
-     * @param \Components\Point $dimensions_
+     * @param Components\Point $dimensions_
      *
-     * @return \Components\Io_Image
+     * @return Components\Io_Image
      */
     public static function createForBase64($path_, $base64_)
     {
@@ -86,7 +86,7 @@ namespace Components;
 
     // ACCESSORS
     /**
-     * @return \Components\Point
+     * @return Components\Point
      */
     public function getDimensions()
     {
@@ -94,9 +94,9 @@ namespace Components;
     }
 
     /**
-     * @param \Components\Point $toSize_
+     * @param Components\Point $toSize_
      *
-     * @return \Components\Io_Image
+     * @return Components\Io_Image
      */
     public function crop(Point $toSize_)
     {
@@ -106,9 +106,9 @@ namespace Components;
     }
 
     /**
-     * @param \Components\Point $toSize_
+     * @param Components\Point $toSize_
      *
-     * @return \Components\Io_Image
+     * @return Components\Io_Image
      */
     public function scale(Point $toSize_)
     {
@@ -190,11 +190,11 @@ namespace Components;
 
     // IMPLEMENTATION
     private static $m_engineImpl=array(
-      'gd'=>'\\Components\\Io_Image_Engine_Gd'
+      'gd'=>'Components\\Io_Image_Engine_Gd'
     );
 
     /**
-     * @var \Components\Io_Image_Engine
+     * @var Components\Io_Image_Engine
      */
     private $m_engine;
     //--------------------------------------------------------------------------

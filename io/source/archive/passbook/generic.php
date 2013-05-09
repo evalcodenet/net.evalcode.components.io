@@ -40,7 +40,7 @@ namespace Components;
 
     // PROPERTIES
     /**
-     * @var \Components\Properties
+     * @var Components\Properties
      */
     public $properties;
     //--------------------------------------------------------------------------

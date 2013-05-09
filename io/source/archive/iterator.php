@@ -62,7 +62,7 @@ namespace Components;
 
     // IMLEMENTATION
     /**
-     * @var \Components\Io_Archive
+     * @var Components\Io_Archive
      */
     private $m_archive;
     //--------------------------------------------------------------------------

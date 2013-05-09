@@ -19,7 +19,7 @@ namespace Components;
      * (non-PHPdoc)
      * @see Components.Io_File::open()
      *
-     * @return \Components\Io_Archive_Zip
+     * @return Components\Io_Archive_Zip
      */
     public function open()
     {
@@ -65,7 +65,7 @@ namespace Components;
      * (non-PHPdoc)
      * @see Components.Io_File::close()
      *
-     * @return \Components\Io_Archive_Zip
+     * @return Components\Io_Archive_Zip
      */
     public function close()
     {
@@ -79,7 +79,7 @@ namespace Components;
      * (non-PHPdoc)
      * @see Components.Io_Archive::add()
      *
-     * @return \Components\Io_Archive_Zip
+     * @return Components\Io_Archive_Zip
      */
     public function add(Io_File $file_, $withName_=null)
     {
@@ -95,7 +95,7 @@ namespace Components;
      * (non-PHPdoc)
      * @see Components.Io_Archive::addDirectory()
      *
-     * @return \Components\Io_Archive_Zip
+     * @return Components\Io_Archive_Zip
      */
     public function addDirectory(Io_Path $directory_)
     {
@@ -105,7 +105,7 @@ namespace Components;
       if(false===$directory_->isDirectory())
         throw new Io_Exception('io/archive/zip', 'Given path must point to a readable directory.');
 
-      /* @var $path \Components\Io_Path */
+      /* @var $path Components\Io_Path */
       foreach($directory_ as $path)
       {
         if($path->isDirectory())
@@ -125,7 +125,7 @@ namespace Components;
      * (non-PHPdoc)
      * @see Components.Io_Archive::extract()
      *
-     * @return \Components\Io_Archive_Zip
+     * @return Components\Io_Archive_Zip
      */
     public function extract(Io_Path $directory_)
     {
@@ -141,7 +141,7 @@ namespace Components;
      * (non-PHPdoc)
      * @see Components.Io_File::delete()
      *
-     * @return \Components\Io_Archive_Zip
+     * @return Components\Io_Archive_Zip
      */
     public function delete()
     {
