@@ -225,9 +225,9 @@ namespace Components;
     public function title()
     {
       if($this->isImage())
-        return translatef('io/mimetype/image', strtoupper($this->type()));
+        return I18n::translatef('io/mimetype/image', strtoupper($this->type()));
 
-      return translatef('io/mimetype/file', strtoupper($this->type()));
+      return I18n::translatef('io/mimetype/file', strtoupper($this->type()));
     }
 
     /**

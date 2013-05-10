@@ -12,7 +12,7 @@ namespace Components;
    *
    * @author evalcode.net
    */
-  class Io_File implements Object, Cloneable
+  class Io_File implements Object, Cloneable, Value_String
   {
     // PREDEFINED PROPERTIES
     /**
@@ -29,7 +29,7 @@ namespace Components;
     const CREATE=2;
     /**
      * Lock file for exclusive access.
-     * TODO Implement locking.
+     * TODO Implement io/file/lock.
      */
     const LOCK=4;
     /**
@@ -60,7 +60,17 @@ namespace Components;
      */
     public static function forPath($path_, $accessModeMask_=self::READ)
     {
-      return new self($path_, $accessModeMask_);
+      return new static($path_, $accessModeMask_);
+    }
+
+    /**
+     * @param string $value_
+     *
+     * @return \Components\Io_File
+     */
+    public static function valueOf($value_)
+    {
+      return new static($value_, self::READ);
     }
     //--------------------------------------------------------------------------
 
@@ -136,7 +146,7 @@ namespace Components;
      */
     public function getSize()
     {
-      // TODO
+      // FIXME Get size without clearstatcache?
       clearstatcache(null, $this->m_pathAsString);
       if(false===($filesize=filesize($this->m_pathAsString)))
         return new Io_Filesize(0);
@@ -694,6 +704,15 @@ namespace Components;
      * @see Components.Object::__toString()
      */
     public function __toString()
+    {
+      return $this->m_pathAsString;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Components.Value_String::value()
+     */
+    public function value()
     {
       return $this->m_pathAsString;
     }

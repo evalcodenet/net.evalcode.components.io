@@ -310,6 +310,15 @@ namespace Components;
     {
       return self::format($this->m_value);
     }
+
+    /**
+     * (non-PHPdoc)
+     * @see Components.Serializable::serialVersionUid()
+     */
+    public function serialVersionUid()
+    {
+      return 1;
+    }
     //--------------------------------------------------------------------------
   }
 ?>

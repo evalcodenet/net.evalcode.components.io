@@ -44,7 +44,7 @@ namespace Components;
     {
       $engineImpl=self::defaultProcessingEngine();
 
-      $instance=new self((string)$path_);
+      $instance=new static((string)$path_);
       $instance->m_engine=$engineImpl::forPath($instance->m_pathAsString);
 
       return $instance;
@@ -60,7 +60,7 @@ namespace Components;
     {
       $engineImpl=self::defaultProcessingEngine();
 
-      $instance=new self((string)$path_);
+      $instance=new static((string)$path_);
       $instance->m_engine=$engineImpl::createImage($instance->m_pathAsString, $dimensions_);
 
       return $instance;
@@ -76,7 +76,7 @@ namespace Components;
     {
       $engineImpl=self::defaultProcessingEngine();
 
-      $instance=new self((string)$path_);
+      $instance=new static((string)$path_);
       $instance->m_engine=$engineImpl::forBase64($base64_);
 
       return $instance;

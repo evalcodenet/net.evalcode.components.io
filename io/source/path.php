@@ -12,7 +12,8 @@ namespace Components;
    *
    * @author evalcode.net
    */
-  class Io_Path implements Object, Cloneable, \IteratorAggregate // TODO (CSH) Iterable
+  class Io_Path implements Object, Cloneable, Value_String,
+    \IteratorAggregate // TODO (CSH) Iterable
   {
     // CONSTRUCTION
     public function __construct($path_)
@@ -38,6 +39,16 @@ namespace Components;
         $prepend=array_shift($args);
 
       return new self($prepend.implode(Io::DIRECTORY_SEPARATOR, $args));
+    }
+
+    /**
+     * @param string $path_
+     *
+     * @return Components\Io_Path
+     */
+    public static function valueOf($path_)
+    {
+      return new self($path_);
     }
 
     /**
@@ -370,6 +381,15 @@ namespace Components;
      * @see Components.Object::__toString()
      */
     public function __toString()
+    {
+      return $this->m_path;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Components.Value_String::value()
+     */
+    public function value()
     {
       return $this->m_path;
     }
