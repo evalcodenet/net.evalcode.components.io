@@ -319,7 +319,7 @@ namespace Components;
     // OVERRIDES
     /**
      * (non-PHPdoc)
-     * @see Components.Io_Archive_Zip::add()
+     * @see Components\Io_Archive_Zip::add()
      */
     public function add(Io_File $file_, $withName_=null)
     {
@@ -333,7 +333,7 @@ namespace Components;
 
     /**
      * (non-PHPdoc)
-     * @see Components.Io_Archive_Zip::close()
+     * @see Components\Io_Archive_Zip::close()
      */
     public function close()
     {
@@ -359,7 +359,7 @@ namespace Components;
 
     /**
      * (non-PHPdoc)
-     * @see Components.Io_File::getMimeType()
+     * @see Components\Io_File::getMimeType()
      */
     public function getMimeType()
     {

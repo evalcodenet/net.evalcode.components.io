@@ -17,9 +17,9 @@ namespace Components;
     // OVERRIDES
     /**
      * (non-PHPdoc)
-     * @see Components.Io_File::open()
+     * @see Components\Io_File::open()
      *
-     * @return Components\Io_Archive_Zip
+     * @return \Components\Io_Archive_Zip
      */
     public function open()
     {
@@ -63,9 +63,9 @@ namespace Components;
 
     /**
      * (non-PHPdoc)
-     * @see Components.Io_File::close()
+     * @see Components\Io_File::close()
      *
-     * @return Components\Io_Archive_Zip
+     * @return \Components\Io_Archive_Zip
      */
     public function close()
     {
@@ -77,9 +77,9 @@ namespace Components;
 
     /**
      * (non-PHPdoc)
-     * @see Components.Io_Archive::add()
+     * @see Components\Io_Archive::add()
      *
-     * @return Components\Io_Archive_Zip
+     * @return \Components\Io_Archive_Zip
      */
     public function add(Io_File $file_, $withName_=null)
     {
@@ -93,9 +93,9 @@ namespace Components;
 
     /**
      * (non-PHPdoc)
-     * @see Components.Io_Archive::addDirectory()
+     * @see Components\Io_Archive::addDirectory()
      *
-     * @return Components\Io_Archive_Zip
+     * @return \Components\Io_Archive_Zip
      */
     public function addDirectory(Io_Path $directory_)
     {
@@ -123,9 +123,9 @@ namespace Components;
 
     /**
      * (non-PHPdoc)
-     * @see Components.Io_Archive::extract()
+     * @see Components\Io_Archive::extract()
      *
-     * @return Components\Io_Archive_Zip
+     * @return \Components\Io_Archive_Zip
      */
     public function extract(Io_Path $directory_)
     {
@@ -139,9 +139,9 @@ namespace Components;
 
     /**
      * (non-PHPdoc)
-     * @see Components.Io_File::delete()
+     * @see Components\Io_File::delete()
      *
-     * @return Components\Io_Archive_Zip
+     * @return \Components\Io_Archive_Zip
      */
     public function delete()
     {

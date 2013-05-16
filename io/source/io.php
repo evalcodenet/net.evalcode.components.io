@@ -26,7 +26,7 @@ namespace Components;
 
     // STATIC ACCESSORS
     /**
-     * @return Components\Io_Console
+     * @return \Components\Io_Console
      */
     public static function console()
     {
@@ -34,7 +34,7 @@ namespace Components;
     }
 
     /**
-     * @return Components\Io_Pipe_Stdin
+     * @return \Components\Io_Pipe_Stdin
      */
     public static function stdin()
     {
@@ -42,7 +42,7 @@ namespace Components;
     }
 
     /**
-     * @return Components\Io_Pipe_Stdout
+     * @return \Components\Io_Pipe_Stdout
      */
     public static function stdout()
     {
@@ -50,7 +50,7 @@ namespace Components;
     }
 
     /**
-     * @return Components\Io_Pipe_Stderr
+     * @return \Components\Io_Pipe_Stderr
      */
     public static function stderr()
     {
@@ -60,7 +60,7 @@ namespace Components;
     /**
     * @param string $filepath_
     *
-    * @return Components\Io_File
+    * @return \Components\Io_File
     */
     public static function file($filepath_, $accessModeMask_=Io_File::READ)
     {
@@ -80,7 +80,7 @@ namespace Components;
     /**
      * @param string $filepath_
      *
-     * @return Components\Io_MimeType
+     * @return \Components\Io_MimeType
      */
     public static function fileMimeType($filepath_)
     {
@@ -90,7 +90,7 @@ namespace Components;
     /**
      * @param integer $bytes_
      *
-     * @return Components\Io_Filesize
+     * @return \Components\Io_Filesize
      */
     public static function fileSize($path_)
     {
@@ -103,7 +103,7 @@ namespace Components;
     /**
      * @param integer $bytes_
      *
-     * @return Components\Io_Filesize
+     * @return \Components\Io_Filesize
      */
     public static function fileSizeForBytes($bytes_)
     {
@@ -140,7 +140,7 @@ namespace Components;
     /**
      * @param string $path_
      *
-     * @return Components\Io_Image
+     * @return \Components\Io_Image
      */
     public static function image($path_)
     {
@@ -152,7 +152,7 @@ namespace Components;
      * @param integer $width_
      * @param integer $height_
      *
-     * @return Components\Io_Image
+     * @return \Components\Io_Image
      */
     public static function createImage($path_, $width_, $height_)
     {
@@ -162,7 +162,7 @@ namespace Components;
     /**
      * @param string $name_
      *
-     * @return Components\Io_MimeType
+     * @return \Components\Io_MimeType
      */
     public static function mimeType($filename_)
     {
@@ -172,7 +172,7 @@ namespace Components;
     /**
      * @param string $filename_
      *
-     * @return Components\Io_Charset
+     * @return \Components\Io_Charset
      */
     public static function charset($filename_)
     {
@@ -182,7 +182,7 @@ namespace Components;
     /**
      * @param string $path_
      *
-     * @return Components\Io_Path
+     * @return \Components\Io_Path
      */
     public static function path($path_)
     {
@@ -193,7 +193,7 @@ namespace Components;
      * @param string $prefix_
      * @param string $path_
      *
-     * @return Components\Io_File
+     * @return \Components\Io_File
      */
     public static function tmpFile($prefix_=null, $path_=null, $global_=true, $accessModeMask_=Io_File::WRITE)
     {
@@ -218,7 +218,7 @@ namespace Components;
     }
 
     /**
-     * @return Components\Io_Path
+     * @return \Components\Io_Path
      */
     public static function tmpPath($directory_=null, $global_=true)
     {
@@ -384,7 +384,7 @@ namespace Components;
     /**
      * @param string $path_
      *
-     * @return Components\Io_Archive
+     * @return \Components\Io_Archive
      */
     public static function openArchive($path_)
     {
@@ -394,7 +394,7 @@ namespace Components;
     /**
      * @param string $path_
      *
-     * @return Components\Io_Archive
+     * @return \Components\Io_Archive
      */
     public static function createArchive($path_)
     {

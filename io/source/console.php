@@ -46,7 +46,7 @@ namespace Components;
     /**
      * @param string $string_
      *
-     * @return Components\Io_Console
+     * @return \Components\Io_Console
      */
     public function append($string_)
     {
@@ -58,7 +58,7 @@ namespace Components;
     /**
      * @param string $string_
      *
-     * @return Components\Io_Console
+     * @return \Components\Io_Console
      */
     public function appendLine($string_='')
     {
@@ -111,13 +111,13 @@ namespace Components;
     }
 
     /**
-     * @param Components\Io_Channel_Readable $stdin_
-     * @param Components\Io_Channel_Writable $stdout_
-     * @param Components\Io_Channel_Writable $stderr_
+     * @param \Components\Io_Channel_Readable $stdin_
+     * @param \Components\Io_Channel_Writable $stdout_
+     * @param \Components\Io_Channel_Writable $stderr_
      *
-     * @return Components\Io_Console
+     * @return \Components\Io_Console
      *
-     * @throws Components\Io_Exception
+     * @throws \Components\Io_Exception
      */
     public function attach(Io_Channel_Readable $stdin_, Io_Channel_Writable $stdout_,
       Io_Channel_Writable $stderr_=null)
@@ -248,7 +248,7 @@ namespace Components;
     // OVERRIDES
     /**
      * (non-PHPdoc)
-     * @see Components.Io_Channel_Readable::read()
+     * @see Components\Io_Channel_Readable::read()
      */
     public function read(Io_Buffer $buffer_, $interrupt_=null)
     {
@@ -257,7 +257,7 @@ namespace Components;
 
     /**
      * (non-PHPdoc)
-     * @see Components.Io_Channel_Writable::write()
+     * @see Components\Io_Channel_Writable::write()
      */
     public function write(Io_Buffer $buffer_)
     {
@@ -266,9 +266,9 @@ namespace Components;
 
     /**
      * (non-PHPdoc)
-     * @see Components.Io_Channel_Flushable::flush()
+     * @see Components\Io_Channel_Flushable::flush()
      *
-     * @return Components\Io_Console
+     * @return \Components\Io_Console
      */
     public function flush()
     {
@@ -281,7 +281,7 @@ namespace Components;
 
     /**
      * (non-PHPdoc)
-     * @see Components.Io_Channel::isOpen()
+     * @see Components\Io_Channel::isOpen()
      */
     public function isOpen()
     {
@@ -290,9 +290,9 @@ namespace Components;
 
     /**
      * (non-PHPdoc)
-     * @see Components.Io_Channel::open()
+     * @see Components\Io_Channel::open()
      *
-     * @return Components\Io_Console
+     * @return \Components\Io_Console
      */
     public function open()
     {
@@ -310,9 +310,9 @@ namespace Components;
 
     /**
      * (non-PHPdoc)
-     * @see Components.Io_Channel_Closeable::close()
+     * @see Components\Io_Channel_Closeable::close()
      *
-     * @return Components\Io_Console
+     * @return \Components\Io_Console
      */
     public function close()
     {

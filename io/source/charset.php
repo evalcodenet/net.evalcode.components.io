@@ -41,7 +41,7 @@ namespace Components;
     /**
      * @param string $charset_
      *
-     * @return Components\Io_Charset
+     * @return \Components\Io_Charset
      */
     public static function forName($name_)
     {
@@ -59,7 +59,7 @@ namespace Components;
     /**
      * @param string $filename_
      *
-     * @return Components\Io_Charset
+     * @return \Components\Io_Charset
      */
     public static function forFilePath($filepath_)
     {
@@ -77,9 +77,9 @@ namespace Components;
     }
 
     /**
-     * @param Components\Io_File $file_
+     * @param \Components\Io_File $file_
      *
-     * @return Components\Io_Charset
+     * @return \Components\Io_Charset
      */
     public static function forFile(Io_File $file_)
     {
@@ -87,7 +87,7 @@ namespace Components;
     }
 
     /**
-     * @return Components\Io_Charset
+     * @return \Components\Io_Charset
      */
     public static function defaultCharset()
     {
@@ -98,7 +98,7 @@ namespace Components;
     }
 
     /**
-     * @see Components.Enumeration::values()
+     * @see Components\Enumeration::values()
      */
     public static function values()
     {

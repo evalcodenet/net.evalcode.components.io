@@ -25,7 +25,7 @@ namespace Components;
     // OVERRIDES
     /**
      * (non-PHPdoc)
-     * @see Components.Io_Channel_Readable::read()
+     * @see Components\Io_Channel_Readable::read()
      */
     public function read(Io_Buffer $buffer_, $interrupt_=null)
     {

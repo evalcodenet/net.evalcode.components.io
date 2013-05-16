@@ -44,7 +44,7 @@ namespace Components;
     /**
      * @param string $path_
      *
-     * @return Components\Io_Path
+     * @return \Components\Io_Path
      */
     public static function valueOf($path_)
     {
@@ -348,7 +348,7 @@ namespace Components;
 
     /**
      * (non-PHPdoc)
-     * @see Components.Cloneable::__clone()
+     * @see Components\Cloneable::__clone()
      */
     public function __clone()
     {
@@ -357,7 +357,7 @@ namespace Components;
 
     /**
      * (non-PHPdoc)
-     * @see Components.Object::hashCode()
+     * @see Components\Object::hashCode()
      */
     public function hashCode()
     {
@@ -366,7 +366,7 @@ namespace Components;
 
     /**
      * (non-PHPdoc)
-     * @see Components.Object::equals()
+     * @see Components\Object::equals()
      */
     public function equals($object_)
     {
@@ -378,7 +378,7 @@ namespace Components;
 
     /**
      * (non-PHPdoc)
-     * @see Components.Object::__toString()
+     * @see Components\Object::__toString()
      */
     public function __toString()
     {
@@ -387,7 +387,7 @@ namespace Components;
 
     /**
      * (non-PHPdoc)
-     * @see Components.Value_String::value()
+     * @see Components\Value_String::value()
      */
     public function value()
     {

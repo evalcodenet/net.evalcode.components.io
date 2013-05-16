@@ -27,7 +27,7 @@ namespace Components;
      * (non-PHPdoc)
      * @see RecursiveDirectoryIterator::current()
      *
-     * @return Components\Io_Path_Iterator
+     * @return \Components\Io_Path_Iterator
      */
     public function current()
     {

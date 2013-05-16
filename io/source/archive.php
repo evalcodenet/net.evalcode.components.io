@@ -18,7 +18,7 @@ namespace Components;
     /**
      * @param string $filepath_
      *
-     * @return Components\Io_Archive_Zip
+     * @return \Components\Io_Archive_Zip
      */
     public static function createZip($filepath_)
     {
@@ -28,7 +28,7 @@ namespace Components;
     /**
      * @param string $filepath_
      *
-     * @return Components\Io_Archive_Zip
+     * @return \Components\Io_Archive_Zip
      */
     public static function openZip($filepath_, $accessModeMask_=Io_File::READ)
     {
@@ -41,28 +41,28 @@ namespace Components;
     /**
      * Adds given file to this archive.
      *
-     * @param Components\Io_File $file_
+     * @param \Components\Io_File $file_
      * @param string $withName_
      *
-     * @return Components\Io_Archive
+     * @return \Components\Io_Archive
      */
     public abstract function add(Io_File $file_, $withName_=null);
 
     /**
      * Adds contents of given directory to this archive.
      *
-     * @param Components\Io_Path $directory_
+     * @param \Components\Io_Path $directory_
      *
-     * @return Components\Io_Archive
+     * @return \Components\Io_Archive
      */
     public abstract function addDirectory(Io_Path $directory_);
 
     /**
      * Extracts contents of this archive into given directory.
      *
-     * @param Components\Io_Path $directory_
+     * @param \Components\Io_Path $directory_
      *
-     * @return Components\Io_Archive
+     * @return \Components\Io_Archive
      */
     public abstract function extract(Io_Path $directory_);
 
@@ -71,7 +71,7 @@ namespace Components;
      * (non-PHPdoc)
      * @see IteratorAggregate::getIterator()
      *
-     * @return Components\Io_Archive_Iterator
+     * @return \Components\Io_Archive_Iterator
      */
     public function getIterator()
     {

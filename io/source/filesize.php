@@ -84,15 +84,15 @@ namespace Components;
     public static function format($bytes_, $round_=self::ROUND_DEFAULT)
     {
       if(self::FACTOR_BYTES_KB>$bytes_)
-        return self::formatAsBytes($bytes_, $round_);
+        return static::formatAsBytes($bytes_, $round_);
       if(self::FACTOR_BYTES_MB>$bytes_)
-        return self::formatAsKiloBytes($bytes_, $round_);
+        return static::formatAsKiloBytes($bytes_, $round_);
       if(self::FACTOR_BYTES_GB>$bytes_)
-        return self::formatAsMegaBytes($bytes_, $round_);
+        return static::formatAsMegaBytes($bytes_, $round_);
       if(self::FACTOR_BYTES_TB>$bytes_)
-        return self::formatAsGigaBytes($bytes_, $round_);
+        return static::formatAsGigaBytes($bytes_, $round_);
 
-      return self::formatAsTeraBytes($bytes_, $round_);
+      return static::formatAsTeraBytes($bytes_, $round_);
     }
 
     /**
@@ -103,7 +103,7 @@ namespace Components;
      */
     public static function formatAsBytes($bytes_, $round_=self::ROUND_DEFAULT, $append_=self::BYTES)
     {
-      return self::convertToKB($bytes_, $round_)." $append_";
+      return static::convertToKB($bytes_, $round_)." $append_";
     }
 
     /**
@@ -114,7 +114,7 @@ namespace Components;
      */
     public static function formatAsKiloBytes($bytes_, $round_=self::ROUND_DEFAULT, $append_=self::KILO_BYTES)
     {
-      return self::convertToKB($bytes_, $round_)." $append_";
+      return static::convertToKB($bytes_, $round_)." $append_";
     }
 
     /**
@@ -125,7 +125,7 @@ namespace Components;
      */
     public static function formatAsMegaBytes($bytes_, $round_=self::ROUND_DEFAULT, $append_=self::MEGA_BYTES)
     {
-      return self::convertToMB($bytes_, $round_)." $append_";
+      return static::convertToMB($bytes_, $round_)." $append_";
     }
 
     /**
@@ -136,7 +136,7 @@ namespace Components;
      */
     public static function formatAsGigaBytes($bytes_, $round_=self::ROUND_DEFAULT, $append_=self::GIGA_BYTES)
     {
-      return self::convertToGB($bytes_, $round_)." $append_";
+      return static::convertToGB($bytes_, $round_)." $append_";
     }
 
     /**
@@ -147,7 +147,7 @@ namespace Components;
      */
     public static function formatAsTeraBytes($bytes_, $round_=self::ROUND_DEFAULT, $append_=self::TERA_BYTES)
     {
-      return self::convertToTB($bytes_, $round_)." $append_";
+      return static::convertToTB($bytes_, $round_)." $append_";
     }
     //--------------------------------------------------------------------------
 
@@ -168,7 +168,7 @@ namespace Components;
      */
     public function kiloBytes($round_=self::ROUND_DEFAULT)
     {
-      return self::convertToKB($this->m_value, $round_);
+      return static::convertToKB($this->m_value, $round_);
     }
 
     /**
@@ -178,7 +178,7 @@ namespace Components;
      */
     public function megaBytes($round_=self::ROUND_DEFAULT)
     {
-      return self::convertToMB($this->m_value, $round_);
+      return static::convertToMB($this->m_value, $round_);
     }
 
     /**
@@ -188,7 +188,7 @@ namespace Components;
      */
     public function gigaBytes($round_=self::ROUND_DEFAULT)
     {
-      return self::convertToGB($this->m_value, $round_);
+      return static::convertToGB($this->m_value, $round_);
     }
 
     /**
@@ -198,9 +198,8 @@ namespace Components;
      */
     public function teraBytes($round_=self::ROUND_DEFAULT)
     {
-      return self::convertToTB($this->m_value, $round_);
+      return static::convertToTB($this->m_value, $round_);
     }
-
 
     /**
      * @param integer $round_
@@ -209,7 +208,7 @@ namespace Components;
      */
     public function formatted($round_=self::ROUND_DEFAULT)
     {
-      return self::format($this->m_value, $round_);
+      return static::format($this->m_value, $round_);
     }
 
     /**
@@ -219,7 +218,7 @@ namespace Components;
      */
     public function formattedKB($round_=self::ROUND_DEFAULT)
     {
-      return self::formatAsKiloBytes($this->m_value, $round_);
+      return static::formatAsKiloBytes($this->m_value, $round_);
     }
 
     /**
@@ -229,7 +228,7 @@ namespace Components;
      */
     public function formattedMB($round_=self::ROUND_DEFAULT)
     {
-      return self::formatAsMegaBytes($this->m_value, $round_);
+      return static::formatAsMegaBytes($this->m_value, $round_);
     }
 
     /**
@@ -239,7 +238,7 @@ namespace Components;
      */
     public function formattedGB($round_=self::ROUND_DEFAULT)
     {
-      return self::formatAsGigaBytes($this->m_value, $round_);
+      return static::formatAsGigaBytes($this->m_value, $round_);
     }
 
     /**
@@ -249,7 +248,7 @@ namespace Components;
      */
     public function formattedTB($round_=self::ROUND_DEFAULT)
     {
-      return self::formatAsTeraBytes($this->m_value, $round_);
+      return static::formatAsTeraBytes($this->m_value, $round_);
     }
     //--------------------------------------------------------------------------
 
@@ -264,7 +263,7 @@ namespace Components;
     {
       if(is_numeric($object_))
       {
-        if($this->m_value==$object_)
+        if($this->m_value===$object_)
           return 0;
 
         return $this->m_value<$object_->m_value?-1:1;
@@ -278,12 +277,12 @@ namespace Components;
         return $this->m_value<$object_->m_value?-1:1;
       }
 
-      throw new Io_Exception('io/filesize', 'Can not compare to object of given type.');
+      throw new Io_Exception('components/io/filesize', 'Can not compare to object of given type.');
     }
 
     /**
      * (non-PHPdoc)
-     * @see Components.Object::hashCode()
+     * @see Components\Object::hashCode()
      */
     public function hashCode()
     {
@@ -292,7 +291,7 @@ namespace Components;
 
     /**
      * (non-PHPdoc)
-     * @see Components.Object::equals()
+     * @see Components\Object::equals()
      */
     public function equals($object_)
     {
@@ -304,16 +303,16 @@ namespace Components;
 
     /**
      * (non-PHPdoc)
-     * @see Components.Object::__toString()
+     * @see Components\Object::__toString()
      */
     public function __toString()
     {
-      return self::format($this->m_value);
+      return static::format($this->m_value);
     }
 
     /**
      * (non-PHPdoc)
-     * @see Components.Serializable::serialVersionUid()
+     * @see Components\Serializable::serialVersionUid()
      */
     public function serialVersionUid()
     {

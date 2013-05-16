@@ -22,7 +22,7 @@ namespace Components;
     // OVERRIDES
     /**
      * (non-PHPdoc)
-     * @see Components.Io_Archive_Passbook_Generic::getStyle()
+     * @see Components\Io_Archive_Passbook_Generic::getStyle()
      */
     public function getStyle()
     {

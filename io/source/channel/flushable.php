@@ -16,9 +16,9 @@ namespace Components;
   {
     // ACCESSORS
     /**
-     * @return Components\Io_Channel_Flushable
+     * @return \Components\Io_Channel_Flushable
      *
-     * @throws Components\Io_Exception
+     * @throws \Components\Io_Exception
      */
     function flush();
     //--------------------------------------------------------------------------

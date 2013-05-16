@@ -56,7 +56,7 @@ namespace Components;
     /**
      * @param string $path_
      *
-     * @return Components\Io_File
+     * @return \Components\Io_File
      */
     public static function forPath($path_, $accessModeMask_=self::READ)
     {
@@ -99,7 +99,7 @@ namespace Components;
     }
 
     /**
-     * @return Components\Io_Path
+     * @return \Components\Io_Path
      */
     public function getPath()
     {
@@ -118,7 +118,7 @@ namespace Components;
     }
 
     /**
-     * @return Components\Io_Path
+     * @return \Components\Io_Path
      */
     public function getDirectory()
     {
@@ -140,9 +140,9 @@ namespace Components;
     }
 
     /**
-     * @throws Components\Io_Exception
+     * @throws \Components\Io_Exception
      *
-     * @return Components\Io_Filesize
+     * @return \Components\Io_Filesize
      */
     public function getSize()
     {
@@ -155,7 +155,7 @@ namespace Components;
     }
 
     /**
-     * @return Components\Io_MimeType
+     * @return \Components\Io_MimeType
      */
     public function getMimeType()
     {
@@ -171,7 +171,7 @@ namespace Components;
     }
 
     /**
-     * @return Components\Io_Charset
+     * @return \Components\Io_Charset
      */
     public function getCharset()
     {
@@ -190,7 +190,7 @@ namespace Components;
     }
 
     /**
-     * @return Components\Io_Image
+     * @return \Components\Io_Image
      */
     public function asImage()
     {
@@ -209,7 +209,7 @@ namespace Components;
      *
      * @param string $path_
      *
-     * @return Components\Io_File
+     * @return \Components\Io_File
      */
     public function getRelated($path_)
     {
@@ -222,9 +222,9 @@ namespace Components;
     /**
      * Returns path of given file relative to path of this file.
      *
-     * @param Components\Io_File $file_
+     * @param \Components\Io_File $file_
      *
-     * @return Components\Io_Path
+     * @return \Components\Io_Path
      */
     public function getRelativePath(Io_File $file_)
     {
@@ -261,7 +261,7 @@ namespace Components;
     /**
      * @param string $string_
      *
-     * @return Components\Io_File
+     * @return \Components\Io_File
      */
     public function setContent($string_)
     {
@@ -340,7 +340,7 @@ namespace Components;
     }
 
     /**
-     * @return Components\Io_File
+     * @return \Components\Io_File
      */
     public function create()
     {
@@ -366,11 +366,11 @@ namespace Components;
     }
 
     /**
-     * @param Components\Io_File $destination_
+     * @param \Components\Io_File $destination_
      *
-     * @return Components\Io_File
+     * @return \Components\Io_File
      *
-     * @throws Components\Io_Exception
+     * @throws \Components\Io_Exception
      */
     public function copy(Io_File $destination_, $autoCreateTargetDirectory_=false, $umaskTargetDirectory_=0775)
     {
@@ -393,9 +393,9 @@ namespace Components;
     }
 
     /**
-     * @param Components\Io_File $target_
+     * @param \Components\Io_File $target_
      *
-     * @return Components\Io_File
+     * @return \Components\Io_File
      */
     public function move(Io_File $destination_, $autoCreateTargetDirectory_=false, $umaskTargetDirectory_=0775)
     {
@@ -418,11 +418,11 @@ namespace Components;
     }
 
     /**
-     * @param Components\Io_Path $target_
+     * @param \Components\Io_Path $target_
      * @param boolean $autoCreateTargetDirectory_
      * @param integer $umaskTargetDirectory_
      *
-     * @return Components\Io_File
+     * @return \Components\Io_File
      */
     public function moveInto(Io_Path $destination_, $autoCreateTargetDirectory_=false, $umaskTargetDirectory_=0775)
     {
@@ -440,9 +440,9 @@ namespace Components;
     /**
      * @param integer $mask_
      *
-     * @return Components\Io_File
+     * @return \Components\Io_File
      *
-     * @throws Components\Io_Exception
+     * @throws \Components\Io_Exception
      */
     public function open()
     {
@@ -469,9 +469,9 @@ namespace Components;
     }
 
     /**
-     * @return Components\Io_File
+     * @return \Components\Io_File
      *
-     * @throws Components\Io_Exception
+     * @throws \Components\Io_Exception
      */
     public function close()
     {
@@ -487,7 +487,7 @@ namespace Components;
      *
      * @return string
      *
-     * @throws Components\Io_Exception
+     * @throws \Components\Io_Exception
      */
     public function read($bytes_=4096)
     {
@@ -507,7 +507,7 @@ namespace Components;
      *
      * @return integer
      *
-     * @throws Components\Io_Exception
+     * @throws \Components\Io_Exception
      */
     public function write($string_)
     {
@@ -557,9 +557,9 @@ namespace Components;
     /**
      * @param integer $length_
      *
-     * @return Components\Io_File
+     * @return \Components\Io_File
      *
-     * @throws Components\Io_Exception
+     * @throws \Components\Io_Exception
      */
     public function truncate($length_=0)
     {
@@ -576,9 +576,9 @@ namespace Components;
     /**
      * @param integer $position_
      *
-     * @return Components\Io_File
+     * @return \Components\Io_File
      *
-     * @throws Components\Io_Exception
+     * @throws \Components\Io_Exception
      */
     public function seekTo($position_)
     {
@@ -591,9 +591,9 @@ namespace Components;
     }
 
     /**
-     * @return Components\Io_File
+     * @return \Components\Io_File
      *
-     * @throws Components\Io_Exception
+     * @throws \Components\Io_Exception
      */
     public function seekToBegin()
     {
@@ -606,9 +606,9 @@ namespace Components;
     }
 
     /**
-     * @return Components\Io_File
+     * @return \Components\Io_File
      *
-     * @throws Components\Io_Exception
+     * @throws \Components\Io_Exception
      */
     public function seekToEnd()
     {
@@ -623,9 +623,9 @@ namespace Components;
     /**
      * @param integer $bytes_
      *
-     * @return Components\Io_File
+     * @return \Components\Io_File
      *
-     * @throws Components\Io_Exception
+     * @throws \Components\Io_Exception
      */
     public function skip($bytes_=1)
     {
@@ -640,7 +640,7 @@ namespace Components;
     /**
      * @return integer
      *
-     * @throws Components\Io_Exception
+     * @throws \Components\Io_Exception
      */
     public function position()
     {
@@ -671,7 +671,7 @@ namespace Components;
     // OVERRIDES
     /**
      * (non-PHPdoc)
-     * @see Components.Cloneable::__clone()
+     * @see Components\Cloneable::__clone()
      */
     public function __clone()
     {
@@ -680,7 +680,7 @@ namespace Components;
 
     /**
      * (non-PHPdoc)
-     * @see Components.Object::hashCode()
+     * @see Components\Object::hashCode()
      */
     public function hashCode()
     {
@@ -689,7 +689,7 @@ namespace Components;
 
     /**
      * (non-PHPdoc)
-     * @see Components.Object::equals()
+     * @see Components\Object::equals()
      */
     public function equals($object_)
     {
@@ -701,7 +701,7 @@ namespace Components;
 
     /**
      * (non-PHPdoc)
-     * @see Components.Object::__toString()
+     * @see Components\Object::__toString()
      */
     public function __toString()
     {
@@ -710,7 +710,7 @@ namespace Components;
 
     /**
      * (non-PHPdoc)
-     * @see Components.Value_String::value()
+     * @see Components\Value_String::value()
      */
     public function value()
     {
