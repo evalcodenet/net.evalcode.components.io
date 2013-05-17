@@ -275,7 +275,7 @@ namespace Components;
         }
         else
         {
-          throw new Io_Exception('io/file', sprintf('File is not writable [%s].', $this));
+          throw new Io_Exception('components/io/file', sprintf('File is not writable [%s].', $this));
         }
       }
 
@@ -285,7 +285,7 @@ namespace Components;
         $mode=LOCK_EX;
 
       if(false===($written=file_put_contents($this->m_pathAsString, $string_, $mode)))
-        throw new Io_Exception('io/file', sprintf('Unable to write to file [%s].', $this));
+        throw new Io_Exception('components/io/file', sprintf('Unable to write to file [%s].', $this));
 
       if($this->m_accessMask&self::APPEND)
         $this->m_length+=$written;
@@ -352,7 +352,7 @@ namespace Components;
       }
 
       if(false===touch($this->m_pathAsString))
-        throw new Io_Exception('io/file', sprintf('Unable to create file in given location [%s].', $this));
+        throw new Io_Exception('components/io/file', sprintf('Unable to create file in given location [%s].', $this));
 
       return $this;
     }
@@ -360,7 +360,7 @@ namespace Components;
     public function delete()
     {
       if(false===unlink($this->m_pathAsString))
-        throw new Io_Exception('io/file', sprintf('Unable to delete file [%s].', $this));
+        throw new Io_Exception('components/io/file', sprintf('Unable to delete file [%s].', $this));
 
       return $this;
     }
@@ -382,7 +382,7 @@ namespace Components;
       }
 
       if(false===copy($this->m_pathAsString, $destination_->m_pathAsString))
-        throw new Io_Exception('io/file', sprintf('Unable to copy file to given destination [source: %s, destination: %s].', $this, $destination_));
+        throw new Io_Exception('components/io/file', sprintf('Unable to copy file to given destination [source: %s, destination: %s].', $this, $destination_));
 
       return $destination_;
     }
@@ -411,7 +411,7 @@ namespace Components;
         if(is_file($destination_->m_pathAsString))
           unlink($this->m_pathAsString);
         else
-          throw new Io_Exception('io/file', sprintf('Unable to move file to given destination [source: %s, destination: %s].', $this, $destination_));
+          throw new Io_Exception('components/io/file', sprintf('Unable to move file to given destination [source: %s, destination: %s].', $this, $destination_));
       }
 
       return $destination_;
@@ -447,7 +447,7 @@ namespace Components;
     public function open()
     {
       if(false===($this->m_pointer=fopen($this->m_pathAsString, $this->accessFlagsForMask($this->m_accessMask))))
-        throw new Io_Exception('io/file', sprintf('Unable to open file [%s].', $this));
+        throw new Io_Exception('components/io/file', sprintf('Unable to open file [%s].', $this));
 
       if(null===$this->m_length)
       {
@@ -495,7 +495,7 @@ namespace Components;
         fseek($this->m_pointer, $this->m_position-($bytes_=-$bytes_));
 
       if(false===($read=fread($this->m_pointer, $bytes_)))
-        throw new Io_Exception('io/file', sprintf('Unable to read from file [%s].', $this));
+        throw new Io_Exception('components/io/file', sprintf('Unable to read from file [%s].', $this));
 
       $this->m_position=ftell($this->m_pointer);
 
@@ -512,13 +512,13 @@ namespace Components;
     public function write($string_)
     {
       if(false===$this->m_writable)
-        throw new Io_Exception('io/file', sprintf('File is not writable [%s].', $this));
+        throw new Io_Exception('components/io/file', sprintf('File is not writable [%s].', $this));
 
       if(1>($length=strlen($string_)))
         return 0;
 
       if(0===($written=fwrite($this->m_pointer, $string_, $length)))
-        throw new Io_Exception('io/file', sprintf('Unable to write to file [%s].', $this));
+        throw new Io_Exception('components/io/file', sprintf('Unable to write to file [%s].', $this));
 
       if($this->m_length<($this->m_position+=$written))
         $this->m_length=$this->m_position;
@@ -534,14 +534,14 @@ namespace Components;
     public function append($string_)
     {
       if(false===$this->m_writable)
-        throw new Io_Exception('io/file', sprintf('File is not writable [%s].', $this));
+        throw new Io_Exception('components/io/file', sprintf('File is not writable [%s].', $this));
 
       if(1>($length=strlen($string_)))
         return 0;
 
       fseek($this->m_pointer, $this->m_length, SEEK_SET);
       if(0===($written=fwrite($this->m_pointer, $string_, $length)))
-        throw new Io_Exception('io/file', sprintf('Unable to write to file [%s].', $this));
+        throw new Io_Exception('components/io/file', sprintf('Unable to write to file [%s].', $this));
 
       $this->m_length+=$written;
       $this->m_position=$this->m_length;
@@ -564,7 +564,7 @@ namespace Components;
     public function truncate($length_=0)
     {
       if(false===ftruncate($this->m_pointer, $length_))
-        throw new Io_Exception('io/file', sprintf('Failed to truncate file [%s].', $this));
+        throw new Io_Exception('components/io/file', sprintf('Failed to truncate file [%s].', $this));
 
       $this->m_length=$length_;
       if($this->m_position>$length_)
@@ -583,7 +583,7 @@ namespace Components;
     public function seekTo($position_)
     {
       if(-1===fseek($this->m_pointer, $position_, SEEK_SET))
-        throw new Io_Exception('io/file', sprintf('Unable to seek in file [%s].', $this));
+        throw new Io_Exception('components/io/file', sprintf('Unable to seek in file [%s].', $this));
 
       $this->m_position=ftell($this->m_pointer);
 
@@ -598,7 +598,7 @@ namespace Components;
     public function seekToBegin()
     {
       if(false===rewind($this->m_pointer))
-        throw new Io_Exception('io/file', sprintf('Unable to seek in file [%s].', $this));
+        throw new Io_Exception('components/io/file', sprintf('Unable to seek in file [%s].', $this));
 
       $this->m_position=0;
 
@@ -613,7 +613,7 @@ namespace Components;
     public function seekToEnd()
     {
       if(-1===fseek($this->m_pointer, 0, SEEK_END))
-        throw new Io_Exception('io/file', sprintf('Unable to seek in file [%s].', $this));
+        throw new Io_Exception('components/io/file', sprintf('Unable to seek in file [%s].', $this));
 
       $this->m_position=ftell($this->m_pointer);
 
@@ -630,7 +630,7 @@ namespace Components;
     public function skip($bytes_=1)
     {
       if(-1===fseek($this->m_pointer, $bytes_, SEEK_CUR))
-        throw new Io_Exception('io/file', sprintf('Unable to seek in file [%s].', $this));
+        throw new Io_Exception('components/io/file', sprintf('Unable to seek in file [%s].', $this));
 
       $this->m_position=ftell($this->m_pointer);
 
