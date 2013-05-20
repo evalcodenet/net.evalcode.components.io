@@ -277,7 +277,7 @@ namespace Components;
         return $this->m_value<$object_->m_value?-1:1;
       }
 
-      throw new Io_Exception('components/io/filesize', 'Can not compare to object of given type.');
+      throw new Io_Exception('io/filesize', 'Can not compare to object of given type.');
     }
 
     /**
