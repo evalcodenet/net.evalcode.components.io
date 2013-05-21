@@ -197,7 +197,7 @@ namespace Components;
      */
     public static function tmpFile($prefix_=null, $path_=null, $global_=true, $accessModeMask_=Io_File::WRITE)
     {
-      return self::file(self::tmpFileName($prefix_, $path_, $global_), $accessModeMask_);
+      return new Io_File(static::tmpFileName($prefix_, $path_, $global_), $accessModeMask_);
     }
 
     /**
@@ -210,8 +210,8 @@ namespace Components;
     {
       if(null===$path_)
       {
-        $path_=self::tmpPathName(null, $global_);
-        self::createDirectory($path_);
+        $path_=static::tmpPathName(null, $global_);
+        static::createDirectory($path_);
       }
 
       return tempnam($path_, $prefix_);
@@ -222,7 +222,7 @@ namespace Components;
      */
     public static function tmpPath($directory_=null, $global_=true)
     {
-      return self::path(self::tmpPathName($directory_, $global_));
+      return new Io_Path(static::tmpPathName($directory_, $global_));
     }
 
     /**
@@ -288,6 +288,16 @@ namespace Components;
         $directory_;
     }
 
+    public static function systemTmpPath()
+    {
+      return new Io_Path(static::systemTmpPathName());
+    }
+
+    public static function systemTmpPathName()
+    {
+      return sys_get_temp_dir();
+    }
+
     public static function createDirectory($path_, $umask_=0775)
     {
       $create=array();
@@ -323,7 +333,7 @@ namespace Components;
         if(@file_exists($pathTarget_))
           throw new Io_Exception('io', 'Target path must not be an existing file.');
 
-        self::createDirectory($pathTarget_);
+        static::createDirectory($pathTarget_);
       }
 
       if(false===@is_dir($pathTarget_))
@@ -342,7 +352,7 @@ namespace Components;
         {
           $subPath=String::replace($entryPath, "$pathSource_/", '');
           if(false===@is_dir("$pathTarget_/".dirname($subPath)))
-            self::createDirectory("$pathTarget_/".dirname($subPath));
+            static::createDirectory("$pathTarget_/".dirname($subPath));
 
           @copy($entryPath, "$pathTarget_/$subPath");
         }
@@ -373,7 +383,7 @@ namespace Components;
       if(@is_dir($path_) && @is_writeable($path_))
       {
         if($recursive_)
-          self::clearPath($path_);
+          static::clearPath($path_);
 
         return @rmdir($path_);
       }
