@@ -158,8 +158,15 @@ namespace Components;
     /**
      * @return Io_File
      */
-    public function asFile()
+    public function asFile($accessModeMask_=Io_File::READ)
     {
+      if(@is_file($this->m_path))
+      {
+        return Io_File::forMimeType(
+          Io_MimeType::forFileName($this->m_path), $this->m_path, $accessModeMask_
+        );
+      }
+
       return new Io_File($this->m_path);
     }
 
@@ -168,9 +175,11 @@ namespace Components;
      *
      * @return Io_File
      */
-    public function getFile($name_)
+    public function getFile($name_, $accessModeMask_=Io_File::READ)
     {
-      return new Io_File("{$this->m_path}/$name_");
+      return Io_File::forMimeType(
+        Io_MimeType::forFileName($name_), "{$this->m_path}/$name_", $accessModeMask_
+      );
     }
 
     /**
@@ -236,7 +245,7 @@ namespace Components;
      */
     public function create($umask_=0775)
     {
-      if(false===Io::createDirectory($this->m_path, $umask_))
+      if(false===Io::directoryCreate($this->m_path, $umask_))
         throw new Io_Exception('io/path', sprintf('Failed to create directory [%1$s].', $this));
 
       return $this;
@@ -249,19 +258,19 @@ namespace Components;
      */
     public function delete($recursive_=false)
     {
-      return Io::deletePath($this->m_path, $recursive_);
+      return Io::directoryDelete($this->m_path, $recursive_);
     }
 
     public function clear()
     {
-      Io::clearPath($this->m_path);
+      Io::directoryClear($this->m_path);
 
       return $this;
     }
 
     public function copy(Io_Path $target_)
     {
-      Io::copyDirectory($this->m_path, $target_->m_path);
+      Io::directoryCopy($this->m_path, $target_->m_path);
 
       return $target_;
     }

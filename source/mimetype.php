@@ -48,6 +48,7 @@ namespace Components;
     const MULTIPART_ENCRYPTED='multipart/encrypted';
     const MULTIPART_MIXED='multipart/mixed';
     const MULTIPART_RELATED='multipart/related';
+    const TEXT_CSV='text/csv';
     const TEXT_HTML='text/html';
     const TEXT_JSON='text/json';
     const TEXT_PLAIN='text/plain';
@@ -56,6 +57,7 @@ namespace Components;
 
     // FILE EXTENSIONS
     const EXTENSION_BIN='bin';
+    const EXTENSION_CSV='csv';
     const EXTENSION_EXE='exe';
     const EXTENSION_GIF='gif';
     const EXTENSION_HTML='html';
@@ -332,6 +334,7 @@ namespace Components;
       self::EXTENSION_JPG=>'IMAGE_JPG',
       self::EXTENSION_JPEG=>'IMAGE_JPG',
       self::EXTENSION_SVG=>'IMAGE_SVG_XML',
+      self::EXTENSION_CSV=>'TEXT_CSV',
       self::EXTENSION_HTML=>'TEXT_HTML',
       self::EXTENSION_TXT=>'TEXT_PLAIN'
       // TODO complete ...
@@ -353,6 +356,7 @@ namespace Components;
       self::MULTIPART_MIXED=>'MULTIPART_MIXED',
       self::MULTIPART_RELATED=>'MULTIPART_RELATED',
       self::TEXT_HTML=>'TEXT_HTML',
+      self::TEXT_CSV=>'TEXT_CSV',
       self::TEXT_JSON=>'TEXT_JSON',
       self::TEXT_PLAIN=>'TEXT_PLAIN'
       // TODO complete ...
@@ -369,6 +373,7 @@ namespace Components;
       self::IMAGE_JPEG=>self::EXTENSION_JPG,
       self::IMAGE_SVG_XML=>self::EXTENSION_SVG,
       self::TEXT_HTML=>self::EXTENSION_HTML,
+      self::TEXT_CSV=>self::EXTENSION_CSV,
       self::TEXT_JSON=>self::EXTENSION_JSON,
       self::TEXT_PLAIN=>self::EXTENSION_TXT
     );

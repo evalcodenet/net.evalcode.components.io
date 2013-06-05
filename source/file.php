@@ -72,6 +72,25 @@ namespace Components;
     {
       return new static($value_, self::READ);
     }
+
+    /**
+     * @param \Components\Io_MimeType $mimeType_
+     * @param string $path_
+     * @param integer $accessModeMask_
+     *
+     * @return \Components\Io_File
+     */
+    public static function forMimeType(Io_MimeType $mimeType_, $path_, $accessModeMask_=self::READ)
+    {
+      if(isset(self::$m_implForMimeType[$mimeType_->name()]))
+      {
+        $type=self::$m_implForMimeType[$mimeType_->name()];
+
+        return new $type($path_, $accessModeMask_);
+      }
+
+      return new static($path_, $accessModeMask_);
+    }
     //--------------------------------------------------------------------------
 
 
@@ -647,12 +666,17 @@ namespace Components;
       return $this->m_position;
     }
 
+    /**
+     * @return boolean
+     */
     public function isBegin()
     {
       return 0===$this->m_position;
     }
 
-
+    /**
+     * @return boolean
+     */
     public function isEnd()
     {
       return feof($this->m_pointer);
@@ -720,6 +744,14 @@ namespace Components;
 
 
     // IMPLEMENTATION
+    private static $m_implForMimeType=array(
+      Io_MimeType::TEXT_CSV=>'Components\Io_File_Csv',
+      Io_MimeType::IMAGE_GIF=>'Components\Io_Image',
+      Io_MimeType::IMAGE_JPEG=>'Components\Io_Image',
+      Io_MimeType::IMAGE_JPG=>'Components\Io_Image',
+      Io_MimeType::IMAGE_PNG=>'Components\Io_Image'
+    );
+
     protected $m_open=false;
     protected $m_pathAsString;
     protected $m_accessMask;
