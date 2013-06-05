@@ -165,8 +165,11 @@ namespace Components;
      *
      * @throws \Components\Io_Exception
      */
-    public static function fileUpload($fileId_, Io_Path $destination_=null)
+    public static function fileUpload($fileId_=null, Io_Path $destination_=null)
     {
+      if(null===$fileId_ && is_array($_FILES) && 0<count($_FILES))
+        $fileId_=key($_FILES);
+
       if(false===isset($_FILES[$fileId_]))
       {
         throw new Io_Exception('io', sprintf(
@@ -189,7 +192,7 @@ namespace Components;
       if(false===$destination_->exists())
         $destination_->create();
 
-      $file=$destination_->getFile($_FILES[$fileId_]['name']);
+      $file=$destination_->getFile(static::fileNameSanitize($_FILES[$fileId_]['name']));
 
       if($file->exists())
         $file->delete();
