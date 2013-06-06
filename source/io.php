@@ -165,7 +165,7 @@ namespace Components;
      *
      * @throws \Components\Io_Exception
      */
-    public static function fileUpload($fileId_=null, Io_Path $destination_=null)
+    public static function fileUpload($fileId_=null, Io_Path $destination_=null, array $permittedMimetypes_=array(), array $permittedFileExtensions_=array())
     {
       if(null===$fileId_ && is_array($_FILES) && 0<count($_FILES))
         $fileId_=key($_FILES);
@@ -259,11 +259,11 @@ namespace Components;
     /**
      * @param string $filename_
      *
-     * @return \Components\Io_MimeType
+     * @return \Components\Io_Mimetype
      */
     public static function mimeType($filename_)
     {
-      return Io_MimeType::forFilePath($filename_);
+      return Io_Mimetype::forFilePath($filename_);
     }
 
     /**

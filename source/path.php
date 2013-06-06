@@ -12,8 +12,7 @@ namespace Components;
    *
    * @author evalcode.net
    */
-  class Io_Path implements Object, Cloneable, Value_String,
-    \IteratorAggregate // TODO (CSH) Iterable
+  class Io_Path implements Object, Cloneable, Value_String, Iterable
   {
     // CONSTRUCTION
     public function __construct($path_)
@@ -161,11 +160,7 @@ namespace Components;
     public function asFile($accessModeMask_=Io_File::READ)
     {
       if(@is_file($this->m_path))
-      {
-        return Io_File::forMimeType(
-          Io_MimeType::forFileName($this->m_path), $this->m_path, $accessModeMask_
-        );
-      }
+        return Io_File::forMimetype($this->m_path, null, $accessModeMask_);
 
       return new Io_File($this->m_path);
     }
@@ -177,9 +172,7 @@ namespace Components;
      */
     public function getFile($name_, $accessModeMask_=Io_File::READ)
     {
-      return Io_File::forMimeType(
-        Io_MimeType::forFileName($name_), "{$this->m_path}/$name_", $accessModeMask_
-      );
+      return Io_File::forMimetype("{$this->m_path}/$name_", null, $accessModeMask_);
     }
 
     /**
@@ -188,9 +181,9 @@ namespace Components;
     public function isImage()
     {
       if(@is_file($this->m_path))
-        return Io_MimeType::forFilePath($this->m_path)->isImage();
+        return Io_Mimetype::forFilePath($this->m_path)->isImage();
 
-      return Io_MimeType::forFileName($this->m_path);
+      return Io_Mimetype::forFileName($this->m_path);
     }
 
     /**
@@ -346,9 +339,7 @@ namespace Components;
 
     /**
      * (non-PHPdoc)
-     * @see \IteratorAggregate::getIterator()
-     *
-     * @return Io_Path_Iterator
+     * @see \Components\Iterable::getIterator()
      */
     public function getIterator()
     {

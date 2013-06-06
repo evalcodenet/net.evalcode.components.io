@@ -12,6 +12,7 @@ namespace Components;
    *
    * @author evalcode.net
    */
+  // TODO Implement io/file/iterator/line
   class Io_File implements Object, Cloneable, Value_String
   {
     // PREDEFINED PROPERTIES
@@ -43,6 +44,11 @@ namespace Components;
     //--------------------------------------------------------------------------
 
 
+    // PROPERTIES
+    public $linefeed=Io::LINE_SEPARATOR_DEFAULT;
+    //--------------------------------------------------------------------------
+
+
     // CONSTRUCTION
     public function __construct($path_, $accessModeMask_=self::READ)
     {
@@ -54,16 +60,6 @@ namespace Components;
 
     // STATIC ACCESSORS
     /**
-     * @param string $path_
-     *
-     * @return \Components\Io_File
-     */
-    public static function forPath($path_, $accessModeMask_=self::READ)
-    {
-      return new static($path_, $accessModeMask_);
-    }
-
-    /**
      * @param string $value_
      *
      * @return \Components\Io_File
@@ -74,17 +70,30 @@ namespace Components;
     }
 
     /**
-     * @param \Components\Io_MimeType $mimeType_
+     * @param string $path_
+     *
+     * @return \Components\Io_File
+     */
+    public static function forPath($path_, $accessModeMask_=self::READ)
+    {
+      return new static($path_, $accessModeMask_);
+    }
+
+    /**
+     * @param \Components\Io_Mimetype $mimeType_
      * @param string $path_
      * @param integer $accessModeMask_
      *
      * @return \Components\Io_File
      */
-    public static function forMimeType(Io_MimeType $mimeType_, $path_, $accessModeMask_=self::READ)
+    public static function forMimetype($path_, $accessModeMask_=self::READ, Io_Mimetype $mimeType_=null)
     {
-      if(isset(self::$m_implForMimeType[$mimeType_->name()]))
+      if(null===$mimeType_)
+        $mimeType_=Io_Mimetype::forFileName($path_);
+
+      if(isset(self::$m_implForMimetype[$mimeType_->name()]))
       {
-        $type=self::$m_implForMimeType[$mimeType_->name()];
+        $type=self::$m_implForMimetype[$mimeType_->name()];
 
         return new $type($path_, $accessModeMask_);
       }
@@ -174,16 +183,16 @@ namespace Components;
     }
 
     /**
-     * @return \Components\Io_MimeType
+     * @return \Components\Io_Mimetype
      */
-    public function getMimeType()
+    public function getMimetype()
     {
       if(null===$this->m_mimeType)
       {
         if($this->exists())
-          return $this->m_mimeType=Io_MimeType::forFilePath($this->m_pathAsString);
+          return $this->m_mimeType=Io_Mimetype::forFilePath($this->m_pathAsString);
 
-        return $this->m_mimeType=Io_MimeType::forFileExtension($this->getExtension());
+        return $this->m_mimeType=Io_Mimetype::forFileExtension($this->getExtension());
       }
 
       return $this->m_mimeType;
@@ -194,7 +203,7 @@ namespace Components;
      */
     public function getCharset()
     {
-      if($mimeType=$this->getMimeType())
+      if($mimeType=$this->getMimetype())
         return $mimeType->charset();
 
       return Io_Charset::defaultCharset();
@@ -205,7 +214,7 @@ namespace Components;
      */
     public function isImage()
     {
-      return $this->getMimeType()->isImage();
+      return $this->getMimetype()->isImage();
     }
 
     /**
@@ -333,6 +342,9 @@ namespace Components;
 
     public function isReadable()
     {
+      if($this->m_open)
+        return true;
+
       return is_readable($this->m_pathAsString);
     }
 
@@ -511,7 +523,7 @@ namespace Components;
     public function read($bytes_=4096)
     {
       if(0>$bytes_)
-        fseek($this->m_pointer, $this->m_position-($bytes_=-$bytes_));
+        fseek($this->m_pointer, $bytes_, SEEK_CUR);
 
       if(false===($read=fread($this->m_pointer, $bytes_)))
         throw new Io_Exception('io/file', sprintf('Unable to read from file [%s].', $this));
@@ -519,6 +531,36 @@ namespace Components;
       $this->m_position=ftell($this->m_pointer);
 
       return $read;
+    }
+
+    /**
+     * @param string $linefeed_
+     *
+     * @return string
+     */
+    public function readLine()
+    {
+      $buffer=array();
+      while(false===feof($this->m_pointer))
+      {
+        if(false===($read=fread($this->m_pointer, 512)))
+          throw new Io_Exception('io/file', sprintf('Unable to read from file [%s].', $this));
+
+        if(-1<($idx=mb_strpos($read, $this->linefeed)))
+        {
+          $buffer[]=mb_substr($read, 0, $idx);
+          fseek($this->m_pointer, -(512-$idx-1), SEEK_CUR);
+
+          break;
+        }
+
+        $buffer[]=$read;
+      }
+
+      $this->m_position=ftell($this->m_pointer);
+      $this->m_line++;
+
+      return implode($buffer);
     }
 
     /**
@@ -545,9 +587,9 @@ namespace Components;
       return $written;
     }
 
-    public function writeLine($string_, $separatorLine_=Io::LINE_SEPARATOR_DEFAULT)
+    public function writeLine($string_)
     {
-      return $this->write($string_.$separatorLine_);
+      return $this->write($string_.$this->linefeed);
     }
 
     public function append($string_)
@@ -568,9 +610,9 @@ namespace Components;
       return $written;
     }
 
-    public function appendLine($string_, $separatorLine_=Io::LINE_SEPARATOR_DEFAULT)
+    public function appendLine($string_)
     {
-      return $this->append($string_.$separatorLine_);
+      return $this->append($string_.$this->linefeed);
     }
 
     /**
@@ -588,6 +630,23 @@ namespace Components;
       $this->m_length=$length_;
       if($this->m_position>$length_)
         $this->m_position=$length_;
+
+      return $this;
+    }
+
+    /**
+     * @param integer $position_
+     *
+     * @return \Components\Io_File
+     *
+     * @throws \Components\Io_Exception
+     */
+    public function seek($position_)
+    {
+      if(-1===fseek($this->m_pointer, $position_, SEEK_CUR))
+        throw new Io_Exception('io/file', sprintf('Unable to seek in file [%s].', $this));
+
+      $this->m_position=ftell($this->m_pointer);
 
       return $this;
     }
@@ -744,18 +803,22 @@ namespace Components;
 
 
     // IMPLEMENTATION
-    private static $m_implForMimeType=array(
-      Io_MimeType::TEXT_CSV=>'Components\Io_File_Csv',
-      Io_MimeType::IMAGE_GIF=>'Components\Io_Image',
-      Io_MimeType::IMAGE_JPEG=>'Components\Io_Image',
-      Io_MimeType::IMAGE_JPG=>'Components\Io_Image',
-      Io_MimeType::IMAGE_PNG=>'Components\Io_Image'
+    private static $m_implForMimetype=array(
+      Io_Mimetype::TEXT_CSV=>'Components\\Io_File_Csv',
+      Io_Mimetype::IMAGE_GIF=>'Components\\Io_Image',
+      Io_Mimetype::IMAGE_JPEG=>'Components\\Io_Image',
+      Io_Mimetype::IMAGE_JPG=>'Components\\Io_Image',
+      Io_Mimetype::IMAGE_PNG=>'Components\\Io_Image'
     );
 
     protected $m_open=false;
     protected $m_pathAsString;
     protected $m_accessMask;
     protected $m_position;
+    /**
+     * @var resource
+     */
+    protected $m_pointer;
     protected $m_length;
 
     private $m_name;
@@ -769,11 +832,10 @@ namespace Components;
      */
     private $m_directory;
     private $m_directoryAsString;
-    private $m_pointer;
     private $m_accessFlags;
     private $m_writable;
     /**
-     * @var Components\Io_MimeType
+     * @var Components\Io_Mimetype
      */
     private $m_mimeType;
     //-----

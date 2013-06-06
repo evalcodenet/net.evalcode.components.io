@@ -58,21 +58,10 @@ namespace Components;
       $this->properties->organizationName=$organizationName_;
       $this->properties->passTypeIdentifier=$passTypeIdentifier_;
       $this->properties->teamIdentifier=$teamIdentifier_;
-      $this->properties->serialNumber=static::generateSerialNumber();
-    }
-    //--------------------------------------------------------------------------
 
-
-    // STATIC ACCESSORS
-    /**
-     * @return string
-     */
-    public static function generateSerialNumber()
-    {
-      $serial=md5(uniqid(null, true));
-      $chunks=str_split($serial, 5);
-
-      return implode('-', array_slice($chunks, 0, 5));
+      $this->properties->serialNumber=String::generateSerialNumber(30, 5, '-',
+        String::ASCII_TABLE_LETTERS|String::ASCII_TABLE_UPPERCASE|String::ASCII_TABLE_NUMBERS
+      );
     }
     //--------------------------------------------------------------------------
 
@@ -127,14 +116,14 @@ namespace Components;
       if(!$icon_->exists())
       {
         throw new Io_Exception('io/archive/passbook/generic', sprintf(
-          'Given icon does not exist [icon: %s].', Io_MimeType::IMAGE_PNG(), $icon_)
+          'Given icon does not exist [icon: %s].', Io_Mimetype::IMAGE_PNG(), $icon_)
         );
       }
 
-      if(!Io_MimeType::IMAGE_PNG()->equals($icon_->getMimeType()))
+      if(!Io_Mimetype::IMAGE_PNG()->equals($icon_->getMimetype()))
       {
         throw new Io_Exception('io/archive/passbook/generic', sprintf(
-          'Icon must be of type %s [icon: %s].', Io_MimeType::IMAGE_PNG(), $icon_)
+          'Icon must be of type %s [icon: %s].', Io_Mimetype::IMAGE_PNG(), $icon_)
         );
       }
 
@@ -146,14 +135,14 @@ namespace Components;
       if(!$logo_->exists())
       {
         throw new Io_Exception('io/archive/passbook/generic', sprintf(
-          'Given logo does not exist [icon: %s].', Io_MimeType::IMAGE_PNG(), $logo_)
+          'Given logo does not exist [icon: %s].', Io_Mimetype::IMAGE_PNG(), $logo_)
         );
       }
 
-      if(!Io_MimeType::IMAGE_PNG()->equals($logo_->getMimeType()))
+      if(!Io_Mimetype::IMAGE_PNG()->equals($logo_->getMimetype()))
       {
         throw new Io_Exception('io/archive/passbook/generic', sprintf(
-          'Logo must be of type %s [logo: %s].', Io_MimeType::IMAGE_PNG(), $logo_)
+          'Logo must be of type %s [logo: %s].', Io_Mimetype::IMAGE_PNG(), $logo_)
         );
       }
 
@@ -203,14 +192,14 @@ namespace Components;
       if(!$image_->exists())
       {
         throw new Io_Exception('io/archive/passbook/generic', sprintf(
-          'Given background image does not exist [icon: %s].', Io_MimeType::IMAGE_PNG(), $image_)
+          'Given background image does not exist [icon: %s].', Io_Mimetype::IMAGE_PNG(), $image_)
         );
       }
 
-      if(!Io_MimeType::IMAGE_PNG()->equals($image_->getMimeType()))
+      if(!Io_Mimetype::IMAGE_PNG()->equals($image_->getMimetype()))
       {
         throw new Io_Exception('io/archive/passbook/generic', sprintf(
-          'Background image must be of type %s [logo: %s].', Io_MimeType::IMAGE_PNG(), $image_)
+          'Background image must be of type %s [logo: %s].', Io_Mimetype::IMAGE_PNG(), $image_)
         );
       }
 
@@ -359,11 +348,11 @@ namespace Components;
 
     /**
      * (non-PHPdoc)
-     * @see Components\Io_File::getMimeType()
+     * @see Components\Io_File::getMimetype()
      */
-    public function getMimeType()
+    public function getMimetype()
     {
-      return Io_MimeType::APPLICATION_VND_APPLE_PKPASS();
+      return Io_Mimetype::APPLICATION_VND_APPLE_PKPASS();
     }
     //--------------------------------------------------------------------------
 

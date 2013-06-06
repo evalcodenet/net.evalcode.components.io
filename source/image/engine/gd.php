@@ -123,7 +123,7 @@ namespace Components;
      *
      * @return \Components\Io_Image_Engine_Gd
      */
-    public function save($path_, $type_=Io_MimeType::IMAGE_PNG)
+    public function save($path_, $type_=Io_Mimetype::IMAGE_PNG)
     {
       imagepng($this->m_resource, $path_);
 

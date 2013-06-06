@@ -40,7 +40,7 @@ namespace Components;
      *
      * @return \Components\Io_Image_Engine
      */
-    function save($path_, $type_=Io_MimeType::IMAGE_PNG);
+    function save($path_, $type_=Io_Mimetype::IMAGE_PNG);
     //--------------------------------------------------------------------------
   }
 ?>

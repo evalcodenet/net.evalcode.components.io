@@ -5,32 +5,32 @@ namespace Components;
 
 
   /**
-   * Io_MimeType
+   * Io_Mimetype
    *
    * @package net.evalcode.components
    * @subpackage io
    *
-   * @method Io_MimeType APPLICATION_JSON
-   * @method Io_MimeType APPLICATION_XML
-   * @method Io_MimeType APPLICATION_ZIP
-   * @method Io_MimeType APPLICATION_OCTET_STREAM
-   * @method Io_MimeType APPLICATION_VND_APPLE_PKPASS
-   * @method Io_MimeType IMAGE_GIF
-   * @method Io_MimeType IMAGE_PNG
-   * @method Io_MimeType IMAGE_JPG
-   * @method Io_MimeType IMAGE_SVG_XML
-   * @method Io_MimeType MULTIPART_ALTERNATIVE
-   * @method Io_MimeType MULTIPART_DIGEST
-   * @method Io_MimeType MULTIPART_ENCRYPTED
-   * @method Io_MimeType MULTIPART_MIXED
-   * @method Io_MimeType MULTIPART_RELATED
-   * @method Io_MimeType TEXT_HTML
-   * @method Io_MimeType TEXT_JSON
-   * @method Io_MimeType TEXT_PLAIN
+   * @method Io_Mimetype APPLICATION_JSON
+   * @method Io_Mimetype APPLICATION_XML
+   * @method Io_Mimetype APPLICATION_ZIP
+   * @method Io_Mimetype APPLICATION_OCTET_STREAM
+   * @method Io_Mimetype APPLICATION_VND_APPLE_PKPASS
+   * @method Io_Mimetype IMAGE_GIF
+   * @method Io_Mimetype IMAGE_PNG
+   * @method Io_Mimetype IMAGE_JPG
+   * @method Io_Mimetype IMAGE_SVG_XML
+   * @method Io_Mimetype MULTIPART_ALTERNATIVE
+   * @method Io_Mimetype MULTIPART_DIGEST
+   * @method Io_Mimetype MULTIPART_ENCRYPTED
+   * @method Io_Mimetype MULTIPART_MIXED
+   * @method Io_Mimetype MULTIPART_RELATED
+   * @method Io_Mimetype TEXT_HTML
+   * @method Io_Mimetype TEXT_JSON
+   * @method Io_Mimetype TEXT_PLAIN
    *
    * @author evalcode.net
    */
-  class Io_MimeType extends Enumeration
+  class Io_Mimetype extends Enumeration
   {
     // MIME TYPES
     const APPLICATION_JSON='application/json';
@@ -53,7 +53,6 @@ namespace Components;
     const TEXT_JSON='text/json';
     const TEXT_PLAIN='text/plain';
     const TEXT_PHP_SOURCE='text/php';
-
 
     // FILE EXTENSIONS
     const EXTENSION_BIN='bin';
@@ -99,11 +98,11 @@ namespace Components;
      * @param string $name_
      * @param \Components\Io_Charset $charset_
      *
-     * @return \Components\Io_MimeType
+     * @return \Components\Io_Mimetype
      */
     public static function forName($name_, Io_Charset $charset_=null)
     {
-      $name=self::$m_mapMimeTypes[$name_];
+      $name=self::$m_mapMimetypes[$name_];
 
       return static::$name($charset_);
     }
@@ -112,7 +111,7 @@ namespace Components;
      * @param \Components\Io_File $file_
      * @param \Components\Io_Charset $charset_
      *
-     * @return \Components\Io_MimeType
+     * @return \Components\Io_Mimetype
      */
     public static function forFile(Io_File $file_, Io_Charset $charset_=null)
     {
@@ -123,7 +122,7 @@ namespace Components;
      * @param string $fileExtension_
      * @param \Components\Io_Charset $charset_
      *
-     * @return \Components\Io_MimeType
+     * @return \Components\Io_Mimetype
      */
     public static function forFileName($filename_, Io_Charset $charset_=null)
     {
@@ -134,7 +133,7 @@ namespace Components;
      * @param string $fileExtension_
      * @param \Components\Io_Charset $charset_
      *
-     * @return \Components\Io_MimeType
+     * @return \Components\Io_Mimetype
      */
     public static function forFileExtension($fileExtension_, Io_Charset $charset_=null)
     {
@@ -150,7 +149,7 @@ namespace Components;
     /**
      * @param string $file_
      *
-     * @return \Components\Io_MimeType
+     * @return \Components\Io_Mimetype
      */
     public static function forFilePath($file_, Io_Charset $charset_=null)
     {
@@ -166,12 +165,19 @@ namespace Components;
 
       $mimetype=trim(substr($info, 0, strpos($info, ';')));
 
-      if(isset(self::$m_mapMimeTypes[$mimetype]))
-        $name=self::$m_mapMimeTypes[$mimetype];
-      else if(0===strpos($mimetype, 'text'))
-        $name=self::$m_mapMimeTypes[self::TEXT_PLAIN];
+      /**
+       * finfo seems to return text/plain for most text files..
+       * I think we can achive more accurate information by relying on the
+       * file extension, since there should be no real danger as soon as we
+       * are sure its really a text file.
+       */
+      if(0===strpos($mimetype, 'text'))
+        return static::forFileName($file_);
+
+      if(isset(self::$m_mapMimetypes[$mimetype]))
+        $name=self::$m_mapMimetypes[$mimetype];
       else
-        $name=self::$m_mapMimeTypes[self::APPLICATION_OCTET_STREAM];
+        $name=self::$m_mapMimetypes[self::APPLICATION_OCTET_STREAM];
 
       if(null===$charset_)
       {
@@ -215,7 +221,7 @@ namespace Components;
      */
     public static function values()
     {
-      return array_values(self::$m_mapMimeTypes);
+      return array_values(self::$m_mapMimetypes);
     }
     //--------------------------------------------------------------------------
 
@@ -259,7 +265,7 @@ namespace Components;
      */
     public function fileExtension()
     {
-      return self::$m_mapMimeTypeFileExtensions[$this->m_name];
+      return self::$m_mapMimetypeFileExtensions[$this->m_name];
     }
 
     /**
@@ -283,7 +289,7 @@ namespace Components;
      */
     public function isArchive()
     {
-      return isset(self::$m_mapArchiveMimeTypes[$this->m_name]);
+      return isset(self::$m_mapArchiveMimetypes[$this->m_name]);
     }
 
     /**
@@ -339,7 +345,7 @@ namespace Components;
       self::EXTENSION_TXT=>'TEXT_PLAIN'
       // TODO complete ...
     );
-    private static $m_mapMimeTypes=array(
+    private static $m_mapMimetypes=array(
       self::APPLICATION_JSON=>'APPLICATION_JSON',
       self::APPLICATION_OCTET_STREAM=>'APPLICATION_OCTET_STREAM',
       self::APPLICATION_XML=>'APPLICATION_XML',
@@ -361,7 +367,7 @@ namespace Components;
       self::TEXT_PLAIN=>'TEXT_PLAIN'
       // TODO complete ...
     );
-    private static $m_mapMimeTypeFileExtensions=array(
+    private static $m_mapMimetypeFileExtensions=array(
       self::APPLICATION_JSON=>self::EXTENSION_JSON,
       self::APPLICATION_OCTET_STREAM=>self::EXTENSION_BIN,
       self::APPLICATION_XML=>self::EXTENSION_XML,
@@ -378,7 +384,7 @@ namespace Components;
       self::TEXT_PLAIN=>self::EXTENSION_TXT
     );
 
-    private static $m_mapArchiveMimeTypes=array(
+    private static $m_mapArchiveMimetypes=array(
       self::APPLICATION_ZIP=>'APPLICATION_ZIP',
       self::APPLICATION_VND_APPLE_PKPASS=>'APPLICATION_VND_APPLE_PKPASS'
     );
