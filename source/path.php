@@ -160,7 +160,7 @@ namespace Components;
     public function asFile($accessModeMask_=Io_File::READ)
     {
       if(@is_file($this->m_path))
-        return Io_File::forMimetype($this->m_path, null, $accessModeMask_);
+        return Io_File::forMimetype($this->m_path, $accessModeMask_);
 
       return new Io_File($this->m_path);
     }
@@ -172,7 +172,7 @@ namespace Components;
      */
     public function getFile($name_, $accessModeMask_=Io_File::READ)
     {
-      return Io_File::forMimetype("{$this->m_path}/$name_", null, $accessModeMask_);
+      return Io_File::forMimetype("{$this->m_path}/$name_", $accessModeMask_);
     }
 
     /**
