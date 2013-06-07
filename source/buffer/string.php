@@ -32,7 +32,7 @@ namespace Components;
      */
     public static function wrap(&$buffer_)
     {
-      $buffer=new static(String::length($buffer_));
+      $buffer=new static(strlen($buffer_));
       $buffer->m_stringBuffer=&$buffer_;
 
       return $buffer;
@@ -43,7 +43,7 @@ namespace Components;
     // ACCESSORS
     public function substring($offset_, $length_)
     {
-      return String::substring($this->m_stringBuffer, $offset_, $length_);
+      return substr($this->m_stringBuffer, $offset_, $length_);
     }
     //--------------------------------------------------------------------------
 
@@ -72,6 +72,11 @@ namespace Components;
       return $this->m_stringBuffer[$position_];
     }
 
+    public function size()
+    {
+      return strlen($this->m_stringBuffer);
+    }
+
     /**
      * @see Components\Io_Buffer::append()
      *
@@ -79,8 +84,8 @@ namespace Components;
      */
     public function append($value_)
     {
-      $this->m_stringBuffer=mb_substr($this->m_stringBuffer, 0, $this->m_position).$value_;
-      $this->m_position+=String::length($value_);
+      $this->m_stringBuffer=substr($this->m_stringBuffer, 0, $this->m_position).$value_;
+      $this->m_position+=strlen($value_);
 
       return $this;
     }
@@ -200,7 +205,7 @@ namespace Components;
     public function equals($object_)
     {
       if($object_ instanceof self)
-        return String::equal($this->m_stringBuffer, $object_->m_stringBuffer);
+        return $this->m_stringBuffer===$object_->m_stringBuffer;
 
       return false;
     }

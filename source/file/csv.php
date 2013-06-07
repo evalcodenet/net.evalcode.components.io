@@ -90,6 +90,11 @@ namespace Components;
       $this->m_columnsMapped=$columns_;
     }
 
+    public function getColumnsIndex()
+    {
+      return $this->m_columnsIndex;
+    }
+
     public function mapColumn($from_, $to_)
     {
       if(false===isset($this->m_columnsIndex[$from_]))
@@ -107,41 +112,80 @@ namespace Components;
       $this->m_columnsMapped[$from_]=$to_;
     }
 
-    public function getColumnsIndex()
+    public function hasMore()
     {
-      return $this->m_columnsIndex;
+      return isset($this->m_data[$this->m_line+1]) || false===feof($this->m_pointer);
     }
 
-    public function hasMoreLines()
+    public function next()
     {
-      if(isset($this->m_data[$this->m_line+1]))
-        return true;
+      if(0===$this->m_line)
+        fseek($this->m_pointer, $this->m_offsetHeaderEnd);
 
-      try
+      $this->m_line++;
+
+      if(isset($this->m_data[$this->m_line]))
+        return $this->m_data[$this->m_line];
+
+      $line=fgetcsv(
+        $this->m_pointer,
+        null,
+        chr($this->characterFieldSeparator),
+        chr($this->characterQuotes),
+        chr($this->characterEscape)
+      );
+
+      $this->m_position=ftell($this->m_pointer);
+
+      if(null===$line)
+        throw new Io_Exception('io/file/csv', sprintf('Failed to read line - file seems to be closed [%s].', $this));
+
+      if(false===$line)
       {
-        $this->readLine();
+        if(feof($this->m_pointer))
+          return array();
+
+        throw new Io_Exception('io/file/csv', sprintf('Failed to read line [%s].', $this));
       }
-      catch(Io_Exception $e)
+
+      $data=array();
+      foreach($this->m_columnsIndex as $name=>$columns)
       {
+        if(isset($this->m_columnsMapped[$name]))
+          $name=$this->m_columnsMapped[$name];
+
+        if(1===count($columns))
+        {
+          $column=reset($columns);
+          if(isset($line[$column]) && trim($line[$column]))
+            $data[$name]=$line[$column];
+          else
+            $data[$name]=null;
+        }
+        else
+        {
+          foreach($columns as $column)
+          {
+            if(isset($line[$column]) && trim($line[$column]))
+              $data[$name][$column]=$line[$column];
+          }
+        }
+      }
+
+      $this->m_data[$this->m_line]=$data;
+
+      return $data;
+    }
+
+    public function previous()
+    {
+      if(1>$this->m_line)
         return false;
-      }
 
-      $this->m_line--;
-
-      return isset($this->m_data[$this->m_line+1]);
-    }
-
-    public function nextLine()
-    {
-      return $this->readLine();
-    }
-
-    public function previousLine()
-    {
       return $this->m_data[--$this->m_line];
     }
 
-    public function currentLine()
+    public function current()
     {
       if(false===isset($this->m_data[$this->m_line]))
         return null;
@@ -154,12 +198,17 @@ namespace Components;
       return $this->m_line;
     }
 
-    public function readAll()
+    public function loadAll()
     {
       while(false===feof($this->m_pointer))
-        $this->readLine();
+        $this->next();
 
       return $this;
+    }
+
+    public function findAll()
+    {
+      return $this->loadAll()->m_data;
     }
 
     public function find($value_, $column_)
@@ -193,230 +242,6 @@ namespace Components;
 
       return $this;
     }
-
-    /**
-     * (non-PHPdoc)
-     * @see \Components\Io_File::readLine()
-     *
-     * @return array|string
-     *
-     * @throws \Components\Io_Exception
-     */
-    public function readLine()
-    {
-      $this->m_line++;
-
-      if(isset($this->m_data[$this->m_line]))
-        return $this->m_data[$this->m_line];
-
-      $start=ftell($this->m_pointer);
-
-      $line=fgetcsv(
-        $this->m_pointer,
-        null,
-        chr($this->characterFieldSeparator),
-        chr($this->characterQuotes),
-        chr($this->characterEscape)
-      );
-
-      $this->m_position=ftell($this->m_pointer);
-
-      if(null===$line)
-        throw new Io_Exception('io/file/csv', sprintf('Failed to read line - file seems to be closed [%s].', $this));
-
-      if(false===$line)
-      {
-        if(feof($this->m_pointer))
-          return array();
-
-        throw new Io_Exception('io/file/csv', sprintf('Failed to read line [%s].', $this));
-      }
-
-      $this->m_offsetLines[$this->m_line]=array($start, $this->m_position);
-
-      $data=array();
-      foreach($this->m_columnsIndex as $name=>$columns)
-      {
-        if(isset($this->m_columnsMapped[$name]))
-          $name=$this->m_columnsMapped[$name];
-
-        if(1===count($columns))
-        {
-          $column=reset($columns);
-          if(isset($line[$column]) && trim($line[$column]))
-            $data[$name]=$line[$column];
-          else
-            $data[$name]=null;
-        }
-        else
-        {
-          foreach($columns as $column)
-          {
-            if(isset($line[$column]) && trim($line[$column]))
-              $data[$name][$column]=$line[$column];
-          }
-        }
-      }
-
-      $this->m_data[$this->m_line]=$data;
-
-      return $data;
-    }
-
-    /**
-     * @param integer $line_
-     *
-     * @return \Components\Io_File
-     *
-     * @throws \Components\Io_Exception
-     */
-    public function truncate($line_=0)
-    {
-      $line_=max(0, $line_);
-
-      if(0===$line_)
-      {
-        ftruncate($this->m_pointer, $this->m_offsetHeaderEnd);
-
-        $this->m_data=array();
-        $this->m_offsetLines=array();
-        $this->m_position=$this->m_offsetHeaderEnd;
-        $this->m_length=$this->m_offsetHeaderEnd;
-        $this->m_line=0;
-
-        return $this;
-      }
-
-      if(false===isset($this->m_offsetLines[$line_]))
-      {
-        while($this->m_line<$line_)
-          $this->readLine();
-      }
-
-      ftruncate($this->m_pointer, $this->m_offsetLines[$line_][0]);
-
-      $this->m_data=array_slice($this->m_data, 0, $line_);
-      $this->m_offsetLines=array_slice($this->m_offsetLines, 0, $line_);
-      $this->m_position=$this->m_offsetLines[$line_][0];
-      $this->m_length=$this->m_offsetLines[$line_][0];
-      $this->m_line=$line_;
-
-      return $this;
-    }
-
-    /**
-     * @param integer $line_
-     *
-     * @return \Components\Io_File
-     *
-     * @throws \Components\Io_Exception
-     */
-    public function seek($line_=1)
-    {
-      $line_=$this->m_line+$line_;
-
-      if(isset($this->m_offsetLines[$line_]))
-      {
-        fseek($this->m_pointer, $this->m_offsetLines[$line_][1], SEEK_SET);
-
-        $this->m_position=$this->m_offsetLines[$line_][1];
-        $this->m_line=$line_;
-      }
-      else
-      {
-        // XXX Throw IllegalState!?
-        if($line_<$this->m_line)
-          $this->seekToBegin();
-
-        while($this->m_line<$line_)
-          $this->readLine();
-      }
-
-      return $this;
-    }
-
-    /**
-     * @param integer $line_
-     *
-     * @return \Components\Io_File
-     *
-     * @throws \Components\Io_Exception
-     */
-    public function seekTo($line_)
-    {
-      $line_=max(0, $line_);
-
-      if(isset($this->m_offsetLines[$line_]))
-      {
-        fseek($this->m_pointer, $this->m_offsetLines[$line_][1], SEEK_SET);
-
-        $this->m_position=$this->m_offsetLines[$line_][1];
-        $this->m_line=$line_;
-      }
-      else
-      {
-        // XXX Throw IllegalState!?
-        if($line_<$this->m_line)
-          $this->seekToBegin();
-
-        while($this->m_line<$line_)
-          $this->readLine();
-      }
-
-      return $this;
-    }
-
-    /**
-     * @return \Components\Io_File
-     *
-     * @throws \Components\Io_Exception
-     */
-    public function seekToBegin()
-    {
-      return $this->seekTo(0);
-    }
-
-    /**
-     * @return \Components\Io_File
-     *
-     * @throws \Components\Io_Exception
-     */
-    public function seekToEnd()
-    {
-      if($last=end($this->m_offsetLines))
-      {
-        fseek($this->m_pointer, $last[1], SEEK_SET);
-        $this->m_line=key($this->m_offsetLines);
-      }
-
-      return $this;
-    }
-
-    /**
-     * @param integer $lines_
-     *
-     * @return \Components\Io_File
-     *
-     * @throws \Components\Io_Exception
-     */
-    // FIXME Inconsistent state (data buffer, offset buffers..)?
-    public function skip($lines_=1)
-    {
-      while(0<$lines_--)
-      {
-        fgetcsv(
-          $this->m_pointer,
-          null,
-          chr($this->characterFieldSeparator),
-          chr($this->characterQuotes),
-          chr($this->characterEscape)
-        );
-      }
-
-      $this->m_position=ftell($this->m_pointer);
-
-      return $this;
-    }
     //--------------------------------------------------------------------------
 
 
@@ -424,7 +249,6 @@ namespace Components;
     private $m_columns=array();
     private $m_columnsIndex=array();
     private $m_columnsMapped=array();
-    private $m_offsetLines=array();
     private $m_data=array();
     private $m_line=0;
     private $m_offsetHeaderStart=0;
