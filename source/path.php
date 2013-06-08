@@ -28,10 +28,9 @@ namespace Components;
      *
      * @return Io_Path
      */
-    public static function get($pathName0_/*, $pathName1_, $pathName2_..*/)
+    public static function get($path0_/*, $path1_, $path2_..*/)
     {
-      if(1>count($args=func_get_args()))
-        return null;
+      $args=func_get_args();
 
       $prepend='';
       if(Io::DIRECTORY_SEPARATOR===$args[0])
@@ -238,10 +237,7 @@ namespace Components;
      */
     public function create($umask_=0775)
     {
-      if(false===Io::directoryCreate($this->m_path, $umask_))
-        throw new Io_Exception('io/path', sprintf('Failed to create directory [%1$s].', $this));
-
-      return $this;
+      return Io::directoryCreate($this->m_path, $umask_);
     }
 
     /**

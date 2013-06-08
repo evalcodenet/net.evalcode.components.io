@@ -163,8 +163,8 @@ namespace Components;
       if(false===$info)
         return self::forFileName($file_);
 
-      $mimetype=trim(substr($info, 0, strpos($info, ';')));
 
+      $mimetype=trim(substr($info, 0, strpos($info, ';')));
       /**
        * finfo seems to return text/plain for most text files..
        * I think we can achive more accurate information by relying on the

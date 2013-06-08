@@ -58,13 +58,19 @@ namespace Components;
     }
 
     /**
-     * @param string $path_
+     * @param string... $path0_
      *
      * @return \Components\Io_Path
      */
-    public static function path($path_)
+    public static function path($path0_/*, $path1_, $path2_..*/)
     {
-      return new Io_Path($path_);
+      $args=func_get_args();
+
+      $prepend='';
+      if(Io::DIRECTORY_SEPARATOR===$args[0])
+        $prepend=array_shift($args);
+
+      return new Io_Path($prepend.implode(Io::DIRECTORY_SEPARATOR, $args));
     }
 
     /**
@@ -290,7 +296,7 @@ namespace Components;
 
         $path=implode(DIRECTORY_SEPARATOR, $segments);
 
-        if(false===mkdir($path, $umask_, true))
+        if(false===@mkdir($path, $umask_, true))
           return false;
 
         @chmod($path, $umask_);
