@@ -164,6 +164,7 @@ namespace Components;
         }
         else
         {
+          $data[$name]=array();
           foreach($columns as $column)
           {
             if(isset($line[$column]) && trim($line[$column]))
