@@ -12,7 +12,7 @@ namespace Components;
    *
    * @author evalcode.net
    */
-  class Io_File_Csv extends Io_File implements \IteratorAggregate
+  class Io_File_Csv extends Io_File implements Iterable, Countable
   {
     // PREDEFINED PROPERTIES
     const QUOTES_NONE=0x00;
@@ -222,6 +222,32 @@ namespace Components;
     // OVERRIDES/IMPLEMENTS
     /**
      * (non-PHPdoc)
+     * @see \Components\Countable::count()
+     */
+    public function count()
+    {
+      $i=0;
+
+      while(false===feof($this->m_pointer))
+      {
+        fgetcsv(
+          $this->m_pointer,
+          null,
+          chr($this->characterFieldSeparator),
+          chr($this->characterQuotes),
+          chr($this->characterEscape)
+        );
+
+        $i++;
+      }
+
+      fseek($this->m_pointer, 0);
+
+      return $i;
+    }
+
+    /**
+     * (non-PHPdoc)
      * @see Components\Iterable::__clone()
      *
      * @return \Components\Io_File_Csv_Iterator
@@ -234,6 +260,8 @@ namespace Components;
     /**
      * (non-PHPdoc)
      * @see \Components\Io_File::open()
+     *
+     * @return \Components\Io_File_Csv
      */
     public function open()
     {
