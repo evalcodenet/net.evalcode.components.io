@@ -10,23 +10,23 @@ namespace Components;
    * @package net.evalcode.components
    * @subpackage io
    *
-   * @method Io_Mimetype APPLICATION_JSON
-   * @method Io_Mimetype APPLICATION_XML
-   * @method Io_Mimetype APPLICATION_ZIP
-   * @method Io_Mimetype APPLICATION_OCTET_STREAM
-   * @method Io_Mimetype APPLICATION_VND_APPLE_PKPASS
-   * @method Io_Mimetype IMAGE_GIF
-   * @method Io_Mimetype IMAGE_PNG
-   * @method Io_Mimetype IMAGE_JPG
-   * @method Io_Mimetype IMAGE_SVG_XML
-   * @method Io_Mimetype MULTIPART_ALTERNATIVE
-   * @method Io_Mimetype MULTIPART_DIGEST
-   * @method Io_Mimetype MULTIPART_ENCRYPTED
-   * @method Io_Mimetype MULTIPART_MIXED
-   * @method Io_Mimetype MULTIPART_RELATED
-   * @method Io_Mimetype TEXT_HTML
-   * @method Io_Mimetype TEXT_JSON
-   * @method Io_Mimetype TEXT_PLAIN
+   * @method \Components\Io_Mimetype APPLICATION_JSON
+   * @method \Components\Io_Mimetype APPLICATION_XML
+   * @method \Components\Io_Mimetype APPLICATION_ZIP
+   * @method \Components\Io_Mimetype APPLICATION_OCTET_STREAM
+   * @method \Components\Io_Mimetype APPLICATION_VND_APPLE_PKPASS
+   * @method \Components\Io_Mimetype IMAGE_GIF
+   * @method \Components\Io_Mimetype IMAGE_PNG
+   * @method \Components\Io_Mimetype IMAGE_JPG
+   * @method \Components\Io_Mimetype IMAGE_SVG_XML
+   * @method \Components\Io_Mimetype MULTIPART_ALTERNATIVE
+   * @method \Components\Io_Mimetype MULTIPART_DIGEST
+   * @method \Components\Io_Mimetype MULTIPART_ENCRYPTED
+   * @method \Components\Io_Mimetype MULTIPART_MIXED
+   * @method \Components\Io_Mimetype MULTIPART_RELATED
+   * @method \Components\Io_Mimetype TEXT_HTML
+   * @method \Components\Io_Mimetype TEXT_JSON
+   * @method \Components\Io_Mimetype TEXT_PLAIN
    *
    * @author evalcode.net
    */

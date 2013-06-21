@@ -799,6 +799,7 @@ namespace Components;
 
     // IMPLEMENTATION
     private static $m_implForMimetype=array(
+      Io_Mimetype::APPLICATION_ZIP=>'Components\\Io_Archive_Zip',
       Io_Mimetype::TEXT_CSV=>'Components\\Io_File_Csv',
       Io_Mimetype::IMAGE_GIF=>'Components\\Io_Image',
       Io_Mimetype::IMAGE_JPEG=>'Components\\Io_Image',
