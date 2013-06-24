@@ -96,7 +96,7 @@ namespace Components;
     {
       if(null===$this->m_isAbsolutePath)
       {
-        if(null===$this->m_path || Io::DIRECTORY_SEPARATOR!==substr($this->m_path, 0, 1) || false!==strpos($this->m_path, '..'))
+        if(null===$this->m_path || Io::DIRECTORY_SEPARATOR!==mb_substr($this->m_path, 0, 1) || false!==mb_strpos($this->m_path, '..'))
           $this->m_isAbsolutePath=false;
         else
           $this->m_isAbsolutePath=true;
@@ -122,11 +122,11 @@ namespace Components;
     }
 
     /**
-     * @return Net_Uri
+     * @return \Components\Uri
      */
     public function toUri()
     {
-      return new Net_Uri($this->m_path);
+      return Uri::valueOf($this->m_path);
     }
 
     /**
@@ -323,6 +323,50 @@ namespace Components;
     public function hasFiles()
     {
 
+    }
+
+    /**
+     * Returns given path relative to this one.
+     *
+     * @param \Components\Io_Path $path_
+     *
+     * @return \Components\Io_Path
+     *
+     * @todo Optimize
+     */
+    public function getRelativePath(Io_Path $path_)
+    {
+      if($this->isFile())
+        $directory=$this->getParent();
+      else
+        $directory=$this;
+
+      if($directory->isParentOf($path_))
+        return Io::path(ltrim(String::replace($path_->m_path, str_pad($directory->m_path, 1, '/', STR_PAD_RIGHT), ''), '/'));
+
+      $level=1;
+      $segments=explode('/', $directory->m_path);
+      $path=$path_->m_path;
+
+      while(array_pop($segments))
+      {
+        if(!$current=implode('/', $segments))
+          $current='/';
+
+        if(0===mb_strpos($path, $current))
+        {
+          if('/'===$current)
+            $subPath=$path;
+          else
+            $subPath=String::replace($path, $current, '');
+
+          return str_repeat('../', $level).ltrim($subPath, '/');
+        }
+
+        $level++;
+      }
+
+      return $file_->getPath();
     }
     //--------------------------------------------------------------------------
 

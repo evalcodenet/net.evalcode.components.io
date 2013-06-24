@@ -11,6 +11,9 @@ namespace Components;
    * @subpackage io
    *
    * @author evalcode.net
+   *
+   * TODO Decouple from io/file - use composition instead of inheritance and
+   * implement e.g. io/file/virtual for memory/cache-mapped images/image processing..
    */
   class Io_Image extends Io_File
   {
@@ -90,7 +93,7 @@ namespace Components;
      */
     public function getDimensions()
     {
-      return $this->m_engine->dimensions();
+      return $this->engine()->dimensions();
     }
 
     /**
@@ -100,7 +103,7 @@ namespace Components;
      */
     public function crop(Point $toSize_)
     {
-      $this->m_engine->crop($toSize_);
+      $this->engine()->crop($toSize_);
 
       return $this;
     }
@@ -112,14 +115,28 @@ namespace Components;
      */
     public function scale(Point $toSize_)
     {
-      $this->m_engine->scale($toSize_);
+      $this->engine()->scale($toSize_);
 
       return $this;
     }
 
     public function save()
     {
-      $this->m_engine->save($this->m_pathAsString);
+      $this->engine()->save($this->m_pathAsString, $this->getMimetype());
+
+      return $this;
+    }
+
+    public function saveTo(Io_Image $image_)
+    {
+      $this->engine()->save($image_->m_pathAsString, $image_->getMimetype());
+
+      return $this;
+    }
+
+    public function getBase64()
+    {
+      return base64_encode($this->getContent());
     }
     //--------------------------------------------------------------------------
 
@@ -151,7 +168,7 @@ namespace Components;
     public function __clone()
     {
       $instance=new self($this->m_pathAsString);
-      $instance->m_engine=clone $this->m_engine;
+      $instance->m_engine=clone $this->engine();
 
       return $instance;
     }
@@ -189,14 +206,34 @@ namespace Components;
 
 
     // IMPLEMENTATION
+    /**
+     * @var array|string
+     */
     private static $m_engineImpl=array(
       'gd'=>'Components\\Io_Image_Engine_Gd'
     );
 
     /**
-     * @var Components\Io_Image_Engine
+     * @var \Components\Io_Image_Engine
      */
-    private $m_engine;
+    protected $m_engine;
+    //-----
+
+
+    /**
+     * @return \Components\Io_Image_Engine
+     */
+    protected function engine()
+    {
+      if(null===$this->m_engine)
+      {
+        $engineImpl=static::defaultProcessingEngine();
+
+        $this->m_engine=$engineImpl::forPath($this->m_pathAsString);
+      }
+
+      return $this->m_engine;
+    }
     //--------------------------------------------------------------------------
   }
 ?>

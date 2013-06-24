@@ -12,7 +12,7 @@ namespace Components;
    *
    * @author evalcode.net
    */
-  class Io_Image_Engine_Gd implements Io_Image_Engine /* TODO Object, .. */
+  class Io_Image_Engine_Gd implements Io_Image_Engine
   {
     // CONSTRUCTION
     private function __construct()
@@ -103,12 +103,23 @@ namespace Components;
      */
     public function scale(Point $dimensions_)
     {
-      if(imageistruecolor($this->m_resource))
-        $tmp=imagecreatetruecolor($dimensions_->x, $dimensions_->y);
-      else
-        $tmp=imagecreate($dimensions_->x, $dimensions_->y);
+      $widthOriginal=imagesx($this->m_resource);
+      $heightOriginal=imagesy($this->m_resource);
 
-      imagecopyresampled($tmp, $this->m_resource, 0, 0, 0, 0, $dimensions_->x, $dimensions_->y, imagesx($this->m_resource), imagesy($this->m_resource));
+      $width=$dimensions_->x;
+      $height=$dimensions_->y;
+
+      if($width && !$height)
+        $height=$heightOriginal/($widthOriginal/$width);
+      else if($height && !$width)
+        $width=$widthOriginal/($heightOriginal/$height);
+
+      if(imageistruecolor($this->m_resource))
+        $tmp=imagecreatetruecolor($width, $height);
+      else
+        $tmp=imagecreate($width, $height);
+
+      imagecopyresampled($tmp, $this->m_resource, 0, 0, 0, 0, $width, $height, imagesx($this->m_resource), imagesy($this->m_resource));
       imagedestroy($this->m_resource);
 
       $this->m_resource=$tmp;
@@ -123,9 +134,24 @@ namespace Components;
      *
      * @return \Components\Io_Image_Engine_Gd
      */
-    public function save($path_, $type_=Io_Mimetype::IMAGE_PNG)
+    public function save($path_, Io_Mimetype $type_=null)
     {
-      imagepng($this->m_resource, $path_);
+      if(null===$type_)
+        $type_=Io_Mimetype::forFileExtension(Io::fileExtension($path_));
+      if(null===$type_)
+        $type_=Io_Mimetype::IMAGE_PNG();
+
+      $typeName=$type_->name();
+
+      if(false===isset(self::$m_saveHandler[$typeName]))
+        throw new Exception_NotSupported('io/image/engine/gd', 'Saving to image of requested type is not supported [%s].', $type_);
+
+      $directory=dirname($path_);
+      if(false===is_dir($directory))
+        Io::directoryCreate($directory);
+
+      $saveHandler=self::$m_saveHandler[$typeName];
+      $saveHandler($this->m_resource, $path_);
 
       return $this;
     }
@@ -133,6 +159,12 @@ namespace Components;
 
 
     // IMPLEMENTATION
+    private static $m_saveHandler=array(
+      Io_Mimetype::IMAGE_GIF=>'imagegif',
+      Io_Mimetype::IMAGE_JPG=>'imagejpeg',
+      Io_Mimetype::IMAGE_PNG=>'imagepng'
+    );
+
     /**
      * @var Components\Point
      */

@@ -12,7 +12,7 @@ namespace Components;
    *
    * @author evalcode.net
    */
-  interface Io_Image_Engine
+  interface Io_Image_Engine /* TODO Object, .. */
   {
     // ACCESSORS
     /**
@@ -40,7 +40,7 @@ namespace Components;
      *
      * @return \Components\Io_Image_Engine
      */
-    function save($path_, $type_=Io_Mimetype::IMAGE_PNG);
+    function save($path_, Io_Mimetype $type_=null);
     //--------------------------------------------------------------------------
   }
 ?>

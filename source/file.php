@@ -260,26 +260,7 @@ namespace Components;
      */
     public function getRelativePath(Io_File $file_)
     {
-      if($this->getDirectory()->isParentOfFile($file_))
-        return Io::path(String::replace($file_->m_pathAsString, $this->getDirectoryAsString().'/', ''));
-
-      $level=0;
-      $segments=explode('/', $this->m_pathAsString);
-      $filepath=$file_->m_pathAsString;
-      while(array_pop($segments))
-      {
-        if(0===mb_strpos($filepath, implode('/', $segments)))
-        {
-          $path=implode('/', $segments);
-          $subPath=String::replace($filepath, $path, '');
-
-          return str_repeat('/..', $level).$subPath;
-        }
-
-        $level++;
-      }
-
-      return $file_->getPath();
+      $this->getDirectory()->getRelativePath($file_->getPath());
     }
 
     /**
@@ -589,7 +570,7 @@ namespace Components;
       if(false===$this->m_writable)
         throw new Io_Exception('io/file', sprintf('File is not writable [%s].', $this));
 
-      if(1>($length=strlen($string_)))
+      if(1>($length=mb_strlen($string_)))
         return 0;
 
       fseek($this->m_pointer, $this->m_length, SEEK_SET);

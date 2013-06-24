@@ -99,9 +99,23 @@ namespace Components;
      *
      * @return \Components\Io_File
      */
-    public static function file($filepath_, $accessModeMask_=Io_File::READ)
+    public static function file($path_, $accessModeMask_=Io_File::READ)
     {
-      return new Io_File($filepath_, $accessModeMask_);
+      return new Io_File($path_, $accessModeMask_);
+    }
+
+    /**
+     * @param string $path_
+     * @param boolean $stripFileExtension_
+     *
+     * @return string
+     */
+    public static function fileName($path_, $stripFileExtension_=false)
+    {
+      if(false===$stripFileExtension_)
+        return basename($path_);
+
+      return basename($path_, mb_substr($path_, mb_strrpos($path_, '.')));
     }
 
     /**
@@ -111,7 +125,7 @@ namespace Components;
      */
     public static function fileExtension($filename_)
     {
-      return substr($filename_, strrpos($filename_, '.')+1);
+      return mb_substr($filename_, mb_strrpos($filename_, '.')+1);
     }
 
     /**
