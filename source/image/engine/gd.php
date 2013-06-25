@@ -110,9 +110,12 @@ namespace Components;
       $height=$dimensions_->y;
 
       if($width && !$height)
-        $height=$heightOriginal/($widthOriginal/$width);
+        $height=round($heightOriginal/($widthOriginal/$width));
       else if($height && !$width)
-        $width=$widthOriginal/($heightOriginal/$height);
+        $width=round($widthOriginal/($heightOriginal/$height));
+
+      if($width===$widthOriginal && $height===$heightOriginal)
+        return $this;
 
       if(imageistruecolor($this->m_resource))
         $tmp=imagecreatetruecolor($width, $height);

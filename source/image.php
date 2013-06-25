@@ -127,7 +127,7 @@ namespace Components;
       return $this;
     }
 
-    public function saveTo(Io_Image $image_)
+    public function saveAs(Io_Image $image_)
     {
       $this->engine()->save($image_->m_pathAsString, $image_->getMimetype());
 

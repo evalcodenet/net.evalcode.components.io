@@ -55,7 +55,7 @@ namespace Components;
 
       if($this->m_accessMask&self::APPEND)
         $this->m_bufferPosition=$this->m_length;
-      else if(null===$this->m_position)
+      else
         $this->m_bufferPosition=0;
 
       $this->m_eof=$this->m_bufferPosition===$this->m_length;
@@ -164,7 +164,7 @@ namespace Components;
       if($this->m_position!=$this->m_bufferPosition)
         fseek($this->m_pointer, $this->m_bufferPosition, SEEK_SET);
 
-      if(0===($written=fwrite($this->m_pointer, $string_, $length)))
+      if(0===($written=fwrite($this->m_pointer, $string_)))
         throw new Io_Exception('io/file', sprintf('Unable to write to file [%s].', $this));
 
       $this->m_position=$this->m_bufferPosition+$written;

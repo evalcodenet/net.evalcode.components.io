@@ -841,7 +841,7 @@ namespace Components;
     // DESTRUCTION
     public function __destruct()
     {
-      if(null!==$this->m_pointer)
+      if($this->m_open)
         @fclose($this->m_pointer);
     }
     //--------------------------------------------------------------------------
