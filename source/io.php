@@ -125,7 +125,10 @@ namespace Components;
      */
     public static function fileExtension($filename_)
     {
-      return mb_substr($filename_, mb_strrpos($filename_, '.')+1);
+      if(!$extension=mb_substr($filename_, mb_strrpos($filename_, '.')+1))
+        return null;
+
+      return $extension;
     }
 
     /**

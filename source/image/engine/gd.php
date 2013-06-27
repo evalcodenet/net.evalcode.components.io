@@ -31,7 +31,7 @@ namespace Components;
     public static function forBase64($base64_)
     {
       $instance=new static();
-      $instance->m_resource=imagecreatefromstring(String::decodeBase64($base64_));
+      $instance->m_resource=imagecreatefromstring(String::fromBase64($base64_));
 
       return $instance;
     }

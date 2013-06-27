@@ -17,6 +17,11 @@ namespace Components;
    */
   class Io_Image extends Io_File
   {
+    // PREDEFINED PROPERTIES
+    const IMAGE_BLANK='R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
+    //--------------------------------------------------------------------------
+
+
     // STATIC ACCESSORS
     /**
      * @return string
@@ -83,6 +88,19 @@ namespace Components;
       $instance->m_engine=$engineImpl::forBase64($base64_);
 
       return $instance;
+    }
+
+    /**
+     * @param string $path_
+     *
+     * @return \Components\Io_Image
+     */
+    public static function createBlank()
+    {
+      // TODO See todo above - support virtual/memory-mapped io/file.
+      $path=Io::tmpFileName();
+
+      return static::createForBase64("$path.gif", self::IMAGE_BLANK);
     }
     //--------------------------------------------------------------------------
 
