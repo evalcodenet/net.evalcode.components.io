@@ -66,9 +66,13 @@ namespace Components;
     {
       $args=func_get_args();
 
-      $prepend='';
+      $prepend='/';
       if(Io::DIRECTORY_SEPARATOR===$args[0])
-        $prepend=array_shift($args);
+        array_shift($args);
+
+      array_walk($args, function(&$value_, $key_) {
+        $value_=ltrim($value_, Io::DIRECTORY_SEPARATOR);
+      });
 
       return new Io_Path($prepend.implode(Io::DIRECTORY_SEPARATOR, $args));
     }
