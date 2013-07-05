@@ -114,7 +114,7 @@ namespace Components;
 
     public function hasMore()
     {
-      return isset($this->m_data[$this->m_line+1]) || false===feof($this->m_pointer);
+      return false===feof($this->m_pointer);
     }
 
     public function next()
@@ -123,9 +123,6 @@ namespace Components;
         fseek($this->m_pointer, $this->m_offsetHeaderEnd);
 
       $this->m_line++;
-
-      if(isset($this->m_data[$this->m_line]))
-        return $this->m_data[$this->m_line];
 
       $line=fgetcsv(
         $this->m_pointer,
@@ -173,48 +170,12 @@ namespace Components;
         }
       }
 
-      $this->m_data[$this->m_line]=$data;
-
       return $data;
-    }
-
-    public function previous()
-    {
-      if(1>$this->m_line)
-        return false;
-
-      return $this->m_data[--$this->m_line];
-    }
-
-    public function current()
-    {
-      if(false===isset($this->m_data[$this->m_line]))
-        return null;
-
-      return $this->m_data[$this->m_line];
     }
 
     public function currentLineNumber()
     {
       return $this->m_line;
-    }
-
-    public function loadAll()
-    {
-      while(false===feof($this->m_pointer))
-        $this->next();
-
-      return $this;
-    }
-
-    public function findAll()
-    {
-      return $this->loadAll()->m_data;
-    }
-
-    public function find($value_, $column_)
-    {
-      // TODO index & query / maybe cache in mongodb?
     }
     //--------------------------------------------------------------------------
 
@@ -275,11 +236,11 @@ namespace Components;
 
 
     // IMPLEMENTATION
+    protected $m_line=0;
+
     private $m_columns=array();
     private $m_columnsIndex=array();
     private $m_columnsMapped=array();
-    private $m_data=array();
-    private $m_line=0;
     private $m_offsetHeaderStart=0;
     private $m_offsetHeaderEnd=0;
     //-----
