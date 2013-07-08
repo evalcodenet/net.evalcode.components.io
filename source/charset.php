@@ -46,6 +46,7 @@ namespace Components;
     public static function forName($name_)
     {
       $name_=strtoupper($name_);
+
       if(isset(self::$m_charsets[$name_]))
       {
         $charset=self::$m_charsets[$name_];
@@ -64,6 +65,7 @@ namespace Components;
     public static function forFilePath($filepath_)
     {
       $info=null;
+
       if($finfo=@finfo_open(FILEINFO_MIME_ENCODING))
       {
         $info=@finfo_file($finfo, $filepath_);
@@ -116,9 +118,47 @@ namespace Components;
     //--------------------------------------------------------------------------
 
 
+    // ACCESSORS/MUTATORS
+    /**
+     * @param string $string_
+     * @param Io_Charset $toCharset_
+     * @return string
+     */
+    public function convert($string_, Io_Charset $toCharset_)
+    {
+      return iconv($this->m_name, $toCharset_->m_name, $string_);
+    }
+
+    /**
+     * @param string $unicode_
+     * @param \Components\Io_Charset $charset_
+     *
+     * @return string
+     */
+    public function unicodeDecode($unicode_, Io_Charset $charset_=null)
+    {
+      if(null===$charset_)
+        $charset_=Io_Charset::UTF_16_BE();
+
+      self::$m_convertImplTo=$this;
+      self::$m_convertImplFrom=$charset_;
+
+      return preg_replace_callback('/(?:\\\\u[0-9a-fA-Z]{4})+/',
+        function($string_)
+        {
+          return Io_Charset::__unicodeDecodeConvertEncodingImpl(pack('H*',
+            strtr($string_[0], array('\\u'=>''))
+          ));
+        },
+        $unicode_
+      );
+    }
+    //--------------------------------------------------------------------------
+
+
     // IMPLEMENTATION
     /**
-     * @var Components\Io_Charset
+     * @var \Components\Io_Charset
      */
     private static $m_defaultCharset;
 
@@ -135,6 +175,22 @@ namespace Components;
       'UTF16'=>'UTF_16',
       'ASCII'=>'US_ASCII'
     );
+
+    /**
+     * @var \Components\Io_Charset
+     */
+    private static $m_convertImplTo;
+    /**
+     * @var \Components\Io_Charset
+     */
+    private static $m_convertImplFrom;
+    //-----
+
+
+    /*private*/ static function __unicodeDecodeConvertEncodingImpl($string_)
+    {
+      return mb_convert_encoding($string_, self::$m_convertImplTo->name(), self::$m_convertImplFrom->name());
+    }
     //--------------------------------------------------------------------------
   }
 ?>
