@@ -81,9 +81,9 @@ namespace Components;
 
 
     // CONSTRUCTION
-    public function __construct($name_, Io_Charset $charset_=null)
+    public function __construct($key_, $name_, Io_Charset $charset_=null)
     {
-      parent::__construct($name_);
+      parent::__construct($key_, $name_);
 
       if(null===$charset_)
         $charset_=Io_Charset::defaultCharset();
@@ -163,8 +163,8 @@ namespace Components;
       if(false===$info)
         return self::forFileName($file_);
 
-
       $mimetype=trim(substr($info, 0, strpos($info, ';')));
+
       /**
        * finfo seems to return text/plain for most text files..
        * I think we can achive more accurate information by relying on the

@@ -78,6 +78,19 @@ namespace Components;
     }
 
     /**
+     * @param string... $path0_
+     *
+     * @return \Components\Io_Path
+     */
+    public static function pathComponentResource($path0_/*, $path1_, $path2_..*/)
+    {
+      if(null===self::$m_pathComponents)
+        self::$m_pathComponents=Environment::pathComponents();
+
+      return new Io_Path(self::$m_pathComponents.'/'.implode('/', func_get_args()));
+    }
+
+    /**
      * @param string $path_
      *
      * @return \Components\Io_Archive
@@ -570,6 +583,10 @@ namespace Components;
      * @var string
      */
     private static $m_tmpPathNameRoot;
+    /**
+     * @var \Components\Io_Path
+     */
+    private static $m_pathComponents;
     //--------------------------------------------------------------------------
   }
 ?>
