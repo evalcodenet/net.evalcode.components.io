@@ -254,11 +254,19 @@ namespace Components;
 
 
     // OVERRIDES
+    /**
+     * (non-PHPdoc)
+     * @see \Components\Cloneable::__clone()
+     */
     public function __clone()
     {
       return new self($this->m_value);
     }
 
+    /**
+     * (non-PHPdoc)
+     * @see \Components\Comparable::compareTo())
+     */
     public function compareTo($object_)
     {
       if(is_numeric($object_))

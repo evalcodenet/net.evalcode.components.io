@@ -175,24 +175,6 @@ namespace Components;
      * @return array|null
      */
     function arrayValue();
-
-    /**
-     * Clones this buffer.
-     *
-     * <p>
-     * Cloned buffers share the same internal buffer, meaning
-     * modifications to a cloned buffer will be visible in the
-     * original buffer as well.
-     * </p>
-     *
-     * <p>
-     * Though each cloned instance holds its own internal position,
-     * limit and marks, therefore can be searched independently.
-     * </p>
-     *
-     * @see Components\Cloneable::__clone()
-     */
-    function __clone();
     //--------------------------------------------------------------------------
   }
 ?>

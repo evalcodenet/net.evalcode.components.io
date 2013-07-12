@@ -209,7 +209,7 @@ namespace Components;
 
     /**
      * (non-PHPdoc)
-     * @see Components\Iterable::__clone()
+     * @see Components\Iterable::getIterator()
      *
      * @return \Components\Io_File_Csv_Iterator
      */
