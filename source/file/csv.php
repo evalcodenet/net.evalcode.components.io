@@ -122,6 +122,8 @@ namespace Components;
       if(0===$this->m_line)
         fseek($this->m_pointer, $this->m_offsetHeaderEnd);
 
+      $this->m_line++;
+
       $line=fgetcsv(
         $this->m_pointer,
         null,
@@ -142,11 +144,6 @@ namespace Components;
 
         throw new Io_Exception('io/file/csv', sprintf('Failed to read line [%s].', $this));
       }
-
-      if(1>count($line))
-        return array();
-
-      $this->m_line++;
 
       $data=array();
       foreach($this->m_columnsIndex as $name=>$columns)

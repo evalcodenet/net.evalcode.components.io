@@ -18,8 +18,7 @@ namespace Components;
     {
       $data=parent::next();
 
-      if(count($data))
-        $this->m_data[$this->m_line-1]=$data;
+      $this->m_data[$this->m_line]=$data;
 
       return $data;
     }
@@ -42,7 +41,7 @@ namespace Components;
 
     public function findAll()
     {
-      while(false===feof($this->m_pointer))
+      while($this->hasMore())
         $this->next();
 
       return $this->m_data;
@@ -51,16 +50,6 @@ namespace Components;
     public function find($value_, $column_)
     {
       // TODO index & query / maybe cache in mongodb?
-    }
-
-    public function count()
-    {
-      $this->findAll();
-
-      $line=$this->m_line;
-      $this->seekToBegin();
-
-      return $line;
     }
     //--------------------------------------------------------------------------
 
