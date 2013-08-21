@@ -326,6 +326,23 @@ namespace Components;
     //--------------------------------------------------------------------------
 
 
+    // OVERRIDES
+    public function __call($name_, array $args_=array())
+    {
+      if(0===strpos($name_, 'is'))
+        return strtolower(substr($name_, 2))===strtolower(str_replace('/', '', $this->m_name));
+
+      throw new Runtime_Exception('components/io/mimetype', sprintf(
+        'Call to undefined method %1$s::%2$s() in %3$s on line %4$d.',
+          $type,
+          $name_,
+          $caller['file'],
+          $caller['line']
+      ));
+    }
+    //--------------------------------------------------------------------------
+
+
     // IMPLEMENTATION
     private static $m_finfo;
     private static $m_mapFileExtensions=array(
