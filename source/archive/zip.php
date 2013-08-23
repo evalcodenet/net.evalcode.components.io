@@ -173,8 +173,8 @@ namespace Components;
 
     public function __destruct()
     {
-      if(null!==$this->m_archive)
-        @$this->m_archive->close();
+      if($this->m_open)
+        $this->archive()->close();
     }
     //--------------------------------------------------------------------------
   }

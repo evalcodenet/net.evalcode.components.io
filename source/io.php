@@ -91,6 +91,30 @@ namespace Components;
     }
 
     /**
+     * Delete file or directory for given path. Returns 'true' on success
+     * or 'false' on failure.
+     *
+     * Also returns 'true' if given path does not point to any existing file
+     * or directory.
+     *
+     * @param string.. $path0_
+     *
+     * @return boolean
+     */
+    public static function pathDelete($path0_/*, $path1_, $path2_..*/)
+    {
+      $path=implode('/', func_get_args());
+
+      if(is_dir($path))
+        return static::directoryDelete($path, true);
+
+      if(is_file($path))
+        return unlink($path);
+
+      return true;
+    }
+
+    /**
      * @param string $path_
      *
      * @return \Components\Io_Archive
@@ -397,9 +421,9 @@ namespace Components;
       foreach($iterator as $entryPath=>$entryInfo)
       {
         if($entryInfo->isFile())
-          @unlink($entryPath);
+          unlink($entryPath);
         else
-          @rmdir($entryPath);
+          rmdir($entryPath);
       }
     }
 
@@ -411,15 +435,15 @@ namespace Components;
      */
     public static function directoryDelete($path_, $recursive_=false)
     {
-      if(@is_dir($path_) && @is_writeable($path_))
+      if(is_dir($path_) && is_writeable($path_))
       {
         if($recursive_)
           static::directoryClear($path_);
 
-        return @rmdir($path_);
+        return rmdir($path_);
       }
 
-      return @unlink($path_);
+      return unlink($path_);
     }
 
     /**
