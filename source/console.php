@@ -246,27 +246,21 @@ namespace Components;
 
 
     // OVERRIDES
-    /**
-     * (non-PHPdoc)
-     * @see Components\Io_Channel_Readable::read()
+    /**     * @see Components\Io_Channel_Readable::read() Components\Io_Channel_Readable::read()
      */
     public function read(Io_Buffer $buffer_, $interrupt_=null)
     {
       return $this->in->read($buffer_, $interrupt_);
     }
 
-    /**
-     * (non-PHPdoc)
-     * @see Components\Io_Channel_Writable::write()
+    /**     * @see Components\Io_Channel_Writable::write() Components\Io_Channel_Writable::write()
      */
     public function write(Io_Buffer $buffer_)
     {
       return $this->out->write($buffer_);
     }
 
-    /**
-     * (non-PHPdoc)
-     * @see Components\Io_Channel_Flushable::flush()
+    /**     * @see Components\Io_Channel_Flushable::flush() Components\Io_Channel_Flushable::flush()
      *
      * @return \Components\Io_Console
      */
@@ -279,18 +273,14 @@ namespace Components;
       return $this;
     }
 
-    /**
-     * (non-PHPdoc)
-     * @see Components\Io_Channel::isOpen()
+    /**     * @see Components\Io_Channel::isOpen() Components\Io_Channel::isOpen()
      */
     public function isOpen()
     {
       return $this->m_isOpen;
     }
 
-    /**
-     * (non-PHPdoc)
-     * @see Components\Io_Channel::open()
+    /**     * @see Components\Io_Channel::open() Components\Io_Channel::open()
      *
      * @return \Components\Io_Console
      */
@@ -308,9 +298,7 @@ namespace Components;
       return $this;
     }
 
-    /**
-     * (non-PHPdoc)
-     * @see Components\Io_Channel_Closeable::close()
+    /**     * @see Components\Io_Channel_Closeable::close() Components\Io_Channel_Closeable::close()
      *
      * @return \Components\Io_Console
      */

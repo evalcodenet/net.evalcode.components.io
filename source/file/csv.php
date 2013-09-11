@@ -188,9 +188,7 @@ namespace Components;
 
 
     // OVERRIDES/IMPLEMENTS
-    /**
-     * (non-PHPdoc)
-     * @see \Components\Countable::count()
+    /**     * @see \Components\Countable::count() \Components\Countable::count()
      */
     public function count()
     {
@@ -214,9 +212,7 @@ namespace Components;
       return $i;
     }
 
-    /**
-     * (non-PHPdoc)
-     * @see Components\Iterable::getIterator()
+    /**     * @see Components\Iterable::getIterator() Components\Iterable::getIterator()
      *
      * @return \Components\Io_File_Csv_Iterator
      */
@@ -225,9 +221,7 @@ namespace Components;
       return new Io_File_Csv_Iterator($this);
     }
 
-    /**
-     * (non-PHPdoc)
-     * @see \Components\Io_File::open()
+    /**     * @see \Components\Io_File::open() \Components\Io_File::open()
      *
      * @return \Components\Io_File_Csv
      */

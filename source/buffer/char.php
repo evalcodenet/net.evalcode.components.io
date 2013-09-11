@@ -16,7 +16,7 @@ namespace Components;
   {
     // OVERRIDES
     /**
-     * @see Components\Object::hashCode()
+     * @see Components\Object::hashCode() Components\Object::hashCode()
      */
     public function hashCode()
     {
@@ -28,7 +28,7 @@ namespace Components;
     }
 
     /**
-     * @see Components\Object::equals()
+     * @see Components\Object::equals() Components\Object::equals()
      */
     public function equals($object_)
     {
@@ -39,7 +39,7 @@ namespace Components;
     }
 
     /**
-     * @see Components\Object::__toString()
+     * @see Components\Object::__toString() Components\Object::__toString()
      */
     public function __toString()
     {

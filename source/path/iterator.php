@@ -23,9 +23,7 @@ namespace Components;
 
 
     // OVERRIDES
-    /**
-     * (non-PHPdoc)
-     * @see RecursiveDirectoryIterator::current()
+    /**     * @see RecursiveDirectoryIterator::current() RecursiveDirectoryIterator::current()
      *
      * @return \Components\Io_Path_Iterator
      */

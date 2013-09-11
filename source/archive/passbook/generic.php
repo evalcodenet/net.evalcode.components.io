@@ -306,9 +306,7 @@ namespace Components;
 
 
     // OVERRIDES
-    /**
-     * (non-PHPdoc)
-     * @see Components\Io_Archive_Zip::add()
+    /**     * @see Components\Io_Archive_Zip::add() Components\Io_Archive_Zip::add()
      */
     public function add(Io_File $file_, $withName_=null)
     {
@@ -320,9 +318,7 @@ namespace Components;
       $this->m_files[$withName_]=$file_->getHashSHA1();
     }
 
-    /**
-     * (non-PHPdoc)
-     * @see Components\Io_Archive_Zip::close()
+    /**     * @see Components\Io_Archive_Zip::close() Components\Io_Archive_Zip::close()
      */
     public function close()
     {
@@ -346,9 +342,7 @@ namespace Components;
       return $this;
     }
 
-    /**
-     * (non-PHPdoc)
-     * @see Components\Io_File::getMimetype()
+    /**     * @see Components\Io_File::getMimetype() Components\Io_File::getMimetype()
      */
     public function getMimetype()
     {

@@ -23,9 +23,7 @@ namespace Components;
 
 
     // OVERRIDES
-    /**
-     * (non-PHPdoc)
-     * @see Components\Io_Channel_Writable::write()
+    /**     * @see Components\Io_Channel_Writable::write() Components\Io_Channel_Writable::write()
      */
     public function write(Io_Buffer $buffer_)
     {

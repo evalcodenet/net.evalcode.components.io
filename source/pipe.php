@@ -25,7 +25,7 @@ namespace Components;
 
     // OVERRIDES
     /**
-     * @see Io_Channel::isOpen()
+     * @see Io_Channel::isOpen() Io_Channel::isOpen()
      */
     public function isOpen()
     {
@@ -33,7 +33,7 @@ namespace Components;
     }
 
     /**
-     * @see Io_Channel::open()
+     * @see Io_Channel::open() Io_Channel::open()
      */
     public function open()
     {
@@ -48,7 +48,7 @@ namespace Components;
     }
 
     /**
-     * @see Io_Channel_Closeable::close()
+     * @see Io_Channel_Closeable::close() Io_Channel_Closeable::close()
      */
     public function close()
     {
@@ -65,7 +65,7 @@ namespace Components;
     }
 
     /**
-     * @see Components\Object::hashCode()
+     * @see Components\Object::hashCode() Components\Object::hashCode()
      */
     public function hashCode()
     {
@@ -73,7 +73,7 @@ namespace Components;
     }
 
     /**
-     * @see Components\Object::equals()
+     * @see Components\Object::equals() Components\Object::equals()
      */
     public function equals($object_)
     {
@@ -84,7 +84,7 @@ namespace Components;
     }
 
     /**
-     * @see Components\Object::__toString()
+     * @see Components\Object::__toString() Components\Object::__toString()
      */
     public function __toString()
     {

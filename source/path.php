@@ -377,36 +377,28 @@ namespace Components;
       return static::get($this->m_path, $name_);
     }
 
-    /**
-     * (non-PHPdoc)
-     * @see \Components\Iterable::getIterator()
+    /**     * @see \Components\Iterable::getIterator() \Components\Iterable::getIterator()
      */
     public function getIterator()
     {
       return new Io_Path_Iterator($this->m_path);
     }
 
-    /**
-     * (non-PHPdoc)
-     * @see Components\Cloneable::__clone()
+    /**     * @see Components\Cloneable::__clone() Components\Cloneable::__clone()
      */
     public function __clone()
     {
       return new self($this->m_path);
     }
 
-    /**
-     * (non-PHPdoc)
-     * @see Components\Object::hashCode()
+    /**     * @see Components\Object::hashCode() Components\Object::hashCode()
      */
     public function hashCode()
     {
       return String::hash($this->m_path);
     }
 
-    /**
-     * (non-PHPdoc)
-     * @see Components\Object::equals()
+    /**     * @see Components\Object::equals() Components\Object::equals()
      */
     public function equals($object_)
     {
@@ -416,18 +408,14 @@ namespace Components;
       return false;
     }
 
-    /**
-     * (non-PHPdoc)
-     * @see Components\Object::__toString()
+    /**     * @see Components\Object::__toString() Components\Object::__toString()
      */
     public function __toString()
     {
       return $this->m_path;
     }
 
-    /**
-     * (non-PHPdoc)
-     * @see Components\Value_String::value()
+    /**     * @see Components\Value_String::value() Components\Value_String::value()
      */
     public function value()
     {

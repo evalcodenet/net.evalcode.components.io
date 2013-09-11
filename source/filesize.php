@@ -254,18 +254,14 @@ namespace Components;
 
 
     // OVERRIDES
-    /**
-     * (non-PHPdoc)
-     * @see \Components\Cloneable::__clone()
+    /**     * @see \Components\Cloneable::__clone() \Components\Cloneable::__clone()
      */
     public function __clone()
     {
       return new self($this->m_value);
     }
 
-    /**
-     * (non-PHPdoc)
-     * @see \Components\Comparable::compareTo())
+    /**     * @see \Components\Comparable::compareTo()) \Components\Comparable::compareTo())
      */
     public function compareTo($object_)
     {
@@ -288,18 +284,14 @@ namespace Components;
       throw new Io_Exception('io/filesize', 'Can not compare to object of given type.');
     }
 
-    /**
-     * (non-PHPdoc)
-     * @see Components\Object::hashCode()
+    /**     * @see Components\Object::hashCode() Components\Object::hashCode()
      */
     public function hashCode()
     {
       return integer_hash($this->m_value);
     }
 
-    /**
-     * (non-PHPdoc)
-     * @see Components\Object::equals()
+    /**     * @see Components\Object::equals() Components\Object::equals()
      */
     public function equals($object_)
     {
@@ -309,9 +301,7 @@ namespace Components;
       return false;
     }
 
-    /**
-     * (non-PHPdoc)
-     * @see Components\Object::__toString()
+    /**     * @see Components\Object::__toString() Components\Object::__toString()
      */
     public function __toString()
     {
@@ -320,7 +310,7 @@ namespace Components;
 
     /**
      * (non-PHPdoc)
-     * @see Components\Serializable::serialVersionUid()
+     * @see Components\Serializable::serialVersionUid() Components\Serializable::serialVersionUid()
      */
     public function serialVersionUid()
     {

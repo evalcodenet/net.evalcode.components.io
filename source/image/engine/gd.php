@@ -68,9 +68,7 @@ namespace Components;
 
 
     // OVERRIDES
-    /**
-     * (non-PHPdoc)
-     * @see Components\Io_Image_Engine::dimensions()
+    /**     * @see Components\Io_Image_Engine::dimensions() Components\Io_Image_Engine::dimensions()
      *
      * @return \Components\Io_Image_Engine_Gd
      */
@@ -82,9 +80,7 @@ namespace Components;
       return $this->m_dimensions;
     }
 
-    /**
-     * (non-PHPdoc)
-     * @see Components\Io_Image_Engine::crop()
+    /**     * @see Components\Io_Image_Engine::crop() Components\Io_Image_Engine::crop()
      *
      * @return \Components\Io_Image_Engine_Gd
      */
@@ -95,9 +91,7 @@ namespace Components;
       return $this;
     }
 
-    /**
-     * (non-PHPdoc)
-     * @see Components\Io_Image_Engine::scale()
+    /**     * @see Components\Io_Image_Engine::scale() Components\Io_Image_Engine::scale()
      *
      * @return \Components\Io_Image_Engine_Gd
      */
@@ -131,9 +125,7 @@ namespace Components;
       return $this;
     }
 
-    /**
-     * (non-PHPdoc)
-     * @see Components\Io_Image_Engine::save()
+    /**     * @see Components\Io_Image_Engine::save() Components\Io_Image_Engine::save()
      *
      * @return \Components\Io_Image_Engine_Gd
      */

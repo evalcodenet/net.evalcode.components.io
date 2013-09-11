@@ -161,18 +161,14 @@ namespace Components;
 
     // OVERRIDES
     // TODO Override __clone(), copy(), move() etc. correctly
-    /**
-     * (non-PHPdoc)
-     * @see Components\Io_File::isImage()
+    /**     * @see Components\Io_File::isImage() Components\Io_File::isImage()
      */
     public function isImage()
     {
       return true;
     }
 
-    /**
-     * (non-PHPdoc)
-     * @see Components\Io_File::asImage()
+    /**     * @see Components\Io_File::asImage() Components\Io_File::asImage()
      */
     public function asImage()
     {
@@ -181,7 +177,7 @@ namespace Components;
 
     /**
      * (non-PHPdoc)
-     * @see Components\Cloneable::__clone()
+     * @see Components\Cloneable::__clone() Components\Cloneable::__clone()
      */
     public function __clone()
     {
@@ -193,7 +189,7 @@ namespace Components;
 
     /**
      * (non-PHPdoc)
-     * @see Components\Object::hashCode()
+     * @see Components\Object::hashCode() Components\Object::hashCode()
      */
     public function hashCode()
     {
@@ -202,7 +198,7 @@ namespace Components;
 
     /**
      * (non-PHPdoc)
-     * @see Components\Object::equals()
+     * @see Components\Object::equals() Components\Object::equals()
      */
     public function equals($object_)
     {
@@ -214,7 +210,7 @@ namespace Components;
 
     /**
      * (non-PHPdoc)
-     * @see Components\Object::__toString()
+     * @see Components\Object::__toString() Components\Object::__toString()
      */
     public function __toString()
     {

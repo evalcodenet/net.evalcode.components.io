@@ -67,9 +67,7 @@ namespace Components;
     public abstract function extract(Io_Path $directory_);
 
 
-    /**
-     * (non-PHPdoc)
-     * @see IteratorAggregate::getIterator()
+    /**     * @see IteratorAggregate::getIterator() IteratorAggregate::getIterator()
      *
      * @return \Components\Io_Archive_Iterator
      */

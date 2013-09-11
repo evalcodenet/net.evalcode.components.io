@@ -27,72 +27,56 @@ namespace Components;
     }
 
     // OVERRIDES/IMPLEMENTS
-    /**
-     * (non-PHPdoc)
-     * @see \Components\Iterator::current()
+    /**     * @see \Components\Iterator::current() \Components\Iterator::current()
      */
     public function current()
     {
       return $this->m_file->currentLine();
     }
 
-    /**
-     * (non-PHPdoc)
-     * @see \Components\Iterator::key()
+    /**     * @see \Components\Iterator::key() \Components\Iterator::key()
      */
     public function key()
     {
       return $this->m_file->currentLineNumber();
     }
 
-    /**
-     * (non-PHPdoc)
-     * @see \Components\Iterator::hasNext()
+    /**     * @see \Components\Iterator::hasNext() \Components\Iterator::hasNext()
      */
     public function hasNext()
     {
       return $this->m_file->hasMoreLines();
     }
 
-    /**
-     * (non-PHPdoc)
-     * @see \Components\Iterator::hasPrevious()
+    /**     * @see \Components\Iterator::hasPrevious() \Components\Iterator::hasPrevious()
      */
     public function hasPrevious()
     {
       return 0<$this->m_file->currentLineNumber();
     }
 
-    /**
-     * (non-PHPdoc)
-     * @see \Components\Iterator::next()
+    /**     * @see \Components\Iterator::next() \Components\Iterator::next()
      */
     public function next()
     {
       return $this->m_file->readLine();
     }
 
-    /**
-     * (non-PHPdoc)
-     * @see \Components\Iterator::previous()
+    /**     * @see \Components\Iterator::previous() \Components\Iterator::previous()
      */
     public function previous()
     {
       return $this->m_file->previousLine();
     }
 
-    /**
-     * (non-PHPdoc)
-     * @see \Components\Iterator::rewind()
+    /**     * @see \Components\Iterator::rewind() \Components\Iterator::rewind()
      */
     public function rewind()
     {
       return $this->m_file->seekToBegin();
     }
 
-    /**
-     * (non-PHPdoc)
-     * @see \Components\Iterator::valid()
+    /**     * @see \Components\Iterator::valid() \Components\Iterator::valid()
      */
     public function valid()
     {
