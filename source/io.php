@@ -7,8 +7,8 @@ namespace Components;
   /**
    * Io
    *
-   * @package net.evalcode.components
-   * @subpackage io
+   * @api
+   * @package net.evalcode.components.io
    *
    * @author evalcode.net
    */
@@ -275,7 +275,7 @@ namespace Components;
     /**
      * @param \Components\Io_Path $destination_
      *
-     * @return array|\Components\Io_File
+     * @return \Components\Io_File[]
      *
      * @throws \Components\Io_Exception
      */
@@ -607,8 +607,10 @@ namespace Components;
      * @var string
      */
     private static $m_tmpPathNameRoot;
-    /**
-     * @var \Components\Io_Path
+
+
+  /**
+   * @var \Components\Io_Path
      */
     private static $m_pathComponents;
     //--------------------------------------------------------------------------

@@ -7,8 +7,9 @@ namespace Components;
   /**
    * Io_Image_Engine_Gd
    *
-   * @package net.evalcode.components
-   * @subpackage io.image.engine
+   * @api
+   * @package net.evalcode.components.io
+   * @subpackage image.engine
    *
    * @author evalcode.net
    */
@@ -68,7 +69,8 @@ namespace Components;
 
 
     // OVERRIDES
-    /**     * @see Components\Io_Image_Engine::dimensions() Components\Io_Image_Engine::dimensions()
+    /**
+     * @see \Components\Io_Image_Engine::dimensions() \Components\Io_Image_Engine::dimensions()
      *
      * @return \Components\Io_Image_Engine_Gd
      */
@@ -80,7 +82,8 @@ namespace Components;
       return $this->m_dimensions;
     }
 
-    /**     * @see Components\Io_Image_Engine::crop() Components\Io_Image_Engine::crop()
+    /**
+     * @see \Components\Io_Image_Engine::crop() \Components\Io_Image_Engine::crop()
      *
      * @return \Components\Io_Image_Engine_Gd
      */
@@ -91,7 +94,8 @@ namespace Components;
       return $this;
     }
 
-    /**     * @see Components\Io_Image_Engine::scale() Components\Io_Image_Engine::scale()
+    /**
+     * @see \Components\Io_Image_Engine::scale() \Components\Io_Image_Engine::scale()
      *
      * @return \Components\Io_Image_Engine_Gd
      */
@@ -125,7 +129,8 @@ namespace Components;
       return $this;
     }
 
-    /**     * @see Components\Io_Image_Engine::save() Components\Io_Image_Engine::save()
+    /**
+     * @see \Components\Io_Image_Engine::save() \Components\Io_Image_Engine::save()
      *
      * @return \Components\Io_Image_Engine_Gd
      */
@@ -161,7 +166,7 @@ namespace Components;
     );
 
     /**
-     * @var Components\Point
+     * @var \Components\Point
      */
     private $m_dimensions;
     /**

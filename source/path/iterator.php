@@ -7,8 +7,9 @@ namespace Components;
   /**
    * Io_Path_Iterator
    *
-   * @package net.evalcode.components
-   * @subpackage io.path
+   * @api
+   * @package net.evalcode.components.io
+   * @subpackage path
    *
    * @author evalcode.net
    */
@@ -23,7 +24,8 @@ namespace Components;
 
 
     // OVERRIDES
-    /**     * @see RecursiveDirectoryIterator::current() RecursiveDirectoryIterator::current()
+    /**
+     * @see \RecursiveDirectoryIterator::current() \RecursiveDirectoryIterator::current()
      *
      * @return \Components\Io_Path_Iterator
      */

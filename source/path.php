@@ -7,8 +7,8 @@ namespace Components;
   /**
    * Io_Path
    *
-   * @package net.evalcode.components
-   * @subpackage io
+   * @api
+   * @package net.evalcode.components.io
    *
    * @author evalcode.net
    */
@@ -26,7 +26,7 @@ namespace Components;
     /**
      * @param string $path_
      *
-     * @return Io_Path
+     * @return \Components\Io_Path
      */
     public static function get($path0_/*, $path1_, $path2_..*/)
     {
@@ -52,7 +52,7 @@ namespace Components;
     /**
      * @param string $path_
      *
-     * @return Io_Path
+     * @return \Components\Io_Path
      */
     public static function resolve($path_)
     {
@@ -82,7 +82,7 @@ namespace Components;
     }
 
     /**
-     * @return Io_Path
+     * @return \Components\Io_Path
      */
     public function getParent()
     {
@@ -106,9 +106,9 @@ namespace Components;
     }
 
     /**
-     * @return Io_Path
+     * @return \Components\Io_Path
      *
-     * @throws Io_Exception If fails to resolve path.
+     * @throws \Components\Io_Exception If fails to resolve path.
      */
     public function toAbsolutePath()
     {
@@ -154,7 +154,7 @@ namespace Components;
     }
 
     /**
-     * @return Io_File
+     * @return \Components\Io_File
      */
     public function asFile($accessModeMask_=Io_File::READ)
     {
@@ -167,7 +167,7 @@ namespace Components;
     /**
      * @param string $name_
      *
-     * @return Io_File
+     * @return \Components\Io_File
      */
     public function getFile($name_, $accessModeMask_=Io_File::READ)
     {
@@ -186,7 +186,7 @@ namespace Components;
     }
 
     /**
-     * @return Io_Image
+     * @return \Components\Io_Image
      */
     public function asImage()
     {
@@ -196,7 +196,7 @@ namespace Components;
     /**
      * @param string $name_
      *
-     * @return Io_Image
+     * @return \Components\Io_Image
      */
     public function getImage($name_)
     {
@@ -231,9 +231,9 @@ namespace Components;
      * @param boolean $recursive_
      * @param integer $umask_
      *
-     * @return Io_Path
+     * @return \Components\Io_Path
      *
-     * @throws Io_Exception
+     * @throws \Components\Io_Exception
      */
     public function create($umask_=0775)
     {
@@ -243,7 +243,7 @@ namespace Components;
     /**
      * @param boolean $recursive_
      *
-     * @return Io_Path
+     * @return \Components\Io_Path
      */
     public function delete($recursive_=false)
     {
@@ -377,28 +377,32 @@ namespace Components;
       return static::get($this->m_path, $name_);
     }
 
-    /**     * @see \Components\Iterable::getIterator() \Components\Iterable::getIterator()
+    /**
+     * @see \Components\Iterable::getIterator() \Components\Iterable::getIterator()
      */
     public function getIterator()
     {
       return new Io_Path_Iterator($this->m_path);
     }
 
-    /**     * @see Components\Cloneable::__clone() Components\Cloneable::__clone()
+    /**
+     * @see \Components\Cloneable::__clone() \Components\Cloneable::__clone()
      */
     public function __clone()
     {
       return new self($this->m_path);
     }
 
-    /**     * @see Components\Object::hashCode() Components\Object::hashCode()
+    /**
+     * @see \Components\Object::hashCode() \Components\Object::hashCode()
      */
     public function hashCode()
     {
       return String::hash($this->m_path);
     }
 
-    /**     * @see Components\Object::equals() Components\Object::equals()
+    /**
+     * @see \Components\Object::equals() \Components\Object::equals()
      */
     public function equals($object_)
     {
@@ -408,14 +412,16 @@ namespace Components;
       return false;
     }
 
-    /**     * @see Components\Object::__toString() Components\Object::__toString()
+    /**
+     * @see \Components\Object::__toString() \Components\Object::__toString()
      */
     public function __toString()
     {
       return $this->m_path;
     }
 
-    /**     * @see Components\Value_String::value() Components\Value_String::value()
+    /**
+     * @see \Components\Value_String::value() \Components\Value_String::value()
      */
     public function value()
     {

@@ -7,8 +7,8 @@ namespace Components;
   /**
    * Io_Pipe
    *
-   * @package net.evalcode.components
-   * @subpackage io
+   * @api
+   * @package net.evalcode.components.io
    *
    * @author evalcode.net
    */
@@ -25,7 +25,7 @@ namespace Components;
 
     // OVERRIDES
     /**
-     * @see Io_Channel::isOpen() Io_Channel::isOpen()
+     * @see \Components\Io_Channel::isOpen() \Components\Io_Channel::isOpen()
      */
     public function isOpen()
     {
@@ -33,7 +33,7 @@ namespace Components;
     }
 
     /**
-     * @see Io_Channel::open() Io_Channel::open()
+     * @see \Components\Io_Channel::open() \Components\Io_Channel::open()
      */
     public function open()
     {
@@ -48,7 +48,7 @@ namespace Components;
     }
 
     /**
-     * @see Io_Channel_Closeable::close() Io_Channel_Closeable::close()
+     * @see \Components\Io_Channel_Closeable::close() \Components\Io_Channel_Closeable::close()
      */
     public function close()
     {

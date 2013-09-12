@@ -7,8 +7,8 @@ namespace Components;
   /**
    * Io_Mimetype
    *
-   * @package net.evalcode.components
-   * @subpackage io
+   * @api
+   * @package net.evalcode.components.io
    *
    * @method \Components\Io_Mimetype APPLICATION_JSON
    * @method \Components\Io_Mimetype APPLICATION_XML
@@ -217,7 +217,7 @@ namespace Components;
     }
 
     /**
-     * @see Components\Enumeration::values() Components\Enumeration::values()
+     * @see \Components\Enumeration::values() \Components\Enumeration::values()
      */
     public static function values()
     {
@@ -408,8 +408,10 @@ namespace Components;
 
     private $m_type;
     private $m_category;
-    /**
-     * @var Components\Io_Charset
+
+
+  /**
+   * @var \Components\Io_Charset
      */
     private $m_charset;
     //--------------------------------------------------------------------------

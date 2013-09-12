@@ -7,8 +7,8 @@ namespace Components;
   /**
    * Io_Exception
    *
-   * @package net.evalcode.components
-   * @subpackage io
+   * @api
+   * @package net.evalcode.components.io
    *
    * @author evalcode.net
    */

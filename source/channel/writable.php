@@ -7,8 +7,9 @@ namespace Components;
   /**
    * Io_Channel_Writable
    *
-   * @package net.evalcode.components
-   * @subpackage io.channel
+   * @api
+   * @package net.evalcode.components.io
+   * @subpackage channel
    *
    * @author evalcode.net
    */

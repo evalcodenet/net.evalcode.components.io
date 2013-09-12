@@ -7,15 +7,17 @@ namespace Components;
   /**
    * Io_Archive_Zip
    *
-   * @package net.evalcode.components
-   * @subpackage io.archive
+   * @api
+   * @package net.evalcode.components.io
+   * @subpackage archive
    *
    * @author evalcode.net
    */
   class Io_Archive_Zip extends Io_Archive
   {
     // OVERRIDES
-    /**     * @see Components\Io_File::open() Components\Io_File::open()
+    /**
+     * @see \Components\Io_File::open() \Components\Io_File::open()
      *
      * @return \Components\Io_Archive_Zip
      */
@@ -59,7 +61,8 @@ namespace Components;
       return $this;
     }
 
-    /**     * @see Components\Io_File::close() Components\Io_File::close()
+    /**
+     * @see \Components\Io_File::close() \Components\Io_File::close()
      *
      * @return \Components\Io_Archive_Zip
      */
@@ -71,7 +74,8 @@ namespace Components;
       return $this;
     }
 
-    /**     * @see Components\Io_Archive::add() Components\Io_Archive::add()
+    /**
+     * @see \Components\Io_Archive::add() \Components\Io_Archive::add()
      *
      * @return \Components\Io_Archive_Zip
      */
@@ -85,7 +89,8 @@ namespace Components;
       return $this;
     }
 
-    /**     * @see Components\Io_Archive::addDirectory() Components\Io_Archive::addDirectory()
+    /**
+     * @see \Components\Io_Archive::addDirectory() \Components\Io_Archive::addDirectory()
      *
      * @return \Components\Io_Archive_Zip
      */
@@ -97,7 +102,7 @@ namespace Components;
       if(false===$directory_->isDirectory())
         throw new Io_Exception('io/archive/zip', 'Given path must point to a readable directory.');
 
-      /* @var $path Components\Io_Path */
+      /* @var $path \Components\Io_Path */
       foreach($directory_ as $path)
       {
         if($path->isDirectory())
@@ -113,7 +118,8 @@ namespace Components;
       }
     }
 
-    /**     * @see Components\Io_Archive::extract() Components\Io_Archive::extract()
+    /**
+     * @see \Components\Io_Archive::extract() \Components\Io_Archive::extract()
      *
      * @return \Components\Io_Archive_Zip
      */
@@ -128,8 +134,7 @@ namespace Components;
     }
 
     /**
-     * (non-PHPdoc)
-     * @see Components\Io_File::delete() Components\Io_File::delete()
+     * @see \Components\Io_File::delete() \Components\Io_File::delete()
      *
      * @return \Components\Io_Archive_Zip
      */

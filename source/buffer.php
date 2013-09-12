@@ -7,8 +7,8 @@ namespace Components;
   /**
    * Io_Buffer
    *
-   * @package net.evalcode.components
-   * @subpackage io
+   * @api
+   * @package net.evalcode.components.io
    *
    * @author evalcode.net
    */
@@ -29,7 +29,6 @@ namespace Components;
      * @return integer
      */
     function capacity();
-
     /**
      * Reads this buffer into passed target buffer.
      *
@@ -38,7 +37,6 @@ namespace Components;
      * @return integer
      */
     function read(Io_Buffer $target_);
-
     /**
      * Iterate through buffer contents.
      *
@@ -49,7 +47,6 @@ namespace Components;
      * @return mixed
      */
     function next();
-
     /**
      * Returns value at given position or at current position if the passed
      * parameter is 'null'.
@@ -59,7 +56,6 @@ namespace Components;
      * @return mixed
      */
     function get($position_=null);
-
     /**
      * Appends given value to this buffer at its current position and
      * increments the position by length of appended value.
@@ -69,7 +65,6 @@ namespace Components;
      * @return \Components\Io_Buffer
      */
     function append($value_);
-
     /**
      * Appends given buffer to this buffer at its current position until
      * this or the target buffer's limit is reached.
@@ -81,7 +76,6 @@ namespace Components;
      * @return \Components\Io_Buffer
      */
     function appendBuffer(Io_Buffer $source_);
-
     /**
      * Sets this buffer's limit to its current position and resets the position
      * to zero.
@@ -89,7 +83,6 @@ namespace Components;
      * @return \Components\Io_Buffer
      */
     function flip();
-
     /**
      * Returns this buffer's internal position or sets it to the given one.
      *
@@ -100,7 +93,6 @@ namespace Components;
      * @throws \Components\Exception_IllegalState
      */
     function position($position_=null);
-
     /**
      * Returns this buffer's limit or sets it to the given one.
      *
@@ -111,7 +103,6 @@ namespace Components;
      * @throws \Components\Exception_IllegalState
      */
     function limit($limit_=null);
-
     /**
      * Returns 'true' if the buffer's limit is not reached yet,
      * otherwise returns 'false'.
@@ -122,21 +113,18 @@ namespace Components;
      * (should be pre-incrementing, not post-incrementing).
      */
     function hasRemaining();
-
     /**
      * Returns remaining free slots until this buffers limit is reached.
      *
      * @return integer
      */
     function remaining();
-
     /**
      * Resets this buffers internal position to zero.
      *
      * @return \Components\Io_Buffer
      */
     function rewind();
-
     /**
      * Removes this buffers contents, resets its internal position to zero
      * and its limit to its capacity.
@@ -144,14 +132,12 @@ namespace Components;
      * @return \Components\Io_Buffer
      */
     function clear();
-
     /**
      * Sets a mark at current position.
      *
      * @return \Components\Io_Buffer
      */
     function mark();
-
     /**
      * Resets this buffers internal position to the last mark ot to
      * zero if no mark is set.
@@ -159,7 +145,6 @@ namespace Components;
      * @return \Components\Io_Buffer
      */
     function reset();
-
     /**
      * Returns 'true' if this buffer is internally backed by an array,
      * otherwise returns 'false'.
@@ -167,7 +152,6 @@ namespace Components;
      * @return boolean
      */
     function isArray();
-
     /**
      * Returns the array internally used as storage. Returns 'null' if
      * this buffer is not backed my an array.

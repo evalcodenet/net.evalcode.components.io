@@ -7,8 +7,9 @@ namespace Components;
   /**
    * Io_Archive_Iterator
    *
-   * @package net.evalcode.components
-   * @subpackage io.archive
+   * @api
+   * @package net.evalcode.components.io
+   * @subpackage archive
    *
    * @author evalcode.net
    */
@@ -62,7 +63,7 @@ namespace Components;
 
     // IMLEMENTATION
     /**
-     * @var Components\Io_Archive
+     * @var \Components\Io_Archive
      */
     private $m_archive;
     //--------------------------------------------------------------------------

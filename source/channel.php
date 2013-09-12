@@ -7,8 +7,8 @@ namespace Components;
   /**
    * Io_Channel
    *
-   * @package net.evalcode.components
-   * @subpackage io
+   * @api
+   * @package net.evalcode.components.io
    *
    * @author evalcode.net
    */
@@ -19,7 +19,6 @@ namespace Components;
      * @return boolean
      */
     function isOpen();
-
     /**
      * Returns 'true' on success.
      *

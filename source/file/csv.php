@@ -7,8 +7,9 @@ namespace Components;
   /**
    * Io_File_Csv
    *
-   * @package net.evalcode.components
-   * @subpackage io.file
+   * @api
+   * @package net.evalcode.components.io
+   * @subpackage file
    *
    * @author evalcode.net
    */
@@ -44,7 +45,7 @@ namespace Components;
     //--------------------------------------------------------------------------
 
 
-    // ACCESSORS/MUTATORS
+    // ACCESSORS
     public function getColumns()
     {
       return $this->m_columns;
@@ -187,8 +188,9 @@ namespace Components;
     //--------------------------------------------------------------------------
 
 
-    // OVERRIDES/IMPLEMENTS
-    /**     * @see \Components\Countable::count() \Components\Countable::count()
+    // OVERRIDES
+    /**
+     * @see \Components\Countable::count() \Components\Countable::count()
      */
     public function count()
     {
@@ -212,7 +214,8 @@ namespace Components;
       return $i;
     }
 
-    /**     * @see Components\Iterable::getIterator() Components\Iterable::getIterator()
+    /**
+     * @see \Components\Iterable::getIterator() \Components\Iterable::getIterator()
      *
      * @return \Components\Io_File_Csv_Iterator
      */
@@ -221,7 +224,8 @@ namespace Components;
       return new Io_File_Csv_Iterator($this);
     }
 
-    /**     * @see \Components\Io_File::open() \Components\Io_File::open()
+    /**
+     * @see \Components\Io_File::open() \Components\Io_File::open()
      *
      * @return \Components\Io_File_Csv
      */

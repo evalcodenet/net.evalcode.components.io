@@ -7,8 +7,9 @@ namespace Components;
   /**
    * Io_File_Csv_Random
    *
-   * @package net.evalcode.components
-   * @subpackage io.file.csv
+   * @api
+   * @package net.evalcode.components.io
+   * @subpackage file.csv
    *
    * @author evalcode.net
    */

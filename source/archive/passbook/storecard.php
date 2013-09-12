@@ -7,8 +7,9 @@ namespace Components;
   /**
    * Io_Archive_Passbook_Storecard
    *
-   * @package net.evalcode.components
-   * @subpackage io.archive.passbook
+   * @api
+   * @package net.evalcode.components.io
+   * @subpackage archive.passbook
    *
    * @author evalcode.net
    */
@@ -20,7 +21,8 @@ namespace Components;
 
 
     // OVERRIDES
-    /**     * @see Components\Io_Archive_Passbook_Generic::getStyle() Components\Io_Archive_Passbook_Generic::getStyle()
+    /**
+     * @see \Components\Io_Archive_Passbook_Generic::getStyle() \Components\Io_Archive_Passbook_Generic::getStyle()
      */
     public function getStyle()
     {

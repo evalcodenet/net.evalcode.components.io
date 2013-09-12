@@ -7,8 +7,9 @@ namespace Components;
   /**
    * Io_File_Csv_Iterator
    *
-   * @package net.evalcode.components
-   * @subpackage io.file.csv
+   * @api
+   * @package net.evalcode.components.io
+   * @subpackage file.csv
    *
    * @author evalcode.net
    */
@@ -26,57 +27,65 @@ namespace Components;
       return $this;
     }
 
-    // OVERRIDES/IMPLEMENTS
-    /**     * @see \Components\Iterator::current() \Components\Iterator::current()
+    // OVERRIDES
+    /**
+     * @see \Components\Iterator::current() \Components\Iterator::current()
      */
     public function current()
     {
       return $this->m_file->currentLine();
     }
 
-    /**     * @see \Components\Iterator::key() \Components\Iterator::key()
+    /**
+     * @see \Components\Iterator::key() \Components\Iterator::key()
      */
     public function key()
     {
       return $this->m_file->currentLineNumber();
     }
 
-    /**     * @see \Components\Iterator::hasNext() \Components\Iterator::hasNext()
+    /**
+     * @see \Components\Iterator::hasNext() \Components\Iterator::hasNext()
      */
     public function hasNext()
     {
       return $this->m_file->hasMoreLines();
     }
 
-    /**     * @see \Components\Iterator::hasPrevious() \Components\Iterator::hasPrevious()
+    /**
+     * @see \Components\Iterator::hasPrevious() \Components\Iterator::hasPrevious()
      */
     public function hasPrevious()
     {
       return 0<$this->m_file->currentLineNumber();
     }
 
-    /**     * @see \Components\Iterator::next() \Components\Iterator::next()
+    /**
+     * @see \Components\Iterator::next() \Components\Iterator::next()
      */
     public function next()
     {
       return $this->m_file->readLine();
     }
 
-    /**     * @see \Components\Iterator::previous() \Components\Iterator::previous()
+    /**
+     * @see \Components\Iterator::previous() \Components\Iterator::previous()
      */
     public function previous()
     {
       return $this->m_file->previousLine();
     }
 
-    /**     * @see \Components\Iterator::rewind() \Components\Iterator::rewind()
+    /**
+     * @see \Components\Iterator::rewind() \Components\Iterator::rewind()
      */
     public function rewind()
     {
       return $this->m_file->seekToBegin();
     }
 
-    /**     * @see \Components\Iterator::valid() \Components\Iterator::valid()
+    /**
+     * @see \Components\Iterator::valid() \Components\Iterator::valid()
      */
     public function valid()
     {

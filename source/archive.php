@@ -7,8 +7,8 @@ namespace Components;
   /**
    * Io_Archive
    *
-   * @package net.evalcode.components
-   * @subpackage io
+   * @api
+   * @package net.evalcode.components.io
    *
    * @author evalcode.net
    */
@@ -66,8 +66,8 @@ namespace Components;
      */
     public abstract function extract(Io_Path $directory_);
 
-
-    /**     * @see IteratorAggregate::getIterator() IteratorAggregate::getIterator()
+    /**
+     * @see \IteratorAggregate::getIterator() \IteratorAggregate::getIterator()
      *
      * @return \Components\Io_Archive_Iterator
      */

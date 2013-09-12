@@ -7,8 +7,9 @@ namespace Components;
   /**
    * Io_Buffer_Char
    *
-   * @package net.evalcode.components
-   * @subpackage io.buffer
+   * @api
+   * @package net.evalcode.components.io
+   * @subpackage buffer
    *
    * @author evalcode.net
    */
@@ -16,7 +17,7 @@ namespace Components;
   {
     // OVERRIDES
     /**
-     * @see Components\Object::hashCode() Components\Object::hashCode()
+     * @see \Components\Object::hashCode() \Components\Object::hashCode()
      */
     public function hashCode()
     {
@@ -28,7 +29,7 @@ namespace Components;
     }
 
     /**
-     * @see Components\Object::equals() Components\Object::equals()
+     * @see \Components\Object::equals() \Components\Object::equals()
      */
     public function equals($object_)
     {
@@ -39,7 +40,7 @@ namespace Components;
     }
 
     /**
-     * @see Components\Object::__toString() Components\Object::__toString()
+     * @see \Components\Object::__toString() \Components\Object::__toString()
      */
     public function __toString()
     {

@@ -7,8 +7,8 @@ namespace Components;
   /**
    * Io_Console
    *
-   * @package net.evalcode.components
-   * @subpackage io
+   * @api
+   * @package net.evalcode.components.io
    *
    * @author evalcode.net
    */
@@ -16,15 +16,15 @@ namespace Components;
   {
     // PROPERTIES
     /**
-     * @var Components\Io_Channel_Readable
+     * @var \Components\Io_Channel_Readable
      */
     public $in;
     /**
-     * @var Components\Io_Channel_Writable
+     * @var \Components\Io_Channel_Writable
      */
     public $out;
     /**
-     * @var Components\Io_Channel_Writable
+     * @var \Components\Io_Channel_Writable
      */
     public $err;
     //--------------------------------------------------------------------------
@@ -246,21 +246,24 @@ namespace Components;
 
 
     // OVERRIDES
-    /**     * @see Components\Io_Channel_Readable::read() Components\Io_Channel_Readable::read()
+    /**
+     * @see \Components\Io_Channel_Readable::read() \Components\Io_Channel_Readable::read()
      */
     public function read(Io_Buffer $buffer_, $interrupt_=null)
     {
       return $this->in->read($buffer_, $interrupt_);
     }
 
-    /**     * @see Components\Io_Channel_Writable::write() Components\Io_Channel_Writable::write()
+    /**
+     * @see \Components\Io_Channel_Writable::write() \Components\Io_Channel_Writable::write()
      */
     public function write(Io_Buffer $buffer_)
     {
       return $this->out->write($buffer_);
     }
 
-    /**     * @see Components\Io_Channel_Flushable::flush() Components\Io_Channel_Flushable::flush()
+    /**
+     * @see \Components\Io_Channel_Flushable::flush() \Components\Io_Channel_Flushable::flush()
      *
      * @return \Components\Io_Console
      */
@@ -273,14 +276,16 @@ namespace Components;
       return $this;
     }
 
-    /**     * @see Components\Io_Channel::isOpen() Components\Io_Channel::isOpen()
+    /**
+     * @see \Components\Io_Channel::isOpen() \Components\Io_Channel::isOpen()
      */
     public function isOpen()
     {
       return $this->m_isOpen;
     }
 
-    /**     * @see Components\Io_Channel::open() Components\Io_Channel::open()
+    /**
+     * @see \Components\Io_Channel::open() \Components\Io_Channel::open()
      *
      * @return \Components\Io_Console
      */
@@ -298,7 +303,8 @@ namespace Components;
       return $this;
     }
 
-    /**     * @see Components\Io_Channel_Closeable::close() Components\Io_Channel_Closeable::close()
+    /**
+     * @see \Components\Io_Channel_Closeable::close() \Components\Io_Channel_Closeable::close()
      *
      * @return \Components\Io_Console
      */
@@ -324,7 +330,7 @@ namespace Components;
     private $m_isAttached=false;
     private $m_isOpen=false;
     /**
-     * @var Components\Io_Buffer
+     * @var \Components\Io_Buffer
      */
     private $m_buffer;
     private $m_info;

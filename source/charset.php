@@ -7,19 +7,19 @@ namespace Components;
   /**
    * Io_Charset
    *
-   * @package net.evalcode.components
-   * @subpackage io
+   * @api
+   * @package net.evalcode.components.io
    *
    * @author evalcode.net
    *
-   * @method Components\Io_Charset BINARY
-   * @method Components\Io_Charset UTF_16
-   * @method Components\Io_Charset UTF_16_BE
-   * @method Components\Io_Charset UTF_16_LE
-   * @method Components\Io_Charset UTF_8
-   * @method Components\Io_Charset ISO_8859_1
-   * @method Components\Io_Charset ISO_8859_15
-   * @method Components\Io_Charset US_ASCII
+   * @method \Components\Io_Charset BINARY
+   * @method \Components\Io_Charset UTF_16
+   * @method \Components\Io_Charset UTF_16_BE
+   * @method \Components\Io_Charset UTF_16_LE
+   * @method \Components\Io_Charset UTF_8
+   * @method \Components\Io_Charset ISO_8859_1
+   * @method \Components\Io_Charset ISO_8859_15
+   * @method \Components\Io_Charset US_ASCII
    */
   class Io_Charset extends Enumeration
   {
@@ -100,7 +100,7 @@ namespace Components;
     }
 
     /**
-     * @see Components\Enumeration::values() Components\Enumeration::values()
+     * @see \Components\Enumeration::values() \Components\Enumeration::values()
      */
     public static function values()
     {
@@ -118,10 +118,11 @@ namespace Components;
     //--------------------------------------------------------------------------
 
 
-    // ACCESSORS/MUTATORS
+    // ACCESSORS
     /**
      * @param string $string_
-     * @param Io_Charset $toCharset_
+     * @param \Components\Io_Charset $toCharset_
+     *
      * @return string
      */
     public function convert($string_, Io_Charset $toCharset_)
@@ -157,11 +158,6 @@ namespace Components;
 
 
     // IMPLEMENTATION
-    /**
-     * @var \Components\Io_Charset
-     */
-    private static $m_defaultCharset;
-
     private static $m_charsets=array(
       self::BINARY=>'BINARY',
       self::UTF_16=>'UTF_16',
@@ -175,7 +171,10 @@ namespace Components;
       'UTF16'=>'UTF_16',
       'ASCII'=>'US_ASCII'
     );
-
+    /**
+     * @var \Components\Io_Charset
+     */
+    private static $m_defaultCharset;
     /**
      * @var \Components\Io_Charset
      */

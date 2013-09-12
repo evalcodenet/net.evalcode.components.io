@@ -7,8 +7,9 @@ namespace Components;
   /**
    * Io_Pipe_Source
    *
-   * @package net.evalcode.components
-   * @subpackage io.pipe
+   * @api
+   * @package net.evalcode.components.io
+   * @subpackage pipe
    *
    * @author evalcode.net
    */
@@ -23,7 +24,8 @@ namespace Components;
 
 
     // OVERRIDES
-    /**     * @see Components\Io_Channel_Readable::read() Components\Io_Channel_Readable::read()
+    /**
+     * @see \Components\Io_Channel_Readable::read() \Components\Io_Channel_Readable::read()
      */
     public function read(Io_Buffer $buffer_, $interrupt_=null)
     {

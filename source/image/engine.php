@@ -7,8 +7,9 @@ namespace Components;
   /**
    * Io_Image_Engine
    *
-   * @package net.evalcode.components
-   * @subpackage io.image
+   * @api
+   * @package net.evalcode.components.io
+   * @subpackage image
    *
    * @author evalcode.net
    */

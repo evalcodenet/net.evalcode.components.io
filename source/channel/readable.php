@@ -7,8 +7,9 @@ namespace Components;
   /**
    * Io_Channel_Readable
    *
-   * @package net.evalcode.components
-   * @subpackage io.channel
+   * @api
+   * @package net.evalcode.components.io
+   * @subpackage channel
    *
    * @author evalcode.net
    */
@@ -16,7 +17,7 @@ namespace Components;
   {
     // ACCESSORS
     /**
-     * Reads into given {@code buffer_} until its defined limit is reached,
+     * Reads into given *\/ until its defined limit is reached,
      * the buffer is full or optionally given (@code interrupt_) is passed
      * through the channel.
      *

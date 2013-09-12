@@ -7,8 +7,9 @@ namespace Components;
   /**
    * Io_Channel_Null
    *
-   * @package net.evalcode.components
-   * @subpackage io.channel
+   * @api
+   * @package net.evalcode.components.io
+   * @subpackage channel
    *
    * @author evalcode.net
    */
@@ -16,7 +17,7 @@ namespace Components;
   {
     // OVERRIDES
     /**
-     * @see Components\Io_Channel_Readable::read() Components\Io_Channel_Readable::read()
+     * @see \Components\Io_Channel_Readable::read() \Components\Io_Channel_Readable::read()
      */
     public function read(Io_Buffer $buffer_, $interrupt_=null)
     {
@@ -24,7 +25,7 @@ namespace Components;
     }
 
     /**
-     * @see Components\Io_Channel_Writable::write() Components\Io_Channel_Writable::write()
+     * @see \Components\Io_Channel_Writable::write() \Components\Io_Channel_Writable::write()
      */
     public function write(Io_Buffer $buffer_)
     {
@@ -32,7 +33,7 @@ namespace Components;
     }
 
     /**
-     * @see Components\Io_Channel::isOpen() Components\Io_Channel::isOpen()
+     * @see \Components\Io_Channel::isOpen() \Components\Io_Channel::isOpen()
      */
     public function isOpen()
     {
@@ -40,7 +41,7 @@ namespace Components;
     }
 
     /**
-     * @see Components\Io_Channel::open() Components\Io_Channel::open()
+     * @see \Components\Io_Channel::open() \Components\Io_Channel::open()
      */
     public function open()
     {
@@ -48,7 +49,7 @@ namespace Components;
     }
 
     /**
-     * @see Components\Io_Channel_Closeable::close() Components\Io_Channel_Closeable::close()
+     * @see \Components\Io_Channel_Closeable::close() \Components\Io_Channel_Closeable::close()
      */
     public function close()
     {
@@ -56,7 +57,7 @@ namespace Components;
     }
 
     /**
-     * @see Components\Object::hashCode() Components\Object::hashCode()
+     * @see \Components\Object::hashCode() \Components\Object::hashCode()
      */
     public function hashCode()
     {
@@ -64,7 +65,7 @@ namespace Components;
     }
 
     /**
-     * @see Components\Object::equals() Components\Object::equals()
+     * @see \Components\Object::equals() \Components\Object::equals()
      */
     public function equals($object_)
     {
@@ -75,7 +76,7 @@ namespace Components;
     }
 
     /**
-     * @see Components\Object::__toString() Components\Object::__toString()
+     * @see \Components\Object::__toString() \Components\Object::__toString()
      */
     public function __toString()
     {

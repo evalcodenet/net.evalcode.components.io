@@ -7,8 +7,9 @@ namespace Components;
   /**
    * Io_File_Buffered
    *
-   * @package net.evalcode.components
-   * @subpackage io.file
+   * @api
+   * @package net.evalcode.components.io
+   * @subpackage file
    *
    * @author evalcode.net
    */
