@@ -24,9 +24,11 @@ namespace Components;
    * @method \Components\Io_Mimetype MULTIPART_ENCRYPTED
    * @method \Components\Io_Mimetype MULTIPART_MIXED
    * @method \Components\Io_Mimetype MULTIPART_RELATED
+   * @method \Components\Io_Mimetype TEXT_CSV
    * @method \Components\Io_Mimetype TEXT_HTML
    * @method \Components\Io_Mimetype TEXT_JSON
    * @method \Components\Io_Mimetype TEXT_PLAIN
+   * @method \Components\Io_Mimetype TEXT_PHP_SOURCE
    *
    * @author evalcode.net
    */

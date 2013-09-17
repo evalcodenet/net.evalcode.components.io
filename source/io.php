@@ -229,6 +229,7 @@ namespace Components;
      *
      * @throws \Components\Io_Exception
      */
+    // TODO [CSH] Implement parameters permittedMimetypes & permittedFileExtensions.
     public static function fileUpload($fileId_=null, Io_Path $destination_=null, array $permittedMimetypes_=array(), array $permittedFileExtensions_=array())
     {
       if(null===$fileId_ && is_array($_FILES) && 0<count($_FILES))
@@ -588,7 +589,7 @@ namespace Components;
      */
     public static function systemIsWindows()
     {
-      return 'win'===strtolower(substr(PHP_OS, 0, 3));
+      return 0===strpos(strtolower(PHP_OS), 'win');
     }
 
     /**
@@ -597,7 +598,9 @@ namespace Components;
     public static function systemIsX()
     {
       // TODO Verify name for OSX
-      return 'linux'===strtolower(PHP_OS) || 'unix'===strtolower(PHP_OS)  || 'macosx'===strtolower(PHP_OS);
+      $os=strtolower(PHP_OS);
+
+      return 'linux'===$os || 'unix'===$os || 'macosx'===$os;
     }
     //--------------------------------------------------------------------------
 
@@ -607,10 +610,8 @@ namespace Components;
      * @var string
      */
     private static $m_tmpPathNameRoot;
-
-
-  /**
-   * @var \Components\Io_Path
+    /**
+     * @var \Components\Io_Path
      */
     private static $m_pathComponents;
     //--------------------------------------------------------------------------

@@ -331,9 +331,8 @@ namespace Components;
      * @param \Components\Io_Path $path_
      *
      * @return \Components\Io_Path
-     *
-     * @todo Optimize
      */
+    // FIXME [CSH] Incorrect implementation.
     public function getRelativePath(Io_Path $path_)
     {
       if($this->isFile())
