@@ -213,7 +213,7 @@ namespace Components;
         $extension=mb_strtolower(mb_substr($filename_, $pos));
       }
 
-      $matches=array();
+      $matches=[];
       preg_match_all('/[\x2B\x2E\x30-\x39\x41-x5B]+/mi', $name, $matches);
 
       if(isset($matches[0]) && 0<count($matches[0]))
@@ -230,7 +230,7 @@ namespace Components;
      * @throws \Components\Io_Exception
      */
     // TODO [CSH] Implement parameters permittedMimetypes & permittedFileExtensions.
-    public static function fileUpload($fileId_=null, Io_Path $destination_=null, array $permittedMimetypes_=array(), array $permittedFileExtensions_=array())
+    public static function fileUpload($fileId_=null, Io_Path $destination_=null, array $permittedMimetypes_=[], array $permittedFileExtensions_=[])
     {
       if(null===$fileId_ && is_array($_FILES) && 0<count($_FILES))
         $fileId_=key($_FILES);
@@ -282,7 +282,7 @@ namespace Components;
      */
     public static function fileUploadAll(Io_Path $destination_=null)
     {
-      $files=array();
+      $files=[];
       foreach($_FILES as $key=>$file)
         $files[$key]=static::fileUpload($key, $destination_);
 
@@ -339,7 +339,7 @@ namespace Components;
      */
     public static function directoryCreate($path_, $umask_=0775)
     {
-      $create=array();
+      $create=[];
       $segments=explode(DIRECTORY_SEPARATOR, $path_);
       while(0<count($segments))
       {

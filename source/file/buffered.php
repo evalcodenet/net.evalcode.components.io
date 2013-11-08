@@ -121,7 +121,7 @@ namespace Components;
      */
     public function readLine()
     {
-      $buffer=array();
+      $buffer=[];
       $bytes=4096;
 
       while(false!==($read=$this->read($bytes)))

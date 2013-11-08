@@ -207,7 +207,7 @@ namespace Components;
     {
       $this->m_position=0;
       $this->m_limit=$this->m_capacity;
-      $this->m_buffer=array();
+      $this->m_buffer=[];
 
       return $this;
     }
@@ -312,7 +312,7 @@ namespace Components;
     /**
      * @var integer[]
      */
-    protected $m_buffer=array();
+    protected $m_buffer=[];
     /**
      * @var integer
      */

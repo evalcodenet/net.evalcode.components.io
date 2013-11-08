@@ -329,7 +329,7 @@ namespace Components;
 
 
     // OVERRIDES
-    public function __call($name_, array $args_=array())
+    public function __call($name_, array $args_=[])
     {
       if(0===strpos($name_, 'is'))
         return strtolower(substr($name_, 2))===strtolower(str_replace('/', '', $this->m_name));

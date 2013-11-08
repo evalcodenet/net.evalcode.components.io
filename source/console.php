@@ -131,8 +131,8 @@ namespace Components;
       if(null!==$stderr_)
         $this->err=$stderr_;
 
-      $options=array();
-      $optionsExtended=array();
+      $options=[];
+      $optionsExtended=[];
       foreach($this->m_options as $option)
       {
         if(false===isset($option['character']))
@@ -191,7 +191,7 @@ namespace Components;
 
     public function addEmptyOption()
     {
-      array_push($this->m_options, array());
+      array_push($this->m_options, []);
 
       return $this;
     }
@@ -325,8 +325,8 @@ namespace Components;
 
 
     // IMPLEMENTATION
-    private $m_arguments=array();
-    private $m_options=array();
+    private $m_arguments=[];
+    private $m_options=[];
     private $m_isAttached=false;
     private $m_isOpen=false;
     /**

@@ -56,7 +56,7 @@ namespace Components;
 
 
     // IMPLEMENTATION
-    private $m_data=array();
+    private $m_data=[];
     //--------------------------------------------------------------------------
   }
 ?>

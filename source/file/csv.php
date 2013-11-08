@@ -58,7 +58,7 @@ namespace Components;
       // Match passed columns with existing columns.
       if($this->m_open && count($this->m_columnsIndex))
       {
-        $columnsIndex=array();
+        $columnsIndex=[];
         foreach($columns_ as $name)
         {
           if(isset($this->m_columnsIndex[$name]))
@@ -141,12 +141,12 @@ namespace Components;
       if(false===$line)
       {
         if(feof($this->m_pointer))
-          return array();
+          return [];
 
         throw new Io_Exception('io/file/csv', sprintf('Failed to read line [%s].', $this));
       }
 
-      $data=array();
+      $data=[];
       foreach($this->m_columnsIndex as $name=>$columns)
       {
         if(isset($this->m_columnsMapped[$name]))
@@ -162,7 +162,7 @@ namespace Components;
         }
         else
         {
-          $data[$name]=array();
+          $data[$name]=[];
           foreach($columns as $column)
           {
             if(isset($line[$column]) && trim($line[$column]))
@@ -243,9 +243,9 @@ namespace Components;
     // IMPLEMENTATION
     protected $m_line=0;
 
-    private $m_columns=array();
-    private $m_columnsIndex=array();
-    private $m_columnsMapped=array();
+    private $m_columns=[];
+    private $m_columnsIndex=[];
+    private $m_columnsMapped=[];
     private $m_offsetHeaderStart=0;
     private $m_offsetHeaderEnd=0;
     //-----
@@ -270,14 +270,14 @@ namespace Components;
       if(false===$header)
       {
         if(feof($this->m_pointer))
-          return array();
+          return [];
 
         throw new Io_Exception('io/file/csv', sprintf('Failed to read line [%s].', $this));
       }
 
       if(0<count($this->m_columnsIndex))
       {
-        $columnsIndex=array();
+        $columnsIndex=[];
         foreach($header as $idx=>$name)
         {
           if(isset($this->m_columnsIndex[$name]))

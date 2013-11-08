@@ -209,7 +209,7 @@ namespace Components;
 
     public function addAssociatedAppKey($appKey_)
     {
-      $associatedStoreIdentifiers=array();
+      $associatedStoreIdentifiers=[];
       if(isset($this->properties->associatedStoreIdentifiers))
         $associatedStoreIdentifiers=$this->properties->associatedStoreIdentifiers;
 
@@ -220,7 +220,7 @@ namespace Components;
 
     public function addRelevantLocation($text_, $altitude_, $latitude_, $longitude_)
     {
-      $locations=array();
+      $locations=[];
       if(isset($this->properties->locations))
         $locations=$this->properties->locations;
 
@@ -280,7 +280,7 @@ namespace Components;
         (string)$signature,
         "file://$certificate_",
         array("file://$privateKey_", $privateKeyPassphrase_),
-        array(),
+        [],
         PKCS7_BINARY|PKCS7_NOATTR|PKCS7_DETACHED,
         $certificateAppleIntermediate_
       );
@@ -356,8 +356,8 @@ namespace Components;
 
 
     // IMPLEMENTATION
-    private $m_fields=array();
-    private $m_files=array();
+    private $m_fields=[];
+    private $m_files=[];
     //--------------------------------------------------------------------------
   }
 ?>
