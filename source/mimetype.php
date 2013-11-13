@@ -28,18 +28,20 @@ namespace Components;
    * @method \Components\Io_Mimetype TEXT_HTML
    * @method \Components\Io_Mimetype TEXT_JSON
    * @method \Components\Io_Mimetype TEXT_PLAIN
-   * @method \Components\Io_Mimetype TEXT_PHP_SOURCE
+   * @method \Components\Io_Mimetype TEXT_PHP
    *
    * @author evalcode.net
    */
   class Io_Mimetype extends Enumeration
   {
     // MIME TYPES
+    const APPLICATION_JAVASCRIPT='application/javascript';
     const APPLICATION_JSON='application/json';
+    const APPLICATION_OCTET_STREAM='application/octet-stream';
+    const APPLICATION_PHP='application/php';
+    const APPLICATION_VND_APPLE_PKPASS='application/vnd.apple.pkpass';
     const APPLICATION_XML='application/xml';
     const APPLICATION_ZIP='application/zip';
-    const APPLICATION_OCTET_STREAM='application/octet-stream';
-    const APPLICATION_VND_APPLE_PKPASS='application/vnd.apple.pkpass';
     const IMAGE_GIF='image/gif';
     const IMAGE_PNG='image/png';
     const IMAGE_JPG='image/jpg';
@@ -50,21 +52,26 @@ namespace Components;
     const MULTIPART_ENCRYPTED='multipart/encrypted';
     const MULTIPART_MIXED='multipart/mixed';
     const MULTIPART_RELATED='multipart/related';
+    const TEXT_CSS='text/css';
     const TEXT_CSV='text/csv';
     const TEXT_HTML='text/html';
+    const TEXT_JAVASCRIPT='text/javascript';
     const TEXT_JSON='text/json';
     const TEXT_PLAIN='text/plain';
-    const TEXT_PHP_SOURCE='text/php';
+    const TEXT_PHP='text/php';
 
     // FILE EXTENSIONS
     const EXTENSION_BIN='bin';
+    const EXTENSION_CSS='css';
     const EXTENSION_CSV='csv';
     const EXTENSION_EXE='exe';
     const EXTENSION_GIF='gif';
     const EXTENSION_HTML='html';
     const EXTENSION_JPG='jpg';
     const EXTENSION_JPEG='jpeg';
+    const EXTENSION_JS='js';
     const EXTENSION_JSON='json';
+    const EXTENSION_PHP='php';
     const EXTENSION_PKPASS='pkpass';
     const EXTENSION_PNG='png';
     const EXTENSION_SVG='svg';
@@ -350,6 +357,7 @@ namespace Components;
     private static $m_mapFileExtensions=array(
       self::EXTENSION_JSON=>'APPLICATION_JSON',
       self::EXTENSION_BIN=>'APPLICATION_OCTET_STREAM',
+      self::EXTENSION_CSS=>'TEXT_CSS',
       self::EXTENSION_EXE=>'APPLICATION_OCTET_STREAM',
       self::EXTENSION_XML=>'APPLICATION_XML',
       self::EXTENSION_ZIP=>'APPLICATION_ZIP',
@@ -358,18 +366,21 @@ namespace Components;
       self::EXTENSION_PNG=>'IMAGE_PNG',
       self::EXTENSION_JPG=>'IMAGE_JPG',
       self::EXTENSION_JPEG=>'IMAGE_JPG',
+      self::EXTENSION_JS=>'APPLICATION_JAVASCRIPT',
       self::EXTENSION_SVG=>'IMAGE_SVG_XML',
       self::EXTENSION_CSV=>'TEXT_CSV',
       self::EXTENSION_HTML=>'TEXT_HTML',
-      self::EXTENSION_TXT=>'TEXT_PLAIN'
+      self::EXTENSION_TXT=>'TEXT_PLAIN',
+      self::EXTENSION_PHP=>'TEXT_PHP'
       // TODO complete ...
     );
     private static $m_mapMimetypes=array(
+      self::APPLICATION_JAVASCRIPT=>'APPLICATION_JAVASCRIPT',
       self::APPLICATION_JSON=>'APPLICATION_JSON',
       self::APPLICATION_OCTET_STREAM=>'APPLICATION_OCTET_STREAM',
+      self::APPLICATION_VND_APPLE_PKPASS=>'APPLICATION_VND_APPLE_PKPASS',
       self::APPLICATION_XML=>'APPLICATION_XML',
       self::APPLICATION_ZIP=>'APPLICATION_ZIP',
-      self::APPLICATION_VND_APPLE_PKPASS=>'APPLICATION_VND_APPLE_PKPASS',
       self::IMAGE_GIF=>'IMAGE_GIF',
       self::IMAGE_PNG=>'IMAGE_PNG',
       self::IMAGE_JPG=>'IMAGE_JPG',
@@ -381,12 +392,16 @@ namespace Components;
       self::MULTIPART_MIXED=>'MULTIPART_MIXED',
       self::MULTIPART_RELATED=>'MULTIPART_RELATED',
       self::TEXT_HTML=>'TEXT_HTML',
+      self::TEXT_CSS=>'TEXT_CSS',
       self::TEXT_CSV=>'TEXT_CSV',
+      self::TEXT_JAVASCRIPT=>'TEXT_JAVASCRIPT',
       self::TEXT_JSON=>'TEXT_JSON',
-      self::TEXT_PLAIN=>'TEXT_PLAIN'
+      self::TEXT_PLAIN=>'TEXT_PLAIN',
+      self::TEXT_PHP=>'TEXT_PHP'
       // TODO complete ...
     );
     private static $m_mapMimetypeFileExtensions=array(
+      self::APPLICATION_JAVASCRIPT=>self::EXTENSION_JS,
       self::APPLICATION_JSON=>self::EXTENSION_JSON,
       self::APPLICATION_OCTET_STREAM=>self::EXTENSION_BIN,
       self::APPLICATION_XML=>self::EXTENSION_XML,
@@ -399,8 +414,10 @@ namespace Components;
       self::IMAGE_SVG_XML=>self::EXTENSION_SVG,
       self::TEXT_HTML=>self::EXTENSION_HTML,
       self::TEXT_CSV=>self::EXTENSION_CSV,
+      self::TEXT_JAVASCRIPT=>self::EXTENSION_JS,
       self::TEXT_JSON=>self::EXTENSION_JSON,
-      self::TEXT_PLAIN=>self::EXTENSION_TXT
+      self::TEXT_PLAIN=>self::EXTENSION_TXT,
+      self::TEXT_PHP=>self::EXTENSION_PHP
     );
 
     private static $m_mapArchiveMimetypes=array(
@@ -412,8 +429,8 @@ namespace Components;
     private $m_category;
 
 
-  /**
-   * @var \Components\Io_Charset
+    /**
+     * @var \Components\Io_Charset
      */
     private $m_charset;
     //--------------------------------------------------------------------------

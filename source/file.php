@@ -325,6 +325,25 @@ namespace Components;
       return sha1_file($this->m_pathAsString);
     }
 
+    /**
+     * @return \Components\Date
+     */
+    public function getDateModified()
+    {
+      if(!$time=filemtime($this->m_pathAsString))
+        return 0;
+
+      return Date::forUnixTimestamp($time);
+    }
+
+    /**
+     * @return int
+     */
+    public function getTimestampModified()
+    {
+      return filemtime($this->m_pathAsString);
+    }
+
     public function isReadable()
     {
       if($this->m_open)
@@ -369,6 +388,9 @@ namespace Components;
 
       if(false===touch($this->m_pathAsString))
         throw new Io_Exception('io/file', sprintf('Failed to create file in given location [%s].', $this));
+
+      if(0<($this->m_accessMask&(self::APPEND|self::TRUNCATE|self::CREATE)))
+        chmod($this->m_pathAsString, 0666);
 
       return $this;
     }
