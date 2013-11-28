@@ -104,23 +104,52 @@ namespace Components;
       $widthOriginal=imagesx($this->m_resource);
       $heightOriginal=imagesy($this->m_resource);
 
-      $width=$dimensions_->x;
-      $height=$dimensions_->y;
+      $widthCanvas=$dimensions_->x;
+      $heightCanvas=$dimensions_->y;
 
-      if($width && !$height)
-        $height=round($heightOriginal/($widthOriginal/$width));
-      else if($height && !$width)
-        $width=round($widthOriginal/($heightOriginal/$height));
+      // If either no height or width is given, set the new image proportions
+      // to the proportions of the original image
+      if($widthCanvas && !$heightCanvas)
+        $heightCanvas=round($heightOriginal/($widthOriginal/$widthCanvas));
+      else if($heightCanvas && !$widthCanvas)
+        $widthCanvas=round($widthOriginal/($heightOriginal/$heightCanvas));
 
-      if($width===$widthOriginal && $height===$heightOriginal)
+      if($widthCanvas===$widthOriginal && $heightCanvas===$heightOriginal)
         return $this;
 
       if(imageistruecolor($this->m_resource))
-        $tmp=imagecreatetruecolor($width, $height);
+        $tmp=imagecreatetruecolor($widthCanvas, $heightCanvas);
       else
-        $tmp=imagecreate($width, $height);
+        $tmp=imagecreate($widthCanvas, $heightCanvas);
 
-      imagecopyresampled($tmp, $this->m_resource, 0, 0, 0, 0, $width, $height, imagesx($this->m_resource), imagesy($this->m_resource));
+      $backgroundColor=imagecolorallocate($tmp, 255, 255, 255);
+      imagefill($tmp, 0, 0, $backgroundColor);
+
+      $destinationX=0;
+      $destinationY=0;
+      $destinationHeight=$heightCanvas;
+      $destinationWidth=$widthCanvas;
+
+      // If the proportions for source and destination image are different
+      // (with a 1% margin), center the source image onto the destination image
+      if(abs(($heightOriginal/$widthOriginal)-($heightCanvas/$widthCanvas))>0.01)
+      {
+        $proportionHeight=round($heightOriginal/$heightCanvas);
+        $proportionWidth=round($widthOriginal/$widthCanvas);
+
+        if($proportionHeight<$proportionWidth)
+        {
+          $destinationHeight=round($widthCanvas/($widthOriginal/$heightOriginal));
+          $destinationY=round(($heightCanvas-$destinationHeight)/2);
+        }
+        else
+        {
+          $destinationWidth=round($heightCanvas/($heightOriginal/$widthOriginal));
+          $destinationX=round(($widthCanvas-$destinationWidth)/2);
+        }
+      }
+
+      imagecopyresampled($tmp, $this->m_resource, $destinationX, $destinationY, 0, 0, $destinationWidth, $destinationHeight, imagesx($this->m_resource), imagesy($this->m_resource));
       imagedestroy($this->m_resource);
 
       $this->m_resource=$tmp;
