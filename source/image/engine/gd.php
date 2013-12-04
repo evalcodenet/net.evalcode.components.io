@@ -15,14 +15,6 @@ namespace Components;
    */
   class Io_Image_Engine_Gd implements Io_Image_Engine
   {
-    // CONSTRUCTION
-    private function __construct()
-    {
-
-    }
-    //--------------------------------------------------------------------------
-
-
     // STATIC ACCESSORS
     /**
      * @param \Components\Point $dimensions_
