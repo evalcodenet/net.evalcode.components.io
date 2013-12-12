@@ -124,7 +124,7 @@ namespace Components;
 
       // If the proportions for source and destination image are different
       // (with a 1% margin), center the source image onto the destination image
-      if(abs(($heightOriginal/$widthOriginal)-($heightCanvas/$widthCanvas))>0.01)
+      if(abs(1-(($heightOriginal/$widthOriginal)/($heightCanvas/$widthCanvas)))>0.01)
       {
         $proportionHeight=round($heightOriginal/$heightCanvas);
         $proportionWidth=round($widthOriginal/$widthCanvas);
