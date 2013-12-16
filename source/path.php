@@ -175,6 +175,19 @@ namespace Components;
     }
 
     /**
+     * @param string $fileExtension_
+     *
+     * @return boolean
+     */
+    public function hasFileExtension($fileExtension_)
+    {
+      $extension='.'.ltrim($fileExtension_, '.');
+
+      return mb_strlen($this->m_path)===(mb_strlen($extension)
+        +(int)mb_strrpos($this->m_path, $extension));
+    }
+
+    /**
      * @return boolean
      */
     public function isImage()
@@ -366,6 +379,20 @@ namespace Components;
       }
 
       return $file_->getPath();
+    }
+
+    /**
+     * @param \Closure $closure_
+     */
+    public function applyRecursive(\Closure $closure_)
+    {
+      $closure_($this);
+
+      if($this->isDirectory())
+      {
+        foreach($this->getIterator() as $path)
+          $path->applyRecursive($closure_);
+      }
     }
     //--------------------------------------------------------------------------
 

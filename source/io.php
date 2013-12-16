@@ -91,6 +91,15 @@ namespace Components;
     }
 
     /**
+     * @param string $path_
+     * @param \Closure $closure_
+     */
+    public static function pathApplyRecursive($path_, \Closure $closure_)
+    {
+      Io_Path::valueOf($path_)->applyRecursive($closure_);
+    }
+
+    /**
      * Delete file or directory for given path. Returns 'true' on success
      * or 'false' on failure.
      *
@@ -455,9 +464,22 @@ namespace Components;
      *
      * @return \Components\Io_File
      */
-    public static function tmpFile($prefix_=null, $path_=null, $global_=true, $accessModeMask_=Io_File::WRITE)
+    public static function tmpFile($prefix_=null, $path_=null, $global_=true, $accessModeMask_=Io_File::CREATE)
     {
       return new Io_File(static::tmpFileName($prefix_, $path_, $global_), $accessModeMask_);
+    }
+
+    /**
+     * @param string $prefix_
+     * @param string $path_
+     * @param boolean $global_
+     * @param integer $accessModeMask_
+     *
+     * @return \Components\Io_File
+     */
+    public static function tmpFileForMimetype(Io_Mimetype $mimeType_, $prefix_=null, $path_=null, $global_=true, $accessModeMask_=Io_File::CREATE)
+    {
+      return Io_File::forMimetype(static::tmpFileName($prefix_, $path_, $global_), $accessModeMask_, $mimeType_);
     }
 
     /**
