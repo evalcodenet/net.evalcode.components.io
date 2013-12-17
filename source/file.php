@@ -99,7 +99,10 @@ namespace Components;
       {
         $type=self::$m_implForMimetype[$mimeType_->name()];
 
-        return new $type($path_, $accessModeMask_);
+        $instance=new $type($path_, $accessModeMask_);
+        $instance->m_mimeType=$mimeType_;
+
+        return $instance;
       }
 
       return new static($path_, $accessModeMask_);
