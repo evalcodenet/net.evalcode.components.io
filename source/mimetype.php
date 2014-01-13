@@ -16,8 +16,9 @@ namespace Components;
    * @method \Components\Io_Mimetype APPLICATION_OCTET_STREAM
    * @method \Components\Io_Mimetype APPLICATION_VND_APPLE_PKPASS
    * @method \Components\Io_Mimetype IMAGE_GIF
-   * @method \Components\Io_Mimetype IMAGE_PNG
+   * @method \Components\Io_Mimetype IMAGE_ICO
    * @method \Components\Io_Mimetype IMAGE_JPG
+   * @method \Components\Io_Mimetype IMAGE_PNG
    * @method \Components\Io_Mimetype IMAGE_SVG_XML
    * @method \Components\Io_Mimetype MULTIPART_ALTERNATIVE
    * @method \Components\Io_Mimetype MULTIPART_DIGEST
@@ -43,9 +44,10 @@ namespace Components;
     const APPLICATION_XML='application/xml';
     const APPLICATION_ZIP='application/zip';
     const IMAGE_GIF='image/gif';
-    const IMAGE_PNG='image/png';
+    const IMAGE_ICO='image/x-icon';
     const IMAGE_JPG='image/jpg';
     const IMAGE_JPEG='image/jpeg';
+    const IMAGE_PNG='image/png';
     const IMAGE_SVG_XML='image/svg+xml';
     const MULTIPART_ALTERNATIVE='multipart/alternative';
     const MULTIPART_DIGEST='multipart/digest';
@@ -67,6 +69,7 @@ namespace Components;
     const EXTENSION_EXE='exe';
     const EXTENSION_GIF='gif';
     const EXTENSION_HTML='html';
+    const EXTENSION_ICO='ico';
     const EXTENSION_JPG='jpg';
     const EXTENSION_JPEG='jpeg';
     const EXTENSION_JS='js';
@@ -316,7 +319,7 @@ namespace Components;
      */
     public function icon($size_=self::ICON_SIZE_16)
     {
-      return sprintf('/io/resource/image/icon/mime/%1$s/%2$s.png', $size_, $this->m_name);
+      return sprintf('/resource/io/image/icon/mime/%1$s/%2$s.png', $size_, $this->m_name);
     }
 
     /**
@@ -354,27 +357,28 @@ namespace Components;
 
     // IMPLEMENTATION
     private static $m_finfo;
-    private static $m_mapFileExtensions=array(
+    private static $m_mapFileExtensions=[
+      self::EXTENSION_JS=>'APPLICATION_JAVASCRIPT',
       self::EXTENSION_JSON=>'APPLICATION_JSON',
       self::EXTENSION_BIN=>'APPLICATION_OCTET_STREAM',
-      self::EXTENSION_CSS=>'TEXT_CSS',
       self::EXTENSION_EXE=>'APPLICATION_OCTET_STREAM',
+      self::EXTENSION_PKPASS=>'APPLICATION_VND_APPLE_PKPASS',
       self::EXTENSION_XML=>'APPLICATION_XML',
       self::EXTENSION_ZIP=>'APPLICATION_ZIP',
       self::EXTENSION_GIF=>'IMAGE_GIF',
-      self::EXTENSION_PKPASS=>'APPLICATION_VND_APPLE_PKPASS',
-      self::EXTENSION_PNG=>'IMAGE_PNG',
+      self::EXTENSION_ICO=>'IMAGE_ICO',
       self::EXTENSION_JPG=>'IMAGE_JPG',
       self::EXTENSION_JPEG=>'IMAGE_JPG',
-      self::EXTENSION_JS=>'APPLICATION_JAVASCRIPT',
+      self::EXTENSION_PNG=>'IMAGE_PNG',
       self::EXTENSION_SVG=>'IMAGE_SVG_XML',
+      self::EXTENSION_CSS=>'TEXT_CSS',
       self::EXTENSION_CSV=>'TEXT_CSV',
       self::EXTENSION_HTML=>'TEXT_HTML',
-      self::EXTENSION_TXT=>'TEXT_PLAIN',
-      self::EXTENSION_PHP=>'TEXT_PHP'
+      self::EXTENSION_PHP=>'TEXT_PHP',
+      self::EXTENSION_TXT=>'TEXT_PLAIN'
       // TODO complete ...
-    );
-    private static $m_mapMimetypes=array(
+    ];
+    private static $m_mapMimetypes=[
       self::APPLICATION_JAVASCRIPT=>'APPLICATION_JAVASCRIPT',
       self::APPLICATION_JSON=>'APPLICATION_JSON',
       self::APPLICATION_OCTET_STREAM=>'APPLICATION_OCTET_STREAM',
@@ -382,9 +386,10 @@ namespace Components;
       self::APPLICATION_XML=>'APPLICATION_XML',
       self::APPLICATION_ZIP=>'APPLICATION_ZIP',
       self::IMAGE_GIF=>'IMAGE_GIF',
-      self::IMAGE_PNG=>'IMAGE_PNG',
+      self::IMAGE_ICO=>'IMAGE_ICO',
       self::IMAGE_JPG=>'IMAGE_JPG',
       self::IMAGE_JPEG=>'IMAGE_JPG',
+      self::IMAGE_PNG=>'IMAGE_PNG',
       self::IMAGE_SVG_XML=>'IMAGE_SVG_XML',
       self::MULTIPART_ALTERNATIVE=>'MULTIPART_ALTERNATIVE',
       self::MULTIPART_DIGEST=>'MULTIPART_DIGEST',
@@ -399,8 +404,8 @@ namespace Components;
       self::TEXT_PLAIN=>'TEXT_PLAIN',
       self::TEXT_PHP=>'TEXT_PHP'
       // TODO complete ...
-    );
-    private static $m_mapMimetypeFileExtensions=array(
+    ];
+    private static $m_mapMimetypeFileExtensions=[
       self::APPLICATION_JAVASCRIPT=>self::EXTENSION_JS,
       self::APPLICATION_JSON=>self::EXTENSION_JSON,
       self::APPLICATION_OCTET_STREAM=>self::EXTENSION_BIN,
@@ -408,9 +413,10 @@ namespace Components;
       self::APPLICATION_ZIP=>self::EXTENSION_ZIP,
       self::APPLICATION_VND_APPLE_PKPASS=>self::EXTENSION_PKPASS,
       self::IMAGE_GIF=>self::EXTENSION_GIF,
-      self::IMAGE_PNG=>self::EXTENSION_PNG,
+      self::IMAGE_ICO=>self::EXTENSION_ICO,
       self::IMAGE_JPG=>self::EXTENSION_JPG,
       self::IMAGE_JPEG=>self::EXTENSION_JPG,
+      self::IMAGE_PNG=>self::EXTENSION_PNG,
       self::IMAGE_SVG_XML=>self::EXTENSION_SVG,
       self::TEXT_HTML=>self::EXTENSION_HTML,
       self::TEXT_CSV=>self::EXTENSION_CSV,
@@ -418,12 +424,12 @@ namespace Components;
       self::TEXT_JSON=>self::EXTENSION_JSON,
       self::TEXT_PLAIN=>self::EXTENSION_TXT,
       self::TEXT_PHP=>self::EXTENSION_PHP
-    );
+    ];
 
-    private static $m_mapArchiveMimetypes=array(
+    private static $m_mapArchiveMimetypes=[
       self::APPLICATION_ZIP=>'APPLICATION_ZIP',
       self::APPLICATION_VND_APPLE_PKPASS=>'APPLICATION_VND_APPLE_PKPASS'
-    );
+    ];
 
     private $m_type;
     private $m_category;
