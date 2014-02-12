@@ -145,9 +145,9 @@ namespace Components;
       return $this;
     }
 
-    public function saveAs(Io_Image $image_)
+    public function saveAs(Io_File $file_)
     {
-      $this->engine()->save($image_->m_pathAsString, $image_->getMimetype());
+      $this->engine()->save($file_->m_pathAsString, $file_->getMimetype());
 
       return $this;
     }
@@ -225,9 +225,10 @@ namespace Components;
     /**
      * @var string[]
      */
-    private static $m_engineImpl=array(
+    private static $m_engineImpl=[
       'gd'=>'Components\\Io_Image_Engine_Gd'
-    );
+    ];
+
     /**
      * @var \Components\Io_Image_Engine
      */
