@@ -165,7 +165,7 @@ namespace Components;
       $typeName=$type_->name();
 
       if(false===isset(self::$m_saveHandler[$typeName]))
-        throw new Exception_NotSupported('io/image/engine/gd', 'Saving to image of requested type is not supported [%s].', $type_);
+        throw new Exception_NotSupported('io/image/engine/gd', sprintf('Saving to image of requested type is not supported [%s].', $type_));
 
       $directory=dirname($path_);
       if(false===is_dir($directory))
