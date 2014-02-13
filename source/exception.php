@@ -12,7 +12,7 @@ namespace Components;
    *
    * @author evalcode.net
    */
-  class Io_Exception extends Runtime_Exception
+  class Io_Exception extends Runtime_Exception_Abstract
   {
 
   }
