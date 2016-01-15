@@ -388,7 +388,7 @@ namespace Components;
     {
       $closure_($this);
 
-      if($this->isDirectory())
+      if($this->isDirectory() && $this->isReadable())
       {
         foreach($this->getIterator() as $path)
           $path->applyRecursive($closure_);
