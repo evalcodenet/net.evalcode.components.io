@@ -197,7 +197,7 @@ namespace Components;
      */
     public function hashCode()
     {
-      return string_hash($this->m_stringBuffer);
+      return \math\hashs($this->m_stringBuffer);
     }
 
     /**

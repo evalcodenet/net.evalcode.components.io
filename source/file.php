@@ -114,10 +114,13 @@ namespace Components;
     /**
      * @return string
      */
-    public function getName()
+    public function getName($stripExtension_=false)
     {
       if(null===$this->m_name)
         $this->m_name=basename($this->m_pathAsString);
+
+      if($stripExtension_)
+        return \io\fileName($this->m_name, true);
 
       return $this->m_name;
     }
@@ -127,10 +130,7 @@ namespace Components;
      */
     public function getExtension()
     {
-      if(null===$this->m_extension)
-        return mb_strtolower(mb_substr($this->m_pathAsString, mb_strrpos($this->m_pathAsString, '.')+1));
-
-      return $this->m_extension;
+      return \io\fileExtension($this->m_pathAsString);
     }
 
     /**
@@ -334,7 +334,7 @@ namespace Components;
     public function getDateModified()
     {
       if(!$time=filemtime($this->m_pathAsString))
-        return 0;
+        return null;
 
       return Date::forUnixTimestamp($time);
     }
@@ -344,9 +344,28 @@ namespace Components;
      */
     public function getTimestampModified()
     {
-      return filemtime($this->m_pathAsString);
+      return (int)filemtime($this->m_pathAsString);
     }
 
+    /**
+     * Determines whether last modification of this file
+     * happened after last modification of given file.
+     *
+     * @param \Components\Io_File $file_
+     *
+     * @return boolean
+     */
+    public function isNewer(Io_File $file_)
+    {
+      if(null===$file_)
+        throw new Exception_NullPointer('io/file', 'Given file must not be null.');
+
+      return $this->getTimestampModified()>$file_->getTimestampModified();
+    }
+
+    /**
+     * @return boolean
+     */
     public function isReadable()
     {
       if($this->m_open)
@@ -355,6 +374,9 @@ namespace Components;
       return is_readable($this->m_pathAsString);
     }
 
+    /**
+     * @return boolean
+     */
     public function isWritable()
     {
       if(false===is_writable($this->m_pathAsString))
@@ -766,7 +788,7 @@ namespace Components;
      */
     public function hashCode()
     {
-      return string_hash($this->m_pathAsString);
+      return \math\hashs($this->m_pathAsString);
     }
 
     /**

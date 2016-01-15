@@ -12,6 +12,7 @@ namespace Components;
    *
    * @author evalcode.net
    *
+   * @method \Components\Io_Charset ASCII
    * @method \Components\Io_Charset BINARY
    * @method \Components\Io_Charset UTF_16
    * @method \Components\Io_Charset UTF_16_BE
@@ -24,16 +25,15 @@ namespace Components;
   class Io_Charset extends Enumeration
   {
     // PREDEFINED PROPERTIES
-    const BINARY='BINARY';
-    const UTF_16='UTF-16';
-    const UTF_16_BE='UTF-16BE';
-    const UTF_16_LE='UTF-16LE';
-    const UTF_8='UTF-8';
-    const ISO_8859_1='ISO-8859-1';
-    const ISO_8859_15='ISO-8859-15';
-    const US_ASCII='US-ASCII';
-
-    const DEFAULT_CHARSET=self::UTF_8;
+    const ASCII=LIBSTD_ENV_CHARSET_ASCII;
+    const BINARY=LIBSTD_ENV_CHARSET_BINARY;
+    const UTF_16=LIBSTD_ENV_CHARSET_UTF16;
+    const UTF_16_BE=LIBSTD_ENV_CHARSET_UTF16BE;
+    const UTF_16_LE=LIBSTD_ENV_CHARSET_UTF16LE;
+    const UTF_8=LIBSTD_ENV_CHARSET_UTF8;
+    const ISO_8859_1=LIBSTD_ENV_CHARSET_ISO8859_1;
+    const ISO_8859_15=LIBSTD_ENV_CHARSET_ISO8859_15;
+    const US_ASCII=LIBSTD_ENV_CHARSET_ASCII;
     //--------------------------------------------------------------------------
 
 
@@ -58,7 +58,7 @@ namespace Components;
     }
 
     /**
-     * @param string $filename_
+     * @param string $filepath_
      *
      * @return \Components\Io_Charset
      */
@@ -85,7 +85,7 @@ namespace Components;
      */
     public static function forFile(Io_File $file_)
     {
-      return self::forFileName((string)$file_);
+      return self::forFilePath((string)$file_);
     }
 
     /**
@@ -94,17 +94,36 @@ namespace Components;
     public static function defaultCharset()
     {
       if(null===self::$m_defaultCharset)
-        self::$m_defaultCharset=static::UTF_8();
+      {
+        $defaultCharsetName=static::defaultCharsetName();
+
+        if(false===isset(self::$m_charsets[$defaultCharsetName]))
+          throw new Exception_IllegalArgument('io/charset', "Charset not supported [name: $defaultCharsetName].");
+
+        self::$m_defaultCharset=static::{self::$m_charsets[$defaultCharsetName]}();
+      }
 
       return self::$m_defaultCharset;
     }
 
     /**
-     * @see \Components\Enumeration::values() \Components\Enumeration::values()
+     * @return string
+     */
+    public static function defaultCharsetName()
+    {
+      if(null===self::$m_defaultCharsetName)
+        self::$m_defaultCharsetName=\env\charset();
+
+      return self::$m_defaultCharsetName;
+    }
+
+    /**
+     * @see \Components\Enumeration::values() values
      */
     public static function values()
     {
-      return array(
+      return [
+        'ASCII',
         'BINARY',
         'UTF_16',
         'UTF_16_BE',
@@ -113,7 +132,7 @@ namespace Components;
         'ISO_8859_1',
         'ISO_8859_15',
         'US_ASCII'
-      );
+      ];
     }
     //--------------------------------------------------------------------------
 
@@ -127,7 +146,7 @@ namespace Components;
      */
     public function convert($string_, Io_Charset $toCharset_)
     {
-      return iconv($this->m_name, $toCharset_->m_name, $string_);
+      return mb_convert_encoding($string_, $toCharset_->m_name, $this->m_name);
     }
 
     /**
@@ -148,7 +167,7 @@ namespace Components;
         function($string_)
         {
           return Io_Charset::__unicodeDecodeConvertEncodingImpl(pack('H*',
-            strtr($string_[0], array('\\u'=>''))
+            strtr($string_[0], ['\\u'=>''])
           ));
         },
         $unicode_
@@ -158,7 +177,10 @@ namespace Components;
 
 
     // IMPLEMENTATION
-    private static $m_charsets=array(
+    /**
+     * @var string[]
+     */
+    private static $m_charsets=[
       self::BINARY=>'BINARY',
       self::UTF_16=>'UTF_16',
       self::UTF_16_BE=>'UTF_16_BE',
@@ -166,15 +188,19 @@ namespace Components;
       self::UTF_8=>'UTF_8',
       self::ISO_8859_1=>'ISO_8859_1',
       self::ISO_8859_15=>'ISO_8859_15',
-      self::US_ASCII=>'US_ASCII',
+      self::US_ASCII=>'ASCII',
       'UTF8'=>'UTF_8',
       'UTF16'=>'UTF_16',
-      'ASCII'=>'US_ASCII'
-    );
+      'ASCII'=>'ASCII'
+    ];
     /**
      * @var \Components\Io_Charset
      */
     private static $m_defaultCharset;
+    /**
+     * @var string
+     */
+    private static $m_defaultCharsetName;
     /**
      * @var \Components\Io_Charset
      */
@@ -186,6 +212,9 @@ namespace Components;
     //-----
 
 
+    /**
+     * @internal
+     */
     /*private*/ static function __unicodeDecodeConvertEncodingImpl($string_)
     {
       return mb_convert_encoding($string_, self::$m_convertImplTo->name(), self::$m_convertImplFrom->name());

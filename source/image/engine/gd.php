@@ -24,7 +24,7 @@ namespace Components;
     public static function forBase64($base64_)
     {
       $instance=new static();
-      $instance->m_resource=imagecreatefromstring(String::fromBase64($base64_));
+      $instance->m_resource=imagecreatefromstring(str\decodeBase64Url($base64_));
 
       return $instance;
     }
@@ -96,52 +96,23 @@ namespace Components;
       $widthOriginal=imagesx($this->m_resource);
       $heightOriginal=imagesy($this->m_resource);
 
-      $widthCanvas=$dimensions_->x;
-      $heightCanvas=$dimensions_->y;
+      $width=$dimensions_->x;
+      $height=$dimensions_->y;
 
-      // If either no height or width is given, set the new image proportions
-      // to the proportions of the original image
-      if($widthCanvas && !$heightCanvas)
-        $heightCanvas=round($heightOriginal/($widthOriginal/$widthCanvas));
-      else if($heightCanvas && !$widthCanvas)
-        $widthCanvas=round($widthOriginal/($heightOriginal/$heightCanvas));
+      if($width && !$height)
+        $height=round($heightOriginal/($widthOriginal/$width));
+      else if($height && !$width)
+        $width=round($widthOriginal/($heightOriginal/$height));
 
-      if($widthCanvas===$widthOriginal && $heightCanvas===$heightOriginal)
+      if($width===$widthOriginal && $height===$heightOriginal)
         return $this;
 
       if(imageistruecolor($this->m_resource))
-        $tmp=imagecreatetruecolor($widthCanvas, $heightCanvas);
+        $tmp=imagecreatetruecolor($width, $height);
       else
-        $tmp=imagecreate($widthCanvas, $heightCanvas);
+        $tmp=imagecreate($width, $height);
 
-      $backgroundColor=imagecolorallocate($tmp, 255, 255, 255);
-      imagefill($tmp, 0, 0, $backgroundColor);
-
-      $destinationX=0;
-      $destinationY=0;
-      $destinationHeight=$heightCanvas;
-      $destinationWidth=$widthCanvas;
-
-      // If the proportions for source and destination image are different
-      // (with a 1% margin), center the source image onto the destination image
-      if(abs(1-(($heightOriginal/$widthOriginal)/($heightCanvas/$widthCanvas)))>0.01)
-      {
-        $proportionHeight=round($heightOriginal/$heightCanvas);
-        $proportionWidth=round($widthOriginal/$widthCanvas);
-
-        if($proportionHeight<$proportionWidth)
-        {
-          $destinationHeight=round($widthCanvas/($widthOriginal/$heightOriginal));
-          $destinationY=round(($heightCanvas-$destinationHeight)/2);
-        }
-        else
-        {
-          $destinationWidth=round($heightCanvas/($heightOriginal/$widthOriginal));
-          $destinationX=round(($widthCanvas-$destinationWidth)/2);
-        }
-      }
-
-      imagecopyresampled($tmp, $this->m_resource, $destinationX, $destinationY, 0, 0, $destinationWidth, $destinationHeight, imagesx($this->m_resource), imagesy($this->m_resource));
+      imagecopyresampled($tmp, $this->m_resource, 0, 0, 0, 0, $width, $height, imagesx($this->m_resource), imagesy($this->m_resource));
       imagedestroy($this->m_resource);
 
       $this->m_resource=$tmp;
@@ -180,11 +151,11 @@ namespace Components;
 
 
     // IMPLEMENTATION
-    private static $m_saveHandler=array(
+    private static $m_saveHandler=[
       Io_Mimetype::IMAGE_GIF=>'imagegif',
       Io_Mimetype::IMAGE_JPG=>'imagejpeg',
       Io_Mimetype::IMAGE_PNG=>'imagepng'
-    );
+    ];
 
     /**
      * @var \Components\Point

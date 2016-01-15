@@ -25,7 +25,7 @@ namespace Components;
 
     // OVERRIDES
     /**
-     * @see \RecursiveDirectoryIterator::current() \RecursiveDirectoryIterator::current()
+     * @see \RecursiveDirectoryIterator::current() current
      *
      * @return \Components\Io_Path_Iterator
      */

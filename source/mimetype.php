@@ -10,11 +10,15 @@ namespace Components;
    * @api
    * @package net.evalcode.components.io
    *
+   * @method \Components\Io_Mimetype APPLICATION_FORM_URLENCODED
+   * @method \Components\Io_Mimetype APPLICATION_JAVASCRIPT
    * @method \Components\Io_Mimetype APPLICATION_JSON
-   * @method \Components\Io_Mimetype APPLICATION_XML
-   * @method \Components\Io_Mimetype APPLICATION_ZIP
+   * @method \Components\Io_Mimetype APPLICATION_PDF
+   * @method \Components\Io_Mimetype APPLICATION_PHP
    * @method \Components\Io_Mimetype APPLICATION_OCTET_STREAM
    * @method \Components\Io_Mimetype APPLICATION_VND_APPLE_PKPASS
+   * @method \Components\Io_Mimetype APPLICATION_XML
+   * @method \Components\Io_Mimetype APPLICATION_ZIP
    * @method \Components\Io_Mimetype IMAGE_GIF
    * @method \Components\Io_Mimetype IMAGE_ICO
    * @method \Components\Io_Mimetype IMAGE_JPG
@@ -23,10 +27,13 @@ namespace Components;
    * @method \Components\Io_Mimetype MULTIPART_ALTERNATIVE
    * @method \Components\Io_Mimetype MULTIPART_DIGEST
    * @method \Components\Io_Mimetype MULTIPART_ENCRYPTED
+   * @method \Components\Io_Mimetype MULTIPART_FORM_DATA
    * @method \Components\Io_Mimetype MULTIPART_MIXED
    * @method \Components\Io_Mimetype MULTIPART_RELATED
+   * @method \Components\Io_Mimetype TEXT_CSS
    * @method \Components\Io_Mimetype TEXT_CSV
    * @method \Components\Io_Mimetype TEXT_HTML
+   * @method \Components\Io_Mimetype TEXT_JAVASCRIPT
    * @method \Components\Io_Mimetype TEXT_JSON
    * @method \Components\Io_Mimetype TEXT_PLAIN
    * @method \Components\Io_Mimetype TEXT_PHP
@@ -36,9 +43,11 @@ namespace Components;
   class Io_Mimetype extends Enumeration
   {
     // MIME TYPES
+    const APPLICATION_FORM_URLENCODED='application/x-www-form-urlencoded';
     const APPLICATION_JAVASCRIPT='application/javascript';
     const APPLICATION_JSON='application/json';
     const APPLICATION_OCTET_STREAM='application/octet-stream';
+    const APPLICATION_PDF='application/pdf';
     const APPLICATION_PHP='application/php';
     const APPLICATION_VND_APPLE_PKPASS='application/vnd.apple.pkpass';
     const APPLICATION_XML='application/xml';
@@ -52,6 +61,7 @@ namespace Components;
     const MULTIPART_ALTERNATIVE='multipart/alternative';
     const MULTIPART_DIGEST='multipart/digest';
     const MULTIPART_ENCRYPTED='multipart/encrypted';
+    const MULTIPART_FORM_DATA='multipart/form-data';
     const MULTIPART_MIXED='multipart/mixed';
     const MULTIPART_RELATED='multipart/related';
     const TEXT_CSS='text/css';
@@ -74,6 +84,7 @@ namespace Components;
     const EXTENSION_JPEG='jpeg';
     const EXTENSION_JS='js';
     const EXTENSION_JSON='json';
+    const EXTENSION_PDF='pdf';
     const EXTENSION_PHP='php';
     const EXTENSION_PKPASS='pkpass';
     const EXTENSION_PNG='png';
@@ -114,6 +125,9 @@ namespace Components;
      */
     public static function forName($name_, Io_Charset $charset_=null)
     {
+      if(false===isset(self::$m_mapMimetypes[$name_]))
+        return static::APPLICATION_OCTET_STREAM($charset_);
+
       $name=self::$m_mapMimetypes[$name_];
 
       return static::$name($charset_);
@@ -138,7 +152,7 @@ namespace Components;
      */
     public static function forFileName($filename_, Io_Charset $charset_=null)
     {
-      return self::forFileExtension(Io::fileExtension($filename_));
+      return self::forFileExtension(\io\fileExtension($filename_));
     }
 
     /**
@@ -150,8 +164,9 @@ namespace Components;
     public static function forFileExtension($fileExtension_, Io_Charset $charset_=null)
     {
       $fileExtension_=strtolower($fileExtension_);
+
       if(false===isset(self::$m_mapFileExtensions[$fileExtension_]))
-        return null;
+        return static::APPLICATION_OCTET_STREAM($charset_);
 
       $name=self::$m_mapFileExtensions[$fileExtension_];
 
@@ -166,6 +181,7 @@ namespace Components;
     public static function forFilePath($file_, Io_Charset $charset_=null)
     {
       $info=null;
+
       if($finfo=@finfo_open(FILEINFO_MIME))
       {
         $info=@finfo_file($finfo, $file_);
@@ -208,7 +224,7 @@ namespace Components;
      */
     public static function isImageFileName($filename_)
     {
-      return self::isImageFileExtension(Io::fileExtension($filename_));
+      return self::isImageFileExtension(\io\fileExtension($filename_));
     }
 
     /**
@@ -319,7 +335,9 @@ namespace Components;
      */
     public function icon($size_=self::ICON_SIZE_16)
     {
-      return sprintf('/resource/io/image/icon/mime/%1$s/%2$s.png', $size_, $this->m_name);
+      return Environment::uriComponentsResource(
+        'io/image/icon/mime', $size_, "$this->m_name.png"
+      );
     }
 
     /**
@@ -341,11 +359,25 @@ namespace Components;
     // OVERRIDES
     public function __call($name_, array $args_=[])
     {
+      // TODO Defined routine.
       if(0===strpos($name_, 'is'))
-        return strtolower(substr($name_, 2))===strtolower(str_replace('/', '', $this->m_name));
+      {
+        if(0===strnatcasecmp(substr($name_, 2), str_replace('/', '', $this->m_name)))
+          return true;
 
-      throw new Runtime_Exception('components/io/mimetype', sprintf(
-        'Call to undefined method %1$s::%2$s() in %3$s on line %4$d.',
+        $name=\str\camelCaseToUnderscore($name_);
+        $name=\str\substring($name, 3);
+
+        $chunks=explode('_', $name);
+
+        if(1===count($chunks))
+          return 0===\str\compareIgnoreCase($chunks[0], $this->type());
+
+        return false;
+      }
+
+      throw new Exception_NotImplemented('io/mimetype', sprintf(
+        'Call to undefined method %s::%s() in %s on line %d.',
           $type,
           $name_,
           $caller['file'],
@@ -362,6 +394,7 @@ namespace Components;
       self::EXTENSION_JSON=>'APPLICATION_JSON',
       self::EXTENSION_BIN=>'APPLICATION_OCTET_STREAM',
       self::EXTENSION_EXE=>'APPLICATION_OCTET_STREAM',
+      self::EXTENSION_PDF=>'APPLICATION_PDF',
       self::EXTENSION_PKPASS=>'APPLICATION_VND_APPLE_PKPASS',
       self::EXTENSION_XML=>'APPLICATION_XML',
       self::EXTENSION_ZIP=>'APPLICATION_ZIP',
@@ -379,9 +412,11 @@ namespace Components;
       // TODO complete ...
     ];
     private static $m_mapMimetypes=[
+      self::APPLICATION_FORM_URLENCODED=>'APPLICATION_FORM_URLENCODED',
       self::APPLICATION_JAVASCRIPT=>'APPLICATION_JAVASCRIPT',
       self::APPLICATION_JSON=>'APPLICATION_JSON',
       self::APPLICATION_OCTET_STREAM=>'APPLICATION_OCTET_STREAM',
+      self::APPLICATION_PDF=>'APPLICATION_PDF',
       self::APPLICATION_VND_APPLE_PKPASS=>'APPLICATION_VND_APPLE_PKPASS',
       self::APPLICATION_XML=>'APPLICATION_XML',
       self::APPLICATION_ZIP=>'APPLICATION_ZIP',
@@ -394,6 +429,7 @@ namespace Components;
       self::MULTIPART_ALTERNATIVE=>'MULTIPART_ALTERNATIVE',
       self::MULTIPART_DIGEST=>'MULTIPART_DIGEST',
       self::MULTIPART_ENCRYPTED=>'MULTIPART_ENCRYPTED',
+      self::MULTIPART_FORM_DATA=>'MULTIPART_FORM_DATA',
       self::MULTIPART_MIXED=>'MULTIPART_MIXED',
       self::MULTIPART_RELATED=>'MULTIPART_RELATED',
       self::TEXT_HTML=>'TEXT_HTML',
@@ -409,6 +445,7 @@ namespace Components;
       self::APPLICATION_JAVASCRIPT=>self::EXTENSION_JS,
       self::APPLICATION_JSON=>self::EXTENSION_JSON,
       self::APPLICATION_OCTET_STREAM=>self::EXTENSION_BIN,
+      self::APPLICATION_PDF=>self::EXTENSION_PDF,
       self::APPLICATION_XML=>self::EXTENSION_XML,
       self::APPLICATION_ZIP=>self::EXTENSION_ZIP,
       self::APPLICATION_VND_APPLE_PKPASS=>self::EXTENSION_PKPASS,

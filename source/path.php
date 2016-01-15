@@ -384,8 +384,12 @@ namespace Components;
     /**
      * @param \Closure $closure_
      */
+    // FIXME Bind scope.
     public function applyRecursive(\Closure $closure_)
     {
+      if($this->isDot())
+        return;
+
       $closure_($this);
 
       if($this->isDirectory() && $this->isReadable())

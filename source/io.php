@@ -82,7 +82,7 @@ namespace Components;
      *
      * @return \Components\Io_Path
      */
-    public static function pathComponentResource($path0_/*, $path1_, $path2_..*/)
+    public static function pathComponentsResource($path0_/*, $path1_, $path2_..*/)
     {
       if(null===self::$m_pathComponents)
         self::$m_pathComponents=Environment::pathComponents();
@@ -162,10 +162,7 @@ namespace Components;
      */
     public static function fileName($path_, $stripFileExtension_=false)
     {
-      if(false===$stripFileExtension_)
-        return basename($path_);
-
-      return basename($path_, mb_substr($path_, mb_strrpos($path_, '.')));
+      return \io\fileName($path_, $stripFileExtension_);
     }
 
     /**
@@ -175,10 +172,7 @@ namespace Components;
      */
     public static function fileExtension($filename_)
     {
-      if(!$extension=mb_substr($filename_, mb_strrpos($filename_, '.')+1))
-        return null;
-
-      return $extension;
+      return \io\fileExtension($filename_);
     }
 
     /**
@@ -317,7 +311,7 @@ namespace Components;
      */
     public static function imageCreate($path_, $width_, $height_)
     {
-      return Io_Image::create($path_, new Point($widh_, $height_));
+      return Io_Image::create($path_, new Point($width_, $height_));
     }
 
     /**
@@ -365,7 +359,10 @@ namespace Components;
         $path=implode(DIRECTORY_SEPARATOR, $segments);
 
         if(false===@mkdir($path, $umask_, true))
-          return false;
+        {
+          if(false===is_dir($path))
+            return false;
+        }
 
         @chmod($path, $umask_);
       }
@@ -527,7 +524,7 @@ namespace Components;
       {
         if(!$sessionId=session_id())
         {
-          if(Environment::isCli())
+          if(Runtime::isCli())
             $sessionId=md5(get_current_user());
           else
             $sessionId=md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT'].date('Ymd'));
@@ -587,7 +584,7 @@ namespace Components;
      */
     public static function tmpPathRoot()
     {
-      return new Io_File(static::tmpPathNameRoot());
+      return new Io_Path(static::tmpPathNameRoot());
     }
 
     /**
