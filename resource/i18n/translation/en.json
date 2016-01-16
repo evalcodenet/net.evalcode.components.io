@@ -1,0 +1,10 @@
+{
+  "io":
+  {
+    "mimetype":
+    {
+      "image": "%1$s Image",
+      "file": "%1$s File"
+    }
+  }
+}

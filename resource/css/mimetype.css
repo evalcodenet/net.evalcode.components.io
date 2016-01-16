@@ -1,0 +1,1258 @@
+@charset "utf-8";
+
+
+/** ============================================================================
+    mimetypes
+    ------------------------------------------------------------------------- */
+.io_mime_icon
+{
+  text-indent:-9999px;
+  background:none center center no-repeat scroll transparent; 
+}
+
+
+/** ============================================================================
+    mimetypes [icon-size: 16x16]
+    ------------------------------------------------------------------------- */
+.io_mime_icon_16
+{
+  height:16px;
+  line-height:16px;
+  background-image:url("/resource/io/image/icon/mime/16/unkown.png");
+}
+
+.io_mime_icon_16.label
+{
+  text-indent:21px;
+  background-position:left center;
+}
+
+.io_mime_icon_16.io_mime_icon_audio
+{
+  background-image:url("/resource/io/image/icon/mime/16/audio.png");
+}
+
+.io_mime_icon_16.io_mime_icon_ascii
+{
+  background-image:url("/resource/io/image/icon/mime/16/ascii.png");
+}
+
+.io_mime_icon_16.io_mime_icon_application_javascript
+{
+  background-image:url("/resource/io/image/icon/mime/16/application/javascript.png");
+}
+
+.io_mime_icon_16.io_mime_icon_application_json
+{
+  background-image:url("/resource/io/image/icon/mime/16/application/json.png");
+}
+
+.io_mime_icon_16.io_mime_icon_application_msword
+{
+  background-image:url("/resource/io/image/icon/mime/16/application/msword.png");
+}
+
+.io_mime_icon_16.io_mime_icon_application_pdf
+{
+  background-image:url("/resource/io/image/icon/mime/16/application/pdf.png");
+}
+
+.io_mime_icon_16.io_mime_icon_application_rss_xml
+{
+  background-image:url("/resource/io/image/icon/mime/16/application/rss+xml.png");
+}
+
+.io_mime_icon_16.io_mime_icon_application_vnd_ms_excel
+{
+  background-image:url("/resource/io/image/icon/mime/16/application/vnd.ms-excel.png");
+}
+
+.io_mime_icon_16.io_mime_icon_application_vnd_ms_powerpoint
+{
+  background-image:url("/resource/io/image/icon/mime/16/application/vnd.ms-powerpoint.png");
+}
+
+.io_mime_icon_16.io_mime_icon_application_x_archive
+{
+  background-image:url("/resource/io/image/icon/mime/16/application/x-archive.png");
+}
+
+.io_mime_icon_16.io_mime_icon_application_x_flash
+{
+  background-image:url("/resource/io/image/icon/mime/16/application/x-flash.png");
+}
+
+.io_mime_icon_16.io_mime_icon_application_x_gzip
+{
+  background-image:url("/resource/io/image/icon/mime/16/application/x-gzip.png");
+}
+
+.io_mime_icon_16.io_mime_icon_application_x_tar
+{
+  background-image:url("/resource/io/image/icon/mime/16/application/x-tar.png");
+}
+
+.io_mime_icon_16.io_mime_icon_application_x_tgz
+{
+  background-image:url("/resource/io/image/icon/mime/16/application/x-tgz.png");
+}
+
+.io_mime_icon_16.io_mime_icon_application_zip,
+.io_mime_icon_16.io_mime_icon_application_x_zip
+{
+  background-image:url("/resource/io/image/icon/mime/16/application/x-zip.png");
+}
+
+.io_mime_icon_16.io_mime_icon_binary
+{
+  background-image:url("/resource/io/image/icon/mime/16/binary.png");
+}
+
+.io_mime_icon_16.io_mime_icon_font
+{
+  background-image:url("/resource/io/image/icon/mime/16/font.png");
+}
+
+.io_mime_icon_16.io_mime_icon_image
+{
+  background-image:url("/resource/io/image/icon/mime/16/image.png");
+}
+
+.io_mime_icon_16.io_mime_icon_image_gif
+{
+  background-image:url("/resource/io/image/icon/mime/16/image/gif.png");
+}
+
+.io_mime_icon_16.io_mime_icon_image_jpg,
+.io_mime_icon_16.io_mime_icon_image_jpeg
+{
+  background-image:url("/resource/io/image/icon/mime/16/image/jpg.png");
+}
+
+.io_mime_icon_16.io_mime_icon_image_png
+{
+  background-image:url("/resource/io/image/icon/mime/16/image/png.png");
+}
+
+.io_mime_icon_16.io_mime_icon_image_eps,
+.io_mime_icon_16.io_mime_icon_image_x_eps
+{
+  background-image:url("/resource/io/image/icon/mime/16/image/x-eps.png");
+}
+
+.io_mime_icon_16.io_mime_icon_image_psd,
+.io_mime_icon_16.io_mime_icon_image_x_psd
+{
+  background-image:url("/resource/io/image/icon/mime/16/image/x-psd.png");
+}
+
+.io_mime_icon_16.io_mime_icon_image_xcf,
+.io_mime_icon_16.io_mime_icon_image_x_xcf
+{
+  background-image:url("/resource/io/image/icon/mime/16/image/x-xcf.png");
+}
+
+.io_mime_icon_16.io_mime_icon_text
+{
+  background-image:url("/resource/io/image/icon/mime/16/text.png");
+}
+
+.io_mime_icon_16.io_mime_icon_text_css
+{
+  background-image:url("/resource/io/image/icon/mime/16/text/css.png");
+}
+
+.io_mime_icon_16.io_mime_icon_text_html
+{
+  background-image:url("/resource/io/image/icon/mime/16/text/html.png");
+}
+
+.io_mime_icon_16.io_mime_icon_text_javascript
+{
+  background-image:url("/resource/io/image/icon/mime/16/text/javascript.png");
+}
+
+.io_mime_icon_16.io_mime_icon_text_json
+{
+  background-image:url("/resource/io/image/icon/mime/16/text/json.png");
+}
+
+.io_mime_icon_16.io_mime_icon_text_plain
+{
+  background-image:url("/resource/io/image/icon/mime/16/text/plain.png");
+}
+
+.io_mime_icon_16.io_mime_icon_text_rtf,
+.io_mime_icon_16.io_mime_icon_text_richtext
+{
+  background-image:url("/resource/io/image/icon/mime/16/text/richtext.png");
+}
+
+.io_mime_icon_16.io_mime_icon_text_xml
+{
+  background-image:url("/resource/io/image/icon/mime/16/text/xml.png");
+}
+
+.io_mime_icon_16.io_mime_icon_unknown
+{
+  background-image:url("/resource/io/image/icon/mime/16/unknown.png");
+}
+
+.io_mime_icon_16.io_mime_icon_video
+{
+  background-image:url("/resource/io/image/icon/mime/16/video.png");
+}
+
+.io_mime_icon_16.io_mime_icon_x-office_address_book
+{
+  background-image:url("/resource/io/image/icon/mime/16/x-office/address-book.png");
+}
+
+.io_mime_icon_16.io_mime_icon_x-office_document
+{
+  background-image:url("/resource/io/image/icon/mime/16/x-office/document.png");
+}
+
+.io_mime_icon_16.io_mime_icon_x-office_spreadsheet
+{
+  background-image:url("/resource/io/image/icon/mime/16/x-office/spreadsheet.png");
+}
+
+
+/** ============================================================================
+    mimetypes [icon-size: 24x24]
+    ------------------------------------------------------------------------- */
+.io_mime_icon_24
+{
+  height:24px;
+  line-height:24px;
+  background-image:url("/resource/io/image/icon/mime/24/unkown.png");
+}
+.io_mime_icon_24.label
+{
+  text-indent:29px;
+  background-position:left center;
+}
+
+.io_mime_icon_24.io_mime_icon_audio
+{
+  background-image:url("/resource/io/image/icon/mime/24/audio.png");
+}
+
+.io_mime_icon_24.io_mime_icon_ascii
+{
+  background-image:url("/resource/io/image/icon/mime/24/ascii.png");
+}
+
+.io_mime_icon_24.io_mime_icon_application_javascript
+{
+  background-image:url("/resource/io/image/icon/mime/24/application/javascript.png");
+}
+
+.io_mime_icon_24.io_mime_icon_application_json
+{
+  background-image:url("/resource/io/image/icon/mime/24/application/json.png");
+}
+
+.io_mime_icon_24.io_mime_icon_application_msword
+{
+  background-image:url("/resource/io/image/icon/mime/24/application/msword.png");
+}
+
+.io_mime_icon_24.io_mime_icon_application_pdf
+{
+  background-image:url("/resource/io/image/icon/mime/24/application/pdf.png");
+}
+
+.io_mime_icon_24.io_mime_icon_application_rss_xml
+{
+  background-image:url("/resource/io/image/icon/mime/24/application/rss+xml.png");
+}
+
+.io_mime_icon_24.io_mime_icon_application_vnd_ms_excel
+{
+  background-image:url("/resource/io/image/icon/mime/24/application/vnd.ms-excel.png");
+}
+
+.io_mime_icon_24.io_mime_icon_application_vnd_ms_powerpoint
+{
+  background-image:url("/resource/io/image/icon/mime/24/application/vnd.ms-powerpoint.png");
+}
+
+.io_mime_icon_24.io_mime_icon_application_x_archive
+{
+  background-image:url("/resource/io/image/icon/mime/24/application/x-archive.png");
+}
+
+.io_mime_icon_24.io_mime_icon_application_x_flash
+{
+  background-image:url("/resource/io/image/icon/mime/24/application/x-flash.png");
+}
+
+.io_mime_icon_24.io_mime_icon_application_x_gzip
+{
+  background-image:url("/resource/io/image/icon/mime/24/application/x-gzip.png");
+}
+
+.io_mime_icon_24.io_mime_icon_application_x_tar
+{
+  background-image:url("/resource/io/image/icon/mime/24/application/x-tar.png");
+}
+
+.io_mime_icon_24.io_mime_icon_application_x_tgz
+{
+  background-image:url("/resource/io/image/icon/mime/24/application/x-tgz.png");
+}
+
+.io_mime_icon_24.io_mime_icon_application_zip,
+.io_mime_icon_24.io_mime_icon_application_x_zip
+{
+  background-image:url("/resource/io/image/icon/mime/24/application/x-zip.png");
+}
+
+.io_mime_icon_24.io_mime_icon_binary
+{
+  background-image:url("/resource/io/image/icon/mime/24/binary.png");
+}
+
+.io_mime_icon_24.io_mime_icon_font
+{
+  background-image:url("/resource/io/image/icon/mime/24/font.png");
+}
+
+.io_mime_icon_24.io_mime_icon_image
+{
+  background-image:url("/resource/io/image/icon/mime/24/image.png");
+}
+
+.io_mime_icon_24.io_mime_icon_image_gif
+{
+  background-image:url("/resource/io/image/icon/mime/24/image/gif.png");
+}
+
+.io_mime_icon_24.io_mime_icon_image_jpg,
+.io_mime_icon_24.io_mime_icon_image_jpeg
+{
+  background-image:url("/resource/io/image/icon/mime/24/image/jpg.png");
+}
+
+.io_mime_icon_24.io_mime_icon_image_png
+{
+  background-image:url("/resource/io/image/icon/mime/24/image/png.png");
+}
+
+.io_mime_icon_24.io_mime_icon_image_eps,
+.io_mime_icon_24.io_mime_icon_image_x_eps
+{
+  background-image:url("/resource/io/image/icon/mime/24/image/x-eps.png");
+}
+
+.io_mime_icon_24.io_mime_icon_image_psd,
+.io_mime_icon_24.io_mime_icon_image_x_psd
+{
+  background-image:url("/resource/io/image/icon/mime/24/image/x-psd.png");
+}
+
+.io_mime_icon_24.io_mime_icon_image_xcf,
+.io_mime_icon_24.io_mime_icon_image_x_xcf
+{
+  background-image:url("/resource/io/image/icon/mime/24/image/x-xcf.png");
+}
+
+.io_mime_icon_24.io_mime_icon_text
+{
+  background-image:url("/resource/io/image/icon/mime/24/text.png");
+}
+
+.io_mime_icon_24.io_mime_icon_text_css
+{
+  background-image:url("/resource/io/image/icon/mime/24/text/css.png");
+}
+
+.io_mime_icon_24.io_mime_icon_text_html
+{
+  background-image:url("/resource/io/image/icon/mime/24/text/html.png");
+}
+
+.io_mime_icon_24.io_mime_icon_text_javascript
+{
+  background-image:url("/resource/io/image/icon/mime/24/text/javascript.png");
+}
+
+.io_mime_icon_24.io_mime_icon_text_json
+{
+  background-image:url("/resource/io/image/icon/mime/24/text/json.png");
+}
+
+.io_mime_icon_24.io_mime_icon_text_plain
+{
+  background-image:url("/resource/io/image/icon/mime/24/text/plain.png");
+}
+
+.io_mime_icon_24.io_mime_icon_text_rtf,
+.io_mime_icon_24.io_mime_icon_text_richtext
+{
+  background-image:url("/resource/io/image/icon/mime/24/text/richtext.png");
+}
+
+.io_mime_icon_24.io_mime_icon_text_xml
+{
+  background-image:url("/resource/io/image/icon/mime/24/text/xml.png");
+}
+
+.io_mime_icon_24.io_mime_icon_unknown
+{
+  background-image:url("/resource/io/image/icon/mime/24/unknown.png");
+}
+
+.io_mime_icon_24.io_mime_icon_video
+{
+  background-image:url("/resource/io/image/icon/mime/24/video.png");
+}
+
+.io_mime_icon_24.io_mime_icon_x-office_address_book
+{
+  background-image:url("/resource/io/image/icon/mime/24/x-office/address-book.png");
+}
+
+.io_mime_icon_24.io_mime_icon_x-office_document
+{
+  background-image:url("/resource/io/image/icon/mime/24/x-office/document.png");
+}
+
+.io_mime_icon_24.io_mime_icon_x-office_spreadsheet
+{
+  background-image:url("/resource/io/image/icon/mime/24/x-office/spreadsheet.png");
+}
+
+
+/** ============================================================================
+    mimetypes [icon-size: 32x32]
+    ------------------------------------------------------------------------- */
+.io_mime_icon_32
+{
+  height:32px;
+  line-height:32px;
+  background-image:url("/resource/io/image/icon/mime/32/unkown.png");
+}
+
+.io_mime_icon_32.label
+{
+  text-indent:37px;
+  background-position:left center;
+}
+
+.io_mime_icon_32.io_mime_icon_audio
+{
+  background-image:url("/resource/io/image/icon/mime/32/audio.png");
+}
+
+.io_mime_icon_32.io_mime_icon_ascii
+{
+  background-image:url("/resource/io/image/icon/mime/32/ascii.png");
+}
+
+.io_mime_icon_32.io_mime_icon_application_javascript
+{
+  background-image:url("/resource/io/image/icon/mime/32/application/javascript.png");
+}
+
+.io_mime_icon_32.io_mime_icon_application_json
+{
+  background-image:url("/resource/io/image/icon/mime/32/application/json.png");
+}
+
+.io_mime_icon_32.io_mime_icon_application_msword
+{
+  background-image:url("/resource/io/image/icon/mime/32/application/msword.png");
+}
+
+.io_mime_icon_32.io_mime_icon_application_pdf
+{
+  background-image:url("/resource/io/image/icon/mime/32/application/pdf.png");
+}
+
+.io_mime_icon_32.io_mime_icon_application_rss_xml
+{
+  background-image:url("/resource/io/image/icon/mime/32/application/rss+xml.png");
+}
+
+.io_mime_icon_32.io_mime_icon_application_vnd_ms_excel
+{
+  background-image:url("/resource/io/image/icon/mime/32/application/vnd.ms-excel.png");
+}
+
+.io_mime_icon_32.io_mime_icon_application_vnd_ms_powerpoint
+{
+  background-image:url("/resource/io/image/icon/mime/32/application/vnd.ms-powerpoint.png");
+}
+
+.io_mime_icon_32.io_mime_icon_application_x_archive
+{
+  background-image:url("/resource/io/image/icon/mime/32/application/x-archive.png");
+}
+
+.io_mime_icon_32.io_mime_icon_application_x_flash
+{
+  background-image:url("/resource/io/image/icon/mime/32/application/x-flash.png");
+}
+
+.io_mime_icon_32.io_mime_icon_application_x_gzip
+{
+  background-image:url("/resource/io/image/icon/mime/32/application/x-gzip.png");
+}
+
+.io_mime_icon_32.io_mime_icon_application_x_tar
+{
+  background-image:url("/resource/io/image/icon/mime/32/application/x-tar.png");
+}
+
+.io_mime_icon_32.io_mime_icon_application_x_tgz
+{
+  background-image:url("/resource/io/image/icon/mime/32/application/x-tgz.png");
+}
+
+.io_mime_icon_32.io_mime_icon_application_zip,
+.io_mime_icon_32.io_mime_icon_application_x_zip
+{
+  background-image:url("/resource/io/image/icon/mime/32/application/x-zip.png");
+}
+
+.io_mime_icon_32.io_mime_icon_binary
+{
+  background-image:url("/resource/io/image/icon/mime/32/binary.png");
+}
+
+.io_mime_icon_32.io_mime_icon_font
+{
+  background-image:url("/resource/io/image/icon/mime/32/font.png");
+}
+
+.io_mime_icon_32.io_mime_icon_image
+{
+  background-image:url("/resource/io/image/icon/mime/32/image.png");
+}
+
+.io_mime_icon_32.io_mime_icon_image_gif
+{
+  background-image:url("/resource/io/image/icon/mime/32/image/gif.png");
+}
+
+.io_mime_icon_32.io_mime_icon_image_jpg,
+.io_mime_icon_32.io_mime_icon_image_jpeg
+{
+  background-image:url("/resource/io/image/icon/mime/32/image/jpg.png");
+}
+
+.io_mime_icon_32.io_mime_icon_image_png
+{
+  background-image:url("/resource/io/image/icon/mime/32/image/png.png");
+}
+
+.io_mime_icon_32.io_mime_icon_image_eps,
+.io_mime_icon_32.io_mime_icon_image_x_eps
+{
+  background-image:url("/resource/io/image/icon/mime/32/image/x-eps.png");
+}
+
+.io_mime_icon_32.io_mime_icon_image_psd,
+.io_mime_icon_32.io_mime_icon_image_x_psd
+{
+  background-image:url("/resource/io/image/icon/mime/32/image/x-psd.png");
+}
+
+.io_mime_icon_32.io_mime_icon_image_xcf,
+.io_mime_icon_32.io_mime_icon_image_x_xcf
+{
+  background-image:url("/resource/io/image/icon/mime/32/image/x-xcf.png");
+}
+
+.io_mime_icon_32.io_mime_icon_text
+{
+  background-image:url("/resource/io/image/icon/mime/32/text.png");
+}
+
+.io_mime_icon_32.io_mime_icon_text_css
+{
+  background-image:url("/resource/io/image/icon/mime/32/text/css.png");
+}
+
+.io_mime_icon_32.io_mime_icon_text_html
+{
+  background-image:url("/resource/io/image/icon/mime/32/text/html.png");
+}
+
+.io_mime_icon_32.io_mime_icon_text_javascript
+{
+  background-image:url("/resource/io/image/icon/mime/32/text/javascript.png");
+}
+
+.io_mime_icon_32.io_mime_icon_text_json
+{
+  background-image:url("/resource/io/image/icon/mime/32/text/json.png");
+}
+
+.io_mime_icon_32.io_mime_icon_text_plain
+{
+  background-image:url("/resource/io/image/icon/mime/32/text/plain.png");
+}
+
+.io_mime_icon_32.io_mime_icon_text_rtf,
+.io_mime_icon_32.io_mime_icon_text_richtext
+{
+  background-image:url("/resource/io/image/icon/mime/32/text/richtext.png");
+}
+
+.io_mime_icon_32.io_mime_icon_text_xml
+{
+  background-image:url("/resource/io/image/icon/mime/32/text/xml.png");
+}
+
+.io_mime_icon_32.io_mime_icon_unknown
+{
+  background-image:url("/resource/io/image/icon/mime/32/unknown.png");
+}
+
+.io_mime_icon_32.io_mime_icon_video
+{
+  background-image:url("/resource/io/image/icon/mime/32/video.png");
+}
+
+.io_mime_icon_32.io_mime_icon_x-office_address_book
+{
+  background-image:url("/resource/io/image/icon/mime/32/x-office/address-book.png");
+}
+
+.io_mime_icon_32.io_mime_icon_x-office_document
+{
+  background-image:url("/resource/io/image/icon/mime/32/x-office/document.png");
+}
+
+.io_mime_icon_32.io_mime_icon_x-office_spreadsheet
+{
+  background-image:url("/resource/io/image/icon/mime/32/x-office/spreadsheet.png");
+}
+
+
+/** ============================================================================
+    mimetypes [icon-size: 48x48]
+    ------------------------------------------------------------------------- */
+.io_mime_icon_48
+{
+  height:48px;
+  line-height:48px;
+  background-image:url("/resource/io/image/icon/mime/48/unkown.png");
+}
+
+.io_mime_icon_48.label
+{
+  text-indent:53px;
+  background-position:left center;
+}
+
+.io_mime_icon_48.io_mime_icon_audio
+{
+  background-image:url("/resource/io/image/icon/mime/48/audio.png");
+}
+
+.io_mime_icon_48.io_mime_icon_ascii
+{
+  background-image:url("/resource/io/image/icon/mime/48/ascii.png");
+}
+
+.io_mime_icon_48.io_mime_icon_application_javascript
+{
+  background-image:url("/resource/io/image/icon/mime/48/application/javascript.png");
+}
+
+.io_mime_icon_48.io_mime_icon_application_json
+{
+  background-image:url("/resource/io/image/icon/mime/48/application/json.png");
+}
+
+.io_mime_icon_48.io_mime_icon_application_msword
+{
+  background-image:url("/resource/io/image/icon/mime/48/application/msword.png");
+}
+
+.io_mime_icon_48.io_mime_icon_application_pdf
+{
+  background-image:url("/resource/io/image/icon/mime/48/application/pdf.png");
+}
+
+.io_mime_icon_48.io_mime_icon_application_rss_xml
+{
+  background-image:url("/resource/io/image/icon/mime/48/application/rss+xml.png");
+}
+
+.io_mime_icon_48.io_mime_icon_application_vnd_ms_excel
+{
+  background-image:url("/resource/io/image/icon/mime/48/application/vnd.ms-excel.png");
+}
+
+.io_mime_icon_48.io_mime_icon_application_vnd_ms_powerpoint
+{
+  background-image:url("/resource/io/image/icon/mime/48/application/vnd.ms-powerpoint.png");
+}
+
+.io_mime_icon_48.io_mime_icon_application_x_archive
+{
+  background-image:url("/resource/io/image/icon/mime/48/application/x-archive.png");
+}
+
+.io_mime_icon_48.io_mime_icon_application_x_flash
+{
+  background-image:url("/resource/io/image/icon/mime/48/application/x-flash.png");
+}
+
+.io_mime_icon_48.io_mime_icon_application_x_gzip
+{
+  background-image:url("/resource/io/image/icon/mime/48/application/x-gzip.png");
+}
+
+.io_mime_icon_48.io_mime_icon_application_x_tar
+{
+  background-image:url("/resource/io/image/icon/mime/48/application/x-tar.png");
+}
+
+.io_mime_icon_48.io_mime_icon_application_x_tgz
+{
+  background-image:url("/resource/io/image/icon/mime/48/application/x-tgz.png");
+}
+
+.io_mime_icon_48.io_mime_icon_application_zip,
+.io_mime_icon_48.io_mime_icon_application_x_zip
+{
+  background-image:url("/resource/io/image/icon/mime/48/application/x-zip.png");
+}
+
+.io_mime_icon_48.io_mime_icon_binary
+{
+  background-image:url("/resource/io/image/icon/mime/48/binary.png");
+}
+
+.io_mime_icon_48.io_mime_icon_font
+{
+  background-image:url("/resource/io/image/icon/mime/48/font.png");
+}
+
+.io_mime_icon_48.io_mime_icon_image
+{
+  background-image:url("/resource/io/image/icon/mime/48/image.png");
+}
+
+.io_mime_icon_48.io_mime_icon_image_gif
+{
+  background-image:url("/resource/io/image/icon/mime/48/image/gif.png");
+}
+
+.io_mime_icon_48.io_mime_icon_image_jpg,
+.io_mime_icon_48.io_mime_icon_image_jpeg
+{
+  background-image:url("/resource/io/image/icon/mime/48/image/jpg.png");
+}
+
+.io_mime_icon_48.io_mime_icon_image_png
+{
+  background-image:url("/resource/io/image/icon/mime/48/image/png.png");
+}
+
+.io_mime_icon_48.io_mime_icon_image_eps,
+.io_mime_icon_48.io_mime_icon_image_x_eps
+{
+  background-image:url("/resource/io/image/icon/mime/48/image/x-eps.png");
+}
+
+.io_mime_icon_48.io_mime_icon_image_psd,
+.io_mime_icon_48.io_mime_icon_image_x_psd
+{
+  background-image:url("/resource/io/image/icon/mime/48/image/x-psd.png");
+}
+
+.io_mime_icon_48.io_mime_icon_image_xcf,
+.io_mime_icon_48.io_mime_icon_image_x_xcf
+{
+  background-image:url("/resource/io/image/icon/mime/48/image/x-xcf.png");
+}
+
+.io_mime_icon_48.io_mime_icon_text
+{
+  background-image:url("/resource/io/image/icon/mime/48/text.png");
+}
+
+.io_mime_icon_48.io_mime_icon_text_css
+{
+  background-image:url("/resource/io/image/icon/mime/48/text/css.png");
+}
+
+.io_mime_icon_48.io_mime_icon_text_html
+{
+  background-image:url("/resource/io/image/icon/mime/48/text/html.png");
+}
+
+.io_mime_icon_48.io_mime_icon_text_javascript
+{
+  background-image:url("/resource/io/image/icon/mime/48/text/javascript.png");
+}
+
+.io_mime_icon_48.io_mime_icon_text_json
+{
+  background-image:url("/resource/io/image/icon/mime/48/text/json.png");
+}
+
+.io_mime_icon_48.io_mime_icon_text_plain
+{
+  background-image:url("/resource/io/image/icon/mime/48/text/plain.png");
+}
+
+.io_mime_icon_48.io_mime_icon_text_rtf,
+.io_mime_icon_48.io_mime_icon_text_richtext
+{
+  background-image:url("/resource/io/image/icon/mime/48/text/richtext.png");
+}
+
+.io_mime_icon_48.io_mime_icon_text_xml
+{
+  background-image:url("/resource/io/image/icon/mime/48/text/xml.png");
+}
+
+.io_mime_icon_48.io_mime_icon_unknown
+{
+  background-image:url("/resource/io/image/icon/mime/48/unknown.png");
+}
+
+.io_mime_icon_48.io_mime_icon_video
+{
+  background-image:url("/resource/io/image/icon/mime/48/video.png");
+}
+
+.io_mime_icon_48.io_mime_icon_x-office_address_book
+{
+  background-image:url("/resource/io/image/icon/mime/48/x-office/address-book.png");
+}
+
+.io_mime_icon_48.io_mime_icon_x-office_document
+{
+  background-image:url("/resource/io/image/icon/mime/48/x-office/document.png");
+}
+
+.io_mime_icon_48.io_mime_icon_x-office_spreadsheet
+{
+  background-image:url("/resource/io/image/icon/mime/48/x-office/spreadsheet.png");
+}
+
+
+/** ============================================================================
+    mimetypes [icon-size: 64x64]
+    ------------------------------------------------------------------------- */
+.io_mime_icon_64
+{
+  height:64px;
+  line-height:64px;
+  background-image:url("/resource/io/image/icon/mime/64/unkown.png");
+}
+
+.io_mime_icon_64.label
+{
+  text-indent:69px;
+  background-position:left center;
+}
+
+.io_mime_icon_64.io_mime_icon_audio
+{
+  background-image:url("/resource/io/image/icon/mime/64/audio.png");
+}
+
+.io_mime_icon_64.io_mime_icon_ascii
+{
+  background-image:url("/resource/io/image/icon/mime/64/ascii.png");
+}
+
+.io_mime_icon_64.io_mime_icon_application_javascript
+{
+  background-image:url("/resource/io/image/icon/mime/64/application/javascript.png");
+}
+
+.io_mime_icon_64.io_mime_icon_application_json
+{
+  background-image:url("/resource/io/image/icon/mime/64/application/json.png");
+}
+
+.io_mime_icon_64.io_mime_icon_application_msword
+{
+  background-image:url("/resource/io/image/icon/mime/64/application/msword.png");
+}
+
+.io_mime_icon_64.io_mime_icon_application_pdf
+{
+  background-image:url("/resource/io/image/icon/mime/64/application/pdf.png");
+}
+
+.io_mime_icon_64.io_mime_icon_application_rss_xml
+{
+  background-image:url("/resource/io/image/icon/mime/64/application/rss+xml.png");
+}
+
+.io_mime_icon_64.io_mime_icon_application_vnd_ms_excel
+{
+  background-image:url("/resource/io/image/icon/mime/64/application/vnd.ms-excel.png");
+}
+
+.io_mime_icon_64.io_mime_icon_application_vnd_ms_powerpoint
+{
+  background-image:url("/resource/io/image/icon/mime/64/application/vnd.ms-powerpoint.png");
+}
+
+.io_mime_icon_64.io_mime_icon_application_x_archive
+{
+  background-image:url("/resource/io/image/icon/mime/64/application/x-archive.png");
+}
+
+.io_mime_icon_64.io_mime_icon_application_x_flash
+{
+  background-image:url("/resource/io/image/icon/mime/64/application/x-flash.png");
+}
+
+.io_mime_icon_64.io_mime_icon_application_x_gzip
+{
+  background-image:url("/resource/io/image/icon/mime/64/application/x-gzip.png");
+}
+
+.io_mime_icon_64.io_mime_icon_application_x_tar
+{
+  background-image:url("/resource/io/image/icon/mime/64/application/x-tar.png");
+}
+
+.io_mime_icon_64.io_mime_icon_application_x_tgz
+{
+  background-image:url("/resource/io/image/icon/mime/64/application/x-tgz.png");
+}
+
+.io_mime_icon_64.io_mime_icon_application_zip,
+.io_mime_icon_64.io_mime_icon_application_x_zip
+{
+  background-image:url("/resource/io/image/icon/mime/64/application/x-zip.png");
+}
+
+.io_mime_icon_64.io_mime_icon_binary
+{
+  background-image:url("/resource/io/image/icon/mime/64/binary.png");
+}
+
+.io_mime_icon_64.io_mime_icon_font
+{
+  background-image:url("/resource/io/image/icon/mime/64/font.png");
+}
+
+.io_mime_icon_64.io_mime_icon_image
+{
+  background-image:url("/resource/io/image/icon/mime/64/image.png");
+}
+
+.io_mime_icon_64.io_mime_icon_image_gif
+{
+  background-image:url("/resource/io/image/icon/mime/64/image/gif.png");
+}
+
+.io_mime_icon_64.io_mime_icon_image_jpg,
+.io_mime_icon_64.io_mime_icon_image_jpeg
+{
+  background-image:url("/resource/io/image/icon/mime/64/image/jpg.png");
+}
+
+.io_mime_icon_64.io_mime_icon_image_png
+{
+  background-image:url("/resource/io/image/icon/mime/64/image/png.png");
+}
+
+.io_mime_icon_64.io_mime_icon_image_eps,
+.io_mime_icon_64.io_mime_icon_image_x_eps
+{
+  background-image:url("/resource/io/image/icon/mime/64/image/x-eps.png");
+}
+
+.io_mime_icon_64.io_mime_icon_image_psd,
+.io_mime_icon_64.io_mime_icon_image_x_psd
+{
+  background-image:url("/resource/io/image/icon/mime/64/image/x-psd.png");
+}
+
+.io_mime_icon_64.io_mime_icon_image_xcf,
+.io_mime_icon_64.io_mime_icon_image_x_xcf
+{
+  background-image:url("/resource/io/image/icon/mime/64/image/x-xcf.png");
+}
+
+.io_mime_icon_64.io_mime_icon_text
+{
+  background-image:url("/resource/io/image/icon/mime/64/text.png");
+}
+
+.io_mime_icon_64.io_mime_icon_text_css
+{
+  background-image:url("/resource/io/image/icon/mime/64/text/css.png");
+}
+
+.io_mime_icon_64.io_mime_icon_text_html
+{
+  background-image:url("/resource/io/image/icon/mime/64/text/html.png");
+}
+
+.io_mime_icon_64.io_mime_icon_text_javascript
+{
+  background-image:url("/resource/io/image/icon/mime/64/text/javascript.png");
+}
+
+.io_mime_icon_64.io_mime_icon_text_json
+{
+  background-image:url("/resource/io/image/icon/mime/64/text/json.png");
+}
+
+.io_mime_icon_64.io_mime_icon_text_plain
+{
+  background-image:url("/resource/io/image/icon/mime/64/text/plain.png");
+}
+
+.io_mime_icon_64.io_mime_icon_text_rtf,
+.io_mime_icon_64.io_mime_icon_text_richtext
+{
+  background-image:url("/resource/io/image/icon/mime/64/text/richtext.png");
+}
+
+.io_mime_icon_64.io_mime_icon_text_xml
+{
+  background-image:url("/resource/io/image/icon/mime/64/text/xml.png");
+}
+
+.io_mime_icon_64.io_mime_icon_unknown
+{
+  background-image:url("/resource/io/image/icon/mime/64/unknown.png");
+}
+
+.io_mime_icon_64.io_mime_icon_video
+{
+  background-image:url("/resource/io/image/icon/mime/64/video.png");
+}
+
+.io_mime_icon_64.io_mime_icon_x-office_address_book
+{
+  background-image:url("/resource/io/image/icon/mime/64/x-office/address-book.png");
+}
+
+.io_mime_icon_64.io_mime_icon_x-office_document
+{
+  background-image:url("/resource/io/image/icon/mime/64/x-office/document.png");
+}
+
+.io_mime_icon_64.io_mime_icon_x-office_spreadsheet
+{
+  background-image:url("/resource/io/image/icon/mime/64/x-office/spreadsheet.png");
+}
+
+
+/** ============================================================================
+    mimetypes [icon-size: 128x128]
+    ------------------------------------------------------------------------- */
+.io_mime_icon_128
+{
+  height:128px;
+  line-height:128px;
+  background-image:url("/resource/io/image/icon/mime/128/unkown.png");
+}
+
+.io_mime_icon_128.label
+{
+  text-indent:135px;
+  background-position:left center;
+}
+
+.io_mime_icon_128.io_mime_icon_audio
+{
+  background-image:url("/resource/io/image/icon/mime/128/audio.png");
+}
+
+.io_mime_icon_128.io_mime_icon_ascii
+{
+  background-image:url("/resource/io/image/icon/mime/128/ascii.png");
+}
+
+.io_mime_icon_128.io_mime_icon_application_javascript
+{
+  background-image:url("/resource/io/image/icon/mime/128/application/javascript.png");
+}
+
+.io_mime_icon_128.io_mime_icon_application_json
+{
+  background-image:url("/resource/io/image/icon/mime/128/application/json.png");
+}
+
+.io_mime_icon_128.io_mime_icon_application_msword
+{
+  background-image:url("/resource/io/image/icon/mime/128/application/msword.png");
+}
+
+.io_mime_icon_128.io_mime_icon_application_pdf
+{
+  background-image:url("/resource/io/image/icon/mime/128/application/pdf.png");
+}
+
+.io_mime_icon_128.io_mime_icon_application_rss_xml
+{
+  background-image:url("/resource/io/image/icon/mime/128/application/rss+xml.png");
+}
+
+.io_mime_icon_128.io_mime_icon_application_vnd_ms_excel
+{
+  background-image:url("/resource/io/image/icon/mime/128/application/vnd.ms-excel.png");
+}
+
+.io_mime_icon_128.io_mime_icon_application_vnd_ms_powerpoint
+{
+  background-image:url("/resource/io/image/icon/mime/128/application/vnd.ms-powerpoint.png");
+}
+
+.io_mime_icon_128.io_mime_icon_application_x_archive
+{
+  background-image:url("/resource/io/image/icon/mime/128/application/x-archive.png");
+}
+
+.io_mime_icon_128.io_mime_icon_application_x_flash
+{
+  background-image:url("/resource/io/image/icon/mime/128/application/x-flash.png");
+}
+
+.io_mime_icon_128.io_mime_icon_application_x_gzip
+{
+  background-image:url("/resource/io/image/icon/mime/128/application/x-gzip.png");
+}
+
+.io_mime_icon_128.io_mime_icon_application_x_tar
+{
+  background-image:url("/resource/io/image/icon/mime/128/application/x-tar.png");
+}
+
+.io_mime_icon_128.io_mime_icon_application_x_tgz
+{
+  background-image:url("/resource/io/image/icon/mime/128/application/x-tgz.png");
+}
+
+.io_mime_icon_128.io_mime_icon_application_zip,
+.io_mime_icon_128.io_mime_icon_application_x_zip
+{
+  background-image:url("/resource/io/image/icon/mime/128/application/x-zip.png");
+}
+
+.io_mime_icon_128.io_mime_icon_binary
+{
+  background-image:url("/resource/io/image/icon/mime/128/binary.png");
+}
+
+.io_mime_icon_128.io_mime_icon_font
+{
+  background-image:url("/resource/io/image/icon/mime/128/font.png");
+}
+
+.io_mime_icon_128.io_mime_icon_image
+{
+  background-image:url("/resource/io/image/icon/mime/128/image.png");
+}
+
+.io_mime_icon_128.io_mime_icon_image_gif
+{
+  background-image:url("/resource/io/image/icon/mime/128/image/gif.png");
+}
+
+.io_mime_icon_128.io_mime_icon_image_jpg,
+.io_mime_icon_128.io_mime_icon_image_jpeg
+{
+  background-image:url("/resource/io/image/icon/mime/128/image/jpg.png");
+}
+
+.io_mime_icon_128.io_mime_icon_image_png
+{
+  background-image:url("/resource/io/image/icon/mime/128/image/png.png");
+}
+
+.io_mime_icon_128.io_mime_icon_image_eps,
+.io_mime_icon_128.io_mime_icon_image_x_eps
+{
+  background-image:url("/resource/io/image/icon/mime/128/image/x-eps.png");
+}
+
+.io_mime_icon_128.io_mime_icon_image_psd,
+.io_mime_icon_128.io_mime_icon_image_x_psd
+{
+  background-image:url("/resource/io/image/icon/mime/128/image/x-psd.png");
+}
+
+.io_mime_icon_128.io_mime_icon_image_xcf,
+.io_mime_icon_128.io_mime_icon_image_x_xcf
+{
+  background-image:url("/resource/io/image/icon/mime/128/image/x-xcf.png");
+}
+
+.io_mime_icon_128.io_mime_icon_text
+{
+  background-image:url("/resource/io/image/icon/mime/128/text.png");
+}
+
+.io_mime_icon_128.io_mime_icon_text_css
+{
+  background-image:url("/resource/io/image/icon/mime/128/text/css.png");
+}
+
+.io_mime_icon_128.io_mime_icon_text_html
+{
+  background-image:url("/resource/io/image/icon/mime/128/text/html.png");
+}
+
+.io_mime_icon_128.io_mime_icon_text_javascript
+{
+  background-image:url("/resource/io/image/icon/mime/128/text/javascript.png");
+}
+
+.io_mime_icon_128.io_mime_icon_text_json
+{
+  background-image:url("/resource/io/image/icon/mime/128/text/json.png");
+}
+
+.io_mime_icon_128.io_mime_icon_text_plain
+{
+  background-image:url("/resource/io/image/icon/mime/128/text/plain.png");
+}
+
+.io_mime_icon_128.io_mime_icon_text_rtf,
+.io_mime_icon_128.io_mime_icon_text_richtext
+{
+  background-image:url("/resource/io/image/icon/mime/128/text/richtext.png");
+}
+
+.io_mime_icon_128.io_mime_icon_text_xml
+{
+  background-image:url("/resource/io/image/icon/mime/128/text/xml.png");
+}
+
+.io_mime_icon_128.io_mime_icon_unknown
+{
+  background-image:url("/resource/io/image/icon/mime/128/unknown.png");
+}
+
+.io_mime_icon_128.io_mime_icon_video
+{
+  background-image:url("/resource/io/image/icon/mime/128/video.png");
+}
+
+.io_mime_icon_128.io_mime_icon_x-office_address_book
+{
+  background-image:url("/resource/io/image/icon/mime/128/x-office/address-book.png");
+}
+
+.io_mime_icon_128.io_mime_icon_x-office_document
+{
+  background-image:url("/resource/io/image/icon/mime/128/x-office/document.png");
+}
+
+.io_mime_icon_128.io_mime_icon_x-office_spreadsheet
+{
+  background-image:url("/resource/io/image/icon/mime/128/x-office/spreadsheet.png");
+}
